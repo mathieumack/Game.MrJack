@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7302FBE3-9A02-42DD-AF1A-B123584B3E05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{2EC4DD1F-4313-4B4D-BFB3-BDBE27B80B59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8E5886F8-A8AC-4C10-AC73-CB552C881335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJack.Client.Wpf", "MrJack.Client.Wpf\MrJack.Client.Wpf.csproj", "{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJack.Core", "MrJack.Core\MrJack.Core.csproj", "{B3A46451-4E25-4EE4-9D94-C6A5FD248249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJack.Services", "MrJack.Services\MrJack.Services.csproj", "{8ED3FADC-1273-4BB8-A7EC-C7322E35580D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A46451-4E25-4EE4-9D94-C6A5FD248249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A46451-4E25-4EE4-9D94-C6A5FD248249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A46451-4E25-4EE4-9D94-C6A5FD248249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A46451-4E25-4EE4-9D94-C6A5FD248249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED3FADC-1273-4BB8-A7EC-C7322E35580D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED3FADC-1273-4BB8-A7EC-C7322E35580D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED3FADC-1273-4BB8-A7EC-C7322E35580D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED3FADC-1273-4BB8-A7EC-C7322E35580D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22B78FE4-EDE7-4D00-A63A-DAD1E401AE38} = {2EC4DD1F-4313-4B4D-BFB3-BDBE27B80B59}
+		{B3A46451-4E25-4EE4-9D94-C6A5FD248249} = {7302FBE3-9A02-42DD-AF1A-B123584B3E05}
+		{8ED3FADC-1273-4BB8-A7EC-C7322E35580D} = {7302FBE3-9A02-42DD-AF1A-B123584B3E05}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {393789D3-7A36-49DF-9704-696FEA3F0ED2}
+	EndGlobalSection
+EndGlobal
