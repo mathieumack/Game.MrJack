@@ -44,7 +44,7 @@ namespace MrJack.Client.Wpf
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
         {
-            currentGame.StartNewGame(Core.Domain.Game.PlayerType.MrJack);
+            currentGame.StartNewGame(Core.Domain.Game.PlayerType.MrJack, Core.Domain.Game.Difficulty.Easy);
         }
     }
 }

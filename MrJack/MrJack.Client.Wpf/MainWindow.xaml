@@ -21,9 +21,15 @@
                              Name="newGameFlyout">
                 <StackPanel Margin="20">
                     <TextBlock Text="Je suis :" Margin="10"></TextBlock>
-                    <ComboBox Margin="10">
+                    <ComboBox Margin="10" Name="comboPlayerType">
                         <ComboBoxItem>Sherlock Holmes</ComboBoxItem>
                         <ComboBoxItem>Mr Jack</ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock Text="Difficulté :" Margin="10"></TextBlock>
+                    <ComboBox Margin="10" Name="comboDifficulty">
+                        <ComboBoxItem>Facile</ComboBoxItem>
+                        <ComboBoxItem>Medium</ComboBoxItem>
+                        <ComboBoxItem>Difficile</ComboBoxItem>
                     </ComboBox>
                     <Button Content="Démarrer" Click="StartNewGame_Click" Margin="10" HorizontalAlignment="Center"></Button>
                 </StackPanel>
@@ -34,8 +40,20 @@
         <Grid.Background>
             <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="Images/mrjackpocket.jpg" Stretch="Uniform"></ImageBrush>
         </Grid.Background>
-        <Grid Name="gameBoard">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MaxWidth="250"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="5">
             
-        </Grid>
+        </StackPanel>
+        <StackPanel Name="gameBoard" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Horizontal" Height="Auto" Name="AvailableActions" HorizontalAlignment="Center">
+            </StackPanel>
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                <ContentControl>
+                </ContentControl>
+            </WrapPanel>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
