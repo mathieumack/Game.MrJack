@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MrJack.Core.Interfaces;
+using MrJack.Core.Interfaces.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;

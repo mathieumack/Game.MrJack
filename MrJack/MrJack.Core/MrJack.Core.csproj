@@ -41,8 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Game\ActionType.cs" />
+    <Compile Include="Domain\Game\CardType.cs" />
+    <Compile Include="Domain\Game\Detective.cs" />
+    <Compile Include="Domain\Game\Difficulty.cs" />
+    <Compile Include="Domain\Game\Killers.cs" />
+    <Compile Include="Interfaces\Game\IAction.cs" />
+    <Compile Include="Interfaces\Game\ICard.cs" />
+    <Compile Include="Interfaces\Game\IGameBoard.cs" />
     <Compile Include="Domain\Game\PlayerType.cs" />
-    <Compile Include="Interfaces\IGame.cs" />
+    <Compile Include="Interfaces\Game\IGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
