@@ -42,5 +42,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MrJack.Core\MrJack.Core.csproj">
+      <Project>{b3a46451-4e25-4ee4-9d94-c6a5fd248249}</Project>
+      <Name>MrJack.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
