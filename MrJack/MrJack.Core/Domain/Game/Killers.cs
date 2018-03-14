@@ -13,7 +13,5 @@
         Sgt_Goodley,
         Madame,
         John_Pizzer
-
-        // Define other
     }
 }
