@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using MrJack.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,30 @@ namespace MrJack.Client.Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
+        IGame currentGame;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            newGameFlyout.IsOpen = true;
+        }
+
+        private void ConfigureNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            newGameFlyout.IsOpen = true;
+        }
+
+        private void StartNewGame_Click(object sender, RoutedEventArgs e)
+        {
+            currentGame.StartNewGame(Core.Domain.Game.PlayerType.MrJack);
         }
     }
 }

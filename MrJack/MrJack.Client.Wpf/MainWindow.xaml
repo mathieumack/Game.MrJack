@@ -1,12 +1,41 @@
-﻿<Window x:Class="MrJack.Client.Wpf.MainWindow"
+﻿<Controls:MetroWindow x:Class="MrJack.Client.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MrJack.Client.Wpf"
         mc:Ignorable="d"
+        Background="White"
         Title="MainWindow" Height="450" Width="800">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Nouvelle partie" Click="ConfigureNewGame_Click"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <!-- Nouvelle partie -->
+            <Controls:Flyout Header="Nouvelle partie" 
+                             Position="Right"
+                             Width="400" 
+                             Name="newGameFlyout">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Je suis :" Margin="10"></TextBlock>
+                    <ComboBox Margin="10">
+                        <ComboBoxItem>Sherlock Holmes</ComboBoxItem>
+                        <ComboBoxItem>Mr Jack</ComboBoxItem>
+                    </ComboBox>
+                    <Button Content="Démarrer" Click="StartNewGame_Click" Margin="10" HorizontalAlignment="Center"></Button>
+                </StackPanel>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="Images/mrjackpocket.jpg" Stretch="Uniform"></ImageBrush>
+        </Grid.Background>
+        <Grid Name="gameBoard">
+            
+        </Grid>
     </Grid>
-</Window>
+</Controls:MetroWindow>
