@@ -45,7 +45,6 @@
     <Compile Include="Domain\Game\Detective.cs" />
     <Compile Include="Domain\Game\Difficulty.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
-    <Compile Include="Domain\Game\Player.cs" />
     <Compile Include="Interfaces\Game\IAction.cs" />
     <Compile Include="Interfaces\Game\ICard.cs" />
     <Compile Include="Interfaces\Game\IGameBoard.cs" />
