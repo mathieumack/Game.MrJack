@@ -70,27 +70,27 @@ namespace MrJack.Client.Wpf.Controls
                     case Core.Domain.Game.Killers.None:
                         Token.Visibility = Visibility.Collapsed;
                         break;
-                    case Core.Domain.Game.Killers.InspLestrade:
+                    case Core.Domain.Game.Killers.Insp_Lestrade:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.RoyalBlue;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_insplestrade.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.JeremyBert:
+                    case Core.Domain.Game.Killers.Jeremy_Bert:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.Orange;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_jeremybert.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.JohnPizer:
+                    case Core.Domain.Game.Killers.John_Pizzer:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.WhiteSmoke;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_johnpizer.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.JohnSmith:
+                    case Core.Domain.Game.Killers.John_Smith:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.Yellow;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_johnsmith.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.JosephLane:
+                    case Core.Domain.Game.Killers.Joseph_Lane:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.DimGray;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_josephlane.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
@@ -100,17 +100,17 @@ namespace MrJack.Client.Wpf.Controls
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_madame.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.MissStealthy:
+                    case Core.Domain.Game.Killers.Miss_Stealthy:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.DarkSeaGreen;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_missstealthy.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.SgtGoodley:
+                    case Core.Domain.Game.Killers.Sgt_Goodley:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.Black;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_sgtgoodley.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;
                         break;
-                    case Core.Domain.Game.Killers.WilliamGull:
+                    case Core.Domain.Game.Killers.William_Gull:
                         TokenBorder.BorderBrush = System.Windows.Media.Brushes.MediumPurple;
                         Token.Source = new BitmapImage(new Uri("/Images/killers/token_williamgull.png", UriKind.Relative));
                         Token.Visibility = Visibility.Visible;

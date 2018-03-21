@@ -68,9 +68,9 @@ namespace MrJack.Client.Wpf.Moqs
 
             AvailableActions = new List<IAction>()
             {
-                new MoqsAction() { ActionType = ActionType.Dog, Selectable = true },
+                new MoqsAction() { ActionType = ActionType.Toby, Selectable = true },
                 new MoqsAction() { ActionType = ActionType.Turn, Selectable = true },
-                new MoqsAction() { ActionType = ActionType.All, Selectable = false },
+                new MoqsAction() { ActionType = ActionType.Joker, Selectable = false },
                 new MoqsAction() { ActionType = ActionType.Sherlock, Selectable = true },
             };
 

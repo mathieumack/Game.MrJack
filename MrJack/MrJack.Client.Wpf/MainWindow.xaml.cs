@@ -98,31 +98,31 @@ namespace MrJack.Client.Wpf
                 case Killers.None:
                     KillerUserImage.Visibility = Visibility.Collapsed;
                     break;
-                case Killers.InspLestrade:
+                case Killers.Insp_Lestrade:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/insplestrade.png", UriKind.Relative));
                     break;
-                case Killers.JeremyBert:
+                case Killers.Jeremy_Bert:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/jeremybert.png", UriKind.Relative));
                     break;
-                case Killers.JohnPizer:
+                case Killers.John_Pizzer:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/johnpizer.png", UriKind.Relative));
                     break;
-                case Killers.JohnSmith:
+                case Killers.John_Smith:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/johnsmith.png", UriKind.Relative));
                     break;
-                case Killers.JosephLane:
+                case Killers.Joseph_Lane:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/josephlane.png", UriKind.Relative));
                     break;
                 case Killers.Madame:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/madame.png", UriKind.Relative));
                     break;
-                case Killers.MissStealthy:
+                case Killers.Miss_Stealthy:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/missstealthy.png", UriKind.Relative));
                     break;
-                case Killers.SgtGoodley:
+                case Killers.Sgt_Goodley:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/sgtgoodley.png", UriKind.Relative));
                     break;
-                case Killers.WilliamGull:
+                case Killers.William_Gull:
                     KillerUserImage.Source = new BitmapImage(new Uri("/Images/killers/williamgull.png", UriKind.Relative));
                     break;
                 // TODO : Add other enumeration cases
