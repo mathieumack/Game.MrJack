@@ -3,7 +3,14 @@
     public enum Killers
     {
         None,
-        Butcher
-        // Define other
+        InspLestrade,
+        JeremyBert,
+        JohnPizer,
+        JohnSmith,
+        JosephLane,
+        Madame,
+        MissStealthy,
+        SgtGoodley,
+        WilliamGull
     }
 }

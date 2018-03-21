@@ -5,6 +5,6 @@
         None,
         Sherlock,
         Watson,
-        Tobby
+        Toby
     }
 }
