@@ -8,10 +8,13 @@ namespace MrJack.Core.Domain.Game
 {
     class Player
     {
-        public int nbSablier { get; set; } 
+        public int nbSablier { get; set; }
+        /// <summary>
+        /// Build Player
+        /// </summary>
         Player()
         {
-            nbSablier = 0;
+            nbSablier = 0;  
         }
     }
 }
