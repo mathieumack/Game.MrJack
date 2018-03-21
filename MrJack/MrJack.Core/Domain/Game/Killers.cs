@@ -3,14 +3,15 @@
     public enum Killers
     {
         None,
-        InspLestrade,
-        JeremyBert,
-        JohnPizer,
-        JohnSmith,
-        JosephLane,
+        Butcher,
+        William_Gull,
+        John_Smith,
+        Jeremy_Bert,
+        Joseph_Lane,
+        Miss_Stealthy,
+        Insp_Lestrade,
+        Sgt_Goodley,
         Madame,
-        MissStealthy,
-        SgtGoodley,
-        WilliamGull
+        John_Pizzer
     }
 }

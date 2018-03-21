@@ -7,9 +7,10 @@
     {
         Sherlock,
         Watson,
-        Dog,
-        All,
-        Turn
-        // Add others available actions
+        Toby,
+        Joker,
+        Turn, 
+        Draw, 
+        Move,
     }
 }
