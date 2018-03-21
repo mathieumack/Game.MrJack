@@ -6,6 +6,11 @@ namespace MrJack.Core.Interfaces.Game
     public interface IGame
     {
         /// <summary>
+        /// Current killer for this game
+        /// </summary>
+        Killers Killer { get; set; }
+
+        /// <summary>
         /// Get the current turn
         /// </summary>
         int CurrentTurn { get; set; }
