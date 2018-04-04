@@ -11,44 +11,26 @@ namespace MrJack.Core.Domain.Game
     {
         public ICard[,] Board { get; set; }
 
+        /// <summary>
+        /// Creates the board game
+        /// </summary>
         public GameBoard()
+        {
+            Draw listeKillers = new Draw();
+            //On remplie la table avec les cartes avec tueurs
+            for (int i = 1; i < 3; i++)
             {
-                //On remplie la table avec les cartes avec tueurs
-                for (int i = 1; i < 3; i++)
+                for (int j = 1; j < 3; j++)
                 {
-                    for( int j = 1; j < 3; j++)
-                    {
-                        Killers killer = new Killers();
-                        Board[i, j] = new Card(killer);
-                    }
+                    Killers killer = listeKillers.Pioche(PlayerType.Sherlock);
+                    Board[i, j] = new Card(killer);
                 }
-                //On place les detectives
-                Board[0, 1] = new Card(Detectives.Sherlock);
-                Board[4, 1] = new Card(Detectives.Watson);
-                Board[2,4] = new Card(Detectives.Toby);
             }
-            public int[,] swapPosition()
-            {
+            //On place les detectives
+            Board[0, 1] = new Card(Detectives.Sherlock);
+            Board[4, 1] = new Card(Detectives.Watson);
+            Board[2, 4] = new Card(Detectives.Toby);
+        }
+    }  
 
-
-                if (Action_ChangeCardPlace = true)
-                {
-                    //carte n°1
-                    int x = Convert.ToInt32(Console.ReadLine());
-                    int y = Convert.ToInt32(Console.ReadLine());
-                    //carte n°2
-                    int i = Convert.ToInt32(Console.ReadLine());
-                    int j = Convert.ToInt32(Console.ReadLine());
-                    //On échange la valeur des deux cartes
-                    array[x, y] = array[i, j];
-                    array[i, j] = array[x, y];
-                }
-                if (Action_SherlockMove = true)
-                {
-
-                }
-
-                return array;
-            }
-    }
 }
