@@ -9,7 +9,7 @@ namespace MrJack.Core.Domain.Game
     class Draw
     {
         public List<Killers> Cartes { get; set; }
-        
+
         /// <summary>
         /// Contructeur de la pioche
         /// </summary>
