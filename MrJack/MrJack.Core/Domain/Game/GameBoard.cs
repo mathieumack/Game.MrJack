@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MrJack.Core.Interfaces.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,38 +7,20 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class GameBoard
+    class GameBoard : IGameBoard
     {
-            int[,] array = new int[5, 5];
-            public int[,] fillArray()
+        public ICard[,] Board { get; set; }
+
+        public GameBoard()
             {
                 //On remplie la table avec des valeurs de 0 à 24
-                array[0, 0] = 0;
-                array[0, 1] = 1;
-                array[0, 2] = 2;
-                array[0, 3] = 3;
-                array[0, 4] = 4;
-                array[1, 0] = 5;
-                array[1, 1] = 6;
-                array[1, 2] = 7;
-                array[1, 3] = 8;
-                array[1, 4] = 9;
-                array[2, 0] = 10;
-                array[2, 1] = 11;
-                array[2, 2] = 12;
-                array[2, 3] = 13;
-                array[2, 4] = 14;
-                array[3, 0] = 15;
-                array[3, 1] = 16;
-                array[3, 2] = 17;
-                array[3, 3] = 18;
-                array[3, 4] = 19;
-                array[4, 0] = 20;
-                array[4, 1] = 21;
-                array[4, 2] = 22;
-                array[4, 3] = 23;
-                array[4, 4] = 24;
-                return array;
+                for (int i = 0; i < 5; i++)
+                {
+                    for( int j = 0; j < 5; j++)
+                    {
+                        Board[i, j] = new Card();
+                    }
+                }
             }
             public int[,] swapPosition()
             {
