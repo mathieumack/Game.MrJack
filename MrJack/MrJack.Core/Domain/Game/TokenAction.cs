@@ -23,37 +23,38 @@ namespace MrJack.Core.Domain.Game
             int nb1 = rnd.Next(1, 3);
             if (nb1 == 1)
             {
-                jeton1 = ActionType.Joker;
-            } else
+                Token1 =  new Token(ActionType.Joker);
+            }
+            else
             {
-                jeton1 = ActionType.Turn;
+                Token1 = new Token(ActionType.Turn);
             }
             int nb2 = rnd.Next(1, 3);
             if (nb2 == 2)
             {
-                jeton2 = ActionType.Move;
+                Token2 = new Token(ActionType.Move);
             }
             else
             {
-                jeton2 = ActionType.Turn;
+                Token2 = new Token(ActionType.Turn);
             }
             int nb3 = rnd.Next(1, 3);
             if (nb3 == 3)
             {
-                jeton3 = ActionType.Draw;
+                Token3 = new Token(ActionType.Draw);
             }
             else
             {
-                jeton3 = ActionType.Sherlock;
+                Token3 = new Token(ActionType.Sherlock);
             }
             int nb4 = rnd.Next(1, 3);
             if (nb4 == 4)
             {
-                jeton4 = ActionType.Toby;
+                Token4 = new Token(ActionType.Toby);
             }
             else
             {
-                jeton4 = ActionType.Watson;
+                Token4 = new Token(ActionType.Watson);
             }
         } 
         /// <summary>
