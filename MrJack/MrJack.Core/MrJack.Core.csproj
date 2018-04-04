@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Game\ActionType.cs" />
+    <Compile Include="Domain\Game\GameBoard.cs" />
     <Compile Include="Domain\Game\CardType.cs" />
     <Compile Include="Domain\Game\Detective.cs" />
     <Compile Include="Domain\Game\Difficulty.cs" />
