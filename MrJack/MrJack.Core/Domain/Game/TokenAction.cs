@@ -16,7 +16,7 @@ namespace MrJack.Core.Domain.Game
         Random rnd = new Random();
         
         /// <summary>
-        /// If pour savoir qu'elle jeton a qu'elle valeur
+        /// If pour savoir quel jeton a quelle valeur
         /// </summary>
         public void Lancer()
         {
@@ -57,7 +57,7 @@ namespace MrJack.Core.Domain.Game
             }
         } 
         /// <summary>
-        /// if pour savoir qu'elles actions exécuter
+        /// if pour savoir quelles actions exécuter
         /// </summary>
         public void Tourner()
         {
@@ -99,10 +99,12 @@ namespace MrJack.Core.Domain.Game
         }
         /// <summary>
         /// Méthode pour faire tourner la carte
-        /// les execption sont là pour au cas ou le chiffre séléctionner soit trop grand, et si la carte choisit à été déplacé ou a déjà tourné.
+        /// les execptions sont là pour au cas ou le chiffre séléctionner soit trop grand, et si la carte choisit à été déplacé ou a déjà tourné.
         /// </summary>
-        /// <param name="Card"></param>
-        /// <param name="Rotation"></param>
+        /// <param name="Card">La carte a tourner</param>
+        /// <param name="Rotation">le nombre de rotation (1 - 3)</param>
+        /// <exception cref="IndexOutOfRangeException">La rotation est comprise entre 1 et 3</exception>
+        /// <exception cref="Exception">La carte a déjà été bouger</exception>
         public void Turn(Card Card, int Rotation)
         {
             try
