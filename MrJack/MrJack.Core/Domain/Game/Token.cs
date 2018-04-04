@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Token : IAction
+    public class Token : IAction
     {
         public ActionType ActionType { get; set; }
         public bool Selectable { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class TokenAction
+    public class TokenAction
     {
         public Token Token1 { get ; set ;}
         public Token Token2 { get; set; }
@@ -20,7 +20,7 @@ namespace MrJack.Core.Domain.Game
             Token1 = new Token(ActionType.Joker);
             Token2 = new Token(ActionType.Move);
             Token3 = new Token(ActionType.Draw);
-            Token3 = new Token(ActionType.Toby);
+            Token4 = new Token(ActionType.Toby);
             Lancer();
         }
 
