@@ -97,30 +97,6 @@ namespace MrJack.Core.Domain.Game
                 jeton4 = ActionType.Toby;
             }
         }
-        /// <summary>
-        /// Méthode pour faire tourner la carte
-        /// les execptions sont là pour au cas ou le chiffre séléctionner soit trop grand, et si la carte choisit à été déplacé ou a déjà tourné.
-        /// </summary>
-        /// <param name="Card">La carte a tourner</param>
-        /// <param name="Rotation">le nombre de rotation (1 - 3)</param>
-        /// <exception cref="IndexOutOfRangeException">La rotation est comprise entre 1 et 3</exception>
-        /// <exception cref="Exception">La carte a déjà été bouger</exception>
-        public void Turn(Card Card, int Rotation)
-        {
-            try
-            {
-            if (Card.CanBeMoved)
-                {
-                Card.Rotate(Rotation);
-                } else
-                {
-                throw new Exception("Hello bitch you can't do this because the card has already been moved");
-                }
-            }catch
-            {
-                throw new IndexOutOfRangeException("Please choose between 1 and 3"); 
-            }
-        }
                 
     }
 }
