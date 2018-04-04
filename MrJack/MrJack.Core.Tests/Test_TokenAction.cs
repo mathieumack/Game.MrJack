@@ -15,21 +15,28 @@ namespace MrJack.Core.Tests
         {
             TokenAction Ta = new TokenAction();
 
+            Assert.IsNull(Ta.Token1);
+            Assert.IsNull(Ta.Token2);
+            Assert.IsNull(Ta.Token3);
+            Assert.IsNull(Ta.Token4);
+            
             Ta.Lancer();
-
+            
             Assert.IsTrue((Ta.Token1.ActionType == ActionType.Joker) || (Ta.Token1.ActionType == ActionType.Turn));
             Assert.IsTrue((Ta.Token2.ActionType == ActionType.Move) || (Ta.Token2.ActionType == ActionType.Turn));
             Assert.IsTrue((Ta.Token3.ActionType == ActionType.Draw) || (Ta.Token3.ActionType == ActionType.Sherlock));
             Assert.IsTrue((Ta.Token4.ActionType == ActionType.Toby) || (Ta.Token4.ActionType == ActionType.Watson));    
         }
+
         [TestMethod]
         public void Test_Tourner_Face1()
         {
             TokenAction Ta = new TokenAction();
-            Ta.Token1.ActionType = ActionType.Joker;
-            Ta.Token2.ActionType = ActionType.Move;
-            Ta.Token3.ActionType = ActionType.Draw;
-            Ta.Token4.ActionType = ActionType.Toby;
+
+            Ta.Token1 = new Token(ActionType.Joker);
+            Ta.Token2 = new Token(ActionType.Move);
+            Ta.Token3 = new Token(ActionType.Draw);
+            Ta.Token4 = new Token(ActionType.Toby);
 
             Ta.Tourner();
 
@@ -42,10 +49,11 @@ namespace MrJack.Core.Tests
         public void Test_Tourner_Face2()
         {
             TokenAction Ta = new TokenAction();
-            Ta.Token1.ActionType = ActionType.Turn;
-            Ta.Token2.ActionType = ActionType.Turn;
-            Ta.Token3.ActionType = ActionType.Sherlock;
-            Ta.Token4.ActionType = ActionType.Watson;
+
+            Ta.Token1 = new Token(ActionType.Turn);
+            Ta.Token2 = new Token(ActionType.Turn);
+            Ta.Token3 = new Token(ActionType.Sherlock);
+            Ta.Token4 = new Token(ActionType.Watson);
 
             Ta.Tourner();
 
