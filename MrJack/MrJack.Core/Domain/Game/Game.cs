@@ -1,19 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using MrJack.Core.Domain.Game;
+using MrJack.Core.Interfaces.Game;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Game
+    class Game : IGame
     {
+        public Killers Killer { get; set; }
+        public int CurrentTurn { get; set; }
+        public int KillerPoints { get; set; }
+        public int DetectivePoints { get; set; }
+        public IGameBoard GameBoard { get; set; }
+        public bool CanDraw { get; set; }
+        public List<IAction> AvailableActions { get; set; }
+        public List<Killers> UserDraw { get; set; }
+        public string LastIAAction { get; set; }
+        public bool EndTurnResult { get; set; }
+        private Turn turn { get; set; }
+
         public void start()
         {
-
-            Turn turn = new Turn();
-
             if (turn.IsDetectiveStart())
             {
                 turn.CurrentPlayer = PlayerType.Sherlock;
@@ -27,8 +38,6 @@ namespace MrJack.Core.Domain.Game
             {
                 Console.WriteLine("C'est au tour de " + turn.CurrentPlayer);
                 Console.WriteLine($"Nb de jetons à prendre: {turn.NbJetonAPiocher()}");
-                actionEnCours(turn.NbJetonAPiocher());
-
 
                 turn.actions++;
                 turn.ChangeCurrentPlayer();
@@ -38,19 +47,27 @@ namespace MrJack.Core.Domain.Game
             //turn.CurrentTurn++;
         }
 
-        public static void actionEnCours(int nbAPiocher)
+        public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
         {
-            ActionType jeton = new ActionType();
-            for (int i = 1; i <= nbAPiocher; i++)
-            {
-                Console.WriteLine("Voici les différentes actions:");
-                Console.WriteLine("1 - Toby");
-                Console.WriteLine("2 - Joker");
-                Console.WriteLine("3 - Rotation");
-                Console.WriteLine("4 - Move");
-                Console.WriteLine("Que voulez-vous choisir ?");
-                Console.ReadLine();
-            }
+            //New player with PlayerType
+            //New IA with opposite of player and difficulty
+
+            Turn turn = new Turn();
+        }
+
+        public void TurnCard(int x, int y, int nbTurn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveCard(int x1, int y1, int x2, int y2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw()
+        {
+            throw new NotImplementedException();
         }
     }
 
