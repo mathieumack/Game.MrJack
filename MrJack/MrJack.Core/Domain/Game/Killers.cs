@@ -3,7 +3,6 @@
     public enum Killers
     {
         None,
-        Butcher,
         William_Gull,
         John_Smith,
         Jeremy_Bert,

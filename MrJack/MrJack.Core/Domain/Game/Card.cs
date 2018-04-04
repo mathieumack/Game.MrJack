@@ -129,7 +129,7 @@ namespace MrJack.Core.Domain.Game
         /// <exception cref="IndexOutOfRangeException">Please choose between 1 and 3</exception>
         public void Rotate(int nb)
         {
-            if ((nb <= 0) || (nb >= 4))
+            if ((nb < 0) || (nb > 4))
                 throw new IndexOutOfRangeException("Please choose between 1 and 3");
             bool temp = Up;
             Up = Left;
