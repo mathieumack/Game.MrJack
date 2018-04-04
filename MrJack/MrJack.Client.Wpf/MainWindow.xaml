@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="MrJack.Client.Wpf.MainWindow"
+﻿<Controls:MetroWindow xmlns:Controls1="clr-namespace:MrJack.Client.Wpf.Controls"  x:Class="MrJack.Client.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="White"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Mr Jack (Pocket virtual edition)" Height="800" Width="1200">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Nouvelle partie" Click="ConfigureNewGame_Click"/>
@@ -40,20 +41,82 @@
         <Grid.Background>
             <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="Images/mrjackpocket.jpg" Stretch="Uniform"></ImageBrush>
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" MaxWidth="250"></ColumnDefinition>
+            <ColumnDefinition Width="1*" MaxWidth="300"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="5">
-            
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="5">
+            <Border CornerRadius="15" Background="#66AAAAAA" Margin="10" BorderThickness="1" BorderBrush="DarkGray">
+                    <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Image Source="Images/Sands/sand.png" Stretch="Uniform" Height="30" HorizontalAlignment="Left"></Image>
+                        <TextBlock Text="Sherlock : " FontSize="30" Foreground="Black" Margin="10"></TextBlock>
+                        <TextBlock Name="PointSherlock" Text="0" FontSize="30" Foreground="Black" Margin="10"></TextBlock>
+                    </StackPanel>
+                </Border>
+            <Border CornerRadius="15" Background="#66AAAAAA" Margin="10,0,10,10" BorderThickness="1" BorderBrush="DarkGray">
+                <StackPanel Margin="10" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="Images/Sands/sand.png" Stretch="Uniform" Height="30" HorizontalAlignment="Left"></Image>
+                    <TextBlock Text="Mr Jack : " FontSize="30" Foreground="Black" Margin="10"></TextBlock>
+                    <TextBlock Name="PointMrJack" Text="0" FontSize="30" Foreground="Black" Margin="10"></TextBlock>
+                </StackPanel>
+            </Border>
+            <!-- Showed if the user is a Killer type -->
+            <Border CornerRadius="15" Background="#66AAAAAA" Margin="10,0,10,10" BorderThickness="1" BorderBrush="DarkGray">
+                <StackPanel Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="Vous êtes: " FontSize="30" Foreground="Black" Margin="10"></TextBlock>
+                    <Image Name="KillerUserImage" Source="Images/killers/draw.png" Stretch="Uniform" MaxHeight="200"></Image>
+                </StackPanel>
+            </Border>
         </StackPanel>
-        <StackPanel Name="gameBoard" Grid.Column="1" Margin="5">
+        <StackPanel Grid.Row="0" Name="gameBoard" Grid.Column="1" Margin="5">
             <StackPanel Orientation="Horizontal" Height="Auto" Name="AvailableActions" HorizontalAlignment="Center">
+                <Button Name="AvailableAction1Btn" BorderThickness="0" Background="Transparent">
+                    <Image Name="AvailableAction1Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
+                </Button>
+                <Button Name="AvailableAction2Btn" BorderThickness="0" Background="Transparent">
+                    <Image Name="AvailableAction2Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
+                </Button>
+                <Button Name="AvailableAction3Btn" BorderThickness="0" Background="Transparent">
+                    <Image Name="AvailableAction3Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
+                </Button>
+                <Button Name="AvailableAction4Btn" BorderThickness="0" Background="Transparent">
+                    <Image Name="AvailableAction4Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
+                </Button>
             </StackPanel>
-            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-                <ContentControl>
-                </ContentControl>
-            </WrapPanel>
+            <UniformGrid Columns="5" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="10">
+                <Controls1:CardRender x:Name="Card00" />
+                <Controls1:CardRender x:Name="Card01" />
+                <Controls1:CardRender x:Name="Card02" />
+                <Controls1:CardRender x:Name="Card03" />
+                <Controls1:CardRender x:Name="Card04" />
+                <Controls1:CardRender x:Name="Card10" />
+                <Controls1:CardRender x:Name="Card11" />
+                <Controls1:CardRender x:Name="Card12" />
+                <Controls1:CardRender x:Name="Card13" />
+                <Controls1:CardRender x:Name="Card14" />
+                <Controls1:CardRender x:Name="Card20" />
+                <Controls1:CardRender x:Name="Card21" />
+                <Controls1:CardRender x:Name="Card22" />
+                <Controls1:CardRender x:Name="Card23" />
+                <Controls1:CardRender x:Name="Card24" />
+                <Controls1:CardRender x:Name="Card30" />
+                <Controls1:CardRender x:Name="Card31" />
+                <Controls1:CardRender x:Name="Card32" />
+                <Controls1:CardRender x:Name="Card33" />
+                <Controls1:CardRender x:Name="Card34" />
+                <Controls1:CardRender x:Name="Card40" />
+                <Controls1:CardRender x:Name="Card41" />
+                <Controls1:CardRender x:Name="Card42" />
+                <Controls1:CardRender x:Name="Card43" />
+                <Controls1:CardRender x:Name="Card44" />
+            </UniformGrid>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource ResourceKey=AccentColorBrush}">
+            <TextBlock Name="customMessage" Text="Bienvenue, configurez votre nouvelle partie" Foreground="White" Margin="10,2,0,0"></TextBlock>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>
