@@ -41,10 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Game\ActionType.cs" />
+    <Compile Include="Domain\Game\Card.cs" />
     <Compile Include="Domain\Game\CardType.cs" />
     <Compile Include="Domain\Game\Detective.cs" />
     <Compile Include="Domain\Game\Difficulty.cs" />
+    <Compile Include="Domain\Game\Direction.cs" />
+    <Compile Include="Domain\Game\Draw.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
+    <Compile Include="Domain\Game\TokenAction.cs" />
     <Compile Include="Interfaces\Game\IAction.cs" />
     <Compile Include="Interfaces\Game\ICard.cs" />
     <Compile Include="Interfaces\Game\IGameBoard.cs" />
