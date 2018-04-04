@@ -96,7 +96,6 @@ namespace MrJack.Core.Domain.Game
             {
                 jeton4 = ActionType.Toby;
             }
-        }
-                
+        } 
     }
 }
