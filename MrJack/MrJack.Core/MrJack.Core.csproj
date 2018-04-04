@@ -50,6 +50,7 @@
     <Compile Include="Domain\Game\Draw.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
     <Compile Include="Domain\Game\Player.cs" />
+    <Compile Include="Domain\Game\Token.cs" />
     <Compile Include="Domain\Game\TokenAction.cs" />
     <Compile Include="Domain\Game\Turn.cs" />
     <Compile Include="Interfaces\Game\IAction.cs" />
