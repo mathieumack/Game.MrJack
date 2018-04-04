@@ -27,13 +27,15 @@ namespace MrJack.Core.Domain.Game
         /// Permet de piocher un carte
         /// </summary>
         /// <returns>le tueur sur la carte</returns>
-        public Killers Pioche()
+        public Killers Pioche(PlayerType CurrentPlayer)
         {
             Random rnd = new Random();
             int nb = rnd.Next(0, 10);
             Killers killer = Cartes[nb];
             Cartes.Remove(killer);
             return killer;
+
+        
         }
     }
 }
