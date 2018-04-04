@@ -13,14 +13,19 @@ namespace MrJack.Core.Domain.Game
 
         public GameBoard()
             {
-                //On remplie la table avec des valeurs de 0 à 24
-                for (int i = 0; i < 5; i++)
+                //On remplie la table avec les cartes avec tueurs
+                for (int i = 1; i < 3; i++)
                 {
-                    for( int j = 0; j < 5; j++)
+                    for( int j = 1; j < 3; j++)
                     {
-                        Board[i, j] = new Card();
+                        Killers killer = new Killers();
+                        Board[i, j] = new Card(killer);
                     }
                 }
+                //On place les detectives
+                Board[0, 1] = new Card(Detectives.Sherlock);
+                Board[4, 1] = new Card(Detectives.Watson);
+                Board[2,4] = new Card(Detectives.Toby);
             }
             public int[,] swapPosition()
             {
