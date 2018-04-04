@@ -10,7 +10,7 @@ namespace MrJack.Core.Domain.Game
     {
         public List<Killers> Cartes { get; set; }
         
-        public void List()
+        public Draw()
         {
             Cartes.Add(Killers.William_Gull);
             Cartes.Add(Killers.John_Smith);
