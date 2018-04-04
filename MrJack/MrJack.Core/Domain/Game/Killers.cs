@@ -1,4 +1,4 @@
-﻿namespace MrJack.Core.Domain.Game
+﻿    namespace MrJack.Core.Domain.Game
 {
     public enum Killers
     {
