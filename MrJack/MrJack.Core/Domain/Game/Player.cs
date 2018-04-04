@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Player
+    public class Player
     {
         public int nbSablier { get; set; }
+        public PlayerType PlayerType { get; set; }
 
-        Player(){
-
+        public Player(PlayerType playerType) {
             nbSablier = 0;
-
+            PlayerType = playerType;
         }
     }
 }

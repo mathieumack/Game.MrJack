@@ -30,7 +30,7 @@ namespace MrJack.Client.Wpf
             newGameFlyout.IsOpen = true;
 
             // TODO : Init game object
-            currentGame = new MoqsGame();
+            currentGame = new Game();
 
             // Register CardRender table :
             cards = new CardRender[5, 5];

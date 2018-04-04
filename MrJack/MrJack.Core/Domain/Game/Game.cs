@@ -9,7 +9,7 @@ using MrJack.Core.Interfaces.Game;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Game : IGame
+    public class Game : IGame
     {
         public Killers Killer { get; set; }
         public int CurrentTurn { get; set; }
@@ -23,7 +23,35 @@ namespace MrJack.Core.Domain.Game
         public bool EndTurnResult { get; set; }
         private Turn turn { get; set; }
 
-        public void start()
+
+        /// <summary>
+        /// Initialise variable when we create a game.
+        /// </summary>
+        /// <param name="typePlayer"></param>
+        /// <param name="difficulty"></param>
+        public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
+        {
+            //New player with PlayerType
+            Player joueur = new Player(typePlayer);
+
+            AvailableActions = new List<IAction>();
+            //New IA with opposite of player and difficulty
+            if (joueur.PlayerType == PlayerType.MrJack)
+            {
+                //Créer une IA de type PlayerType.Sherlock
+            }
+            else
+            {
+                //Créer une IA de type PlayerType.MrJack
+            }
+            Turn turn = new Turn();
+            
+        }
+
+        /// <summary>
+        /// Middle Game 
+        /// </summary>
+        public void MiddleGame()
         {
             if (turn.IsDetectiveStart())
             {
@@ -47,16 +75,9 @@ namespace MrJack.Core.Domain.Game
             //turn.CurrentTurn++;
         }
 
-        public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
-        {
-            //New player with PlayerType
-            //New IA with opposite of player and difficulty
-
-            Turn turn = new Turn();
-        }
-
         public void TurnCard(int x, int y, int nbTurn)
         {
+
             throw new NotImplementedException();
         }
 
@@ -82,7 +103,5 @@ namespace MrJack.Core.Domain.Game
      *      -   Criminel visible        => suspects invisibles innocentés   => le détective gagne le jeton
      * On compte les sabliers du criminel
      */
-
-    //TODO:Action Token
 }
 
