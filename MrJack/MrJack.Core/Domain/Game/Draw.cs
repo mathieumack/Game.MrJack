@@ -9,8 +9,11 @@ namespace MrJack.Core.Domain.Game
     class Draw
     {
         public List<Killers> Cartes { get; set; }
-        
-        public void List()
+
+        /// <summary>
+        /// Contructeur de la pioche
+        /// </summary>
+        public Draw()
         {
             Cartes.Add(Killers.William_Gull);
             Cartes.Add(Killers.John_Smith);
@@ -21,6 +24,19 @@ namespace MrJack.Core.Domain.Game
             Cartes.Add(Killers.Sgt_Goodley);
             Cartes.Add(Killers.Madame);
             Cartes.Add(Killers.John_Pizzer);
+        }
+
+        /// <summary>
+        /// Permet de piocher un carte
+        /// </summary>
+        /// <returns>le tueur sur la carte</returns>
+        public Killers Pioche()
+        {
+            Random rnd = new Random();
+            int nb = rnd.Next(0, 10);
+            Killers killer = Cartes[nb];
+            Cartes.Remove(killer);
+            return killer;
         }
     }
 }
