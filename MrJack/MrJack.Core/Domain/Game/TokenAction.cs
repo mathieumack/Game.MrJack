@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class TokenAction
+    public class TokenAction
     {
-        public ActionType jeton1 {get ; set ;}
-        public ActionType jeton2 { get; set; }
-        public ActionType jeton3 { get; set; }
-        public ActionType jeton4 { get; set; }
+        public Token Token1 { get; set; }
+        public Token Token2 { get; set; }
+        public Token Token3 { get; set; }
+        public Token Token4 { get; set; }
 
         Random rnd = new Random();
-        
+
+
         /// <summary>
         /// If pour savoir quel jeton a quelle valeur
         /// </summary>
@@ -23,14 +24,14 @@ namespace MrJack.Core.Domain.Game
             int nb1 = rnd.Next(1, 3);
             if (nb1 == 1)
             {
-                Token1 =  new Token(ActionType.Joker);
+                Token1 = new Token(ActionType.Joker);
             }
             else
             {
                 Token1 = new Token(ActionType.Turn);
             }
             int nb2 = rnd.Next(1, 3);
-            if (nb2 == 2)
+            if (nb2 == 1)
             {
                 Token2 = new Token(ActionType.Move);
             }
@@ -39,7 +40,7 @@ namespace MrJack.Core.Domain.Game
                 Token2 = new Token(ActionType.Turn);
             }
             int nb3 = rnd.Next(1, 3);
-            if (nb3 == 3)
+            if (nb3 == 1)
             {
                 Token3 = new Token(ActionType.Draw);
             }
@@ -48,7 +49,7 @@ namespace MrJack.Core.Domain.Game
                 Token3 = new Token(ActionType.Sherlock);
             }
             int nb4 = rnd.Next(1, 3);
-            if (nb4 == 4)
+            if (nb4 == 1)
             {
                 Token4 = new Token(ActionType.Toby);
             }
@@ -56,48 +57,47 @@ namespace MrJack.Core.Domain.Game
             {
                 Token4 = new Token(ActionType.Watson);
             }
-        } 
+        }
         /// <summary>
         /// if pour savoir quelles actions exécuter
         /// </summary>
         public void Tourner()
         {
-            if (jeton1 == ActionType.Joker)
+            if (Token1.ActionType == ActionType.Joker)
             {
-                jeton1 = ActionType.Turn;
+                Token1.ActionType = ActionType.Turn;
             }
             else
             {
-                jeton1 = ActionType.Joker;
+                Token1.ActionType = ActionType.Joker;
             }
 
-            if (jeton2 == ActionType.Move)
+            if (Token2.ActionType == ActionType.Move)
             {
-                jeton2 = ActionType.Turn;
+                Token2.ActionType = ActionType.Turn;
             }
             else
             {
-                jeton2 = ActionType.Move;
+                Token2.ActionType = ActionType.Move;
             }
 
-            if (jeton3 == ActionType.Draw)
+            if (Token3.ActionType == ActionType.Draw)
             {
-                jeton3 = ActionType.Sherlock;
+                Token3.ActionType = ActionType.Sherlock;
             }
             else
             {
-                jeton3 = ActionType.Draw;
+                Token3.ActionType = ActionType.Draw;
             }
 
-            if (jeton4 == ActionType.Toby)
+            if (Token4.ActionType == ActionType.Toby)
             {
-                jeton4 = ActionType.Watson;
+                Token4.ActionType = ActionType.Watson;
             }
             else
             {
-                jeton4 = ActionType.Toby;
+                Token4.ActionType = ActionType.Toby;
             }
         }
-                
     }
 }
