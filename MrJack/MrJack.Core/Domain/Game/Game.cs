@@ -33,6 +33,8 @@ namespace MrJack.Core.Domain.Game
         {
             //New player with PlayerType
             Joueur = new Player(typePlayer);
+            Draw mainDraw = new Draw();
+            mainDraw.Pioche(Joueur.PlayerType);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -45,12 +47,14 @@ namespace MrJack.Core.Domain.Game
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
                 //Créer une IA de type PlayerType.Sherlock
+
             }
             else
             {
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard();
+            TurnCard(1, 1, 1);
             Turn turn = new Turn();
             
         }
@@ -84,18 +88,38 @@ namespace MrJack.Core.Domain.Game
 
         public void TurnCard(int x, int y, int nbTurn)
         {
+            ICard card = GameBoard.Board[x, y];            
+            for (int i = 0; i<nbTurn; i++)
+            {
+                TurnCard(card);    
+            }
+        }
 
-            throw new NotImplementedException();
+        private void TurnCard(ICard card)
+        {
+            var cardUp = card.Up;
+            var cardRight = card.Right;
+            var cardDown = card.Down;
+            var cardLeft = card.Left;
+            
+            card.Up = cardLeft;
+            card.Right = cardUp;
+            card.Down = cardRight;
+            card.Left = cardDown;
         }
 
         public void MoveCard(int x1, int y1, int x2, int y2)
         {
-            throw new NotImplementedException();
+            ICard card1 = GameBoard.Board[x1, y1];
+            ICard card2 = GameBoard.Board[x2, y2];
+
+            GameBoard.Board[x1, y1] = card2;
+            GameBoard.Board[x2, y2] = card1;
         }
 
         public void Draw()
         {
-            throw new NotImplementedException();
+
         }
     }
 
