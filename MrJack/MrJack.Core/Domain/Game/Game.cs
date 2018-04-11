@@ -110,11 +110,19 @@ namespace MrJack.Core.Domain.Game
 
         public void MoveCard(int x1, int y1, int x2, int y2)
         {
-            ICard card1 = GameBoard.Board[x1, y1];
-            ICard card2 = GameBoard.Board[x2, y2];
+            foreach (var token in AvailableActions)
+            {
+                if (token.ActionType == ActionType.Move)
+                {
+                    ICard card1 = GameBoard.Board[x1, y1];
+                    ICard card2 = GameBoard.Board[x2, y2];
 
-            GameBoard.Board[x1, y1] = card2;
-            GameBoard.Board[x2, y2] = card1;
+                    GameBoard.Board[x1, y1] = card2;
+                    GameBoard.Board[x2, y2] = card1;
+
+                    token.Selectable = false;
+                }
+            }  
         }
 
         public void Draw()
