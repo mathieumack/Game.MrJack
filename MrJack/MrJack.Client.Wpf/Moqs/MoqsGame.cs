@@ -32,12 +32,12 @@ namespace MrJack.Client.Wpf.Moqs
 
         #region Properties
 
-        public void Draw()
+        public void Draw(int actionIndex)
         {
             throw new System.NotImplementedException();
         }
 
-        public void MoveCard(int x1, int y1, int x2, int y2)
+        public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             throw new System.NotImplementedException();
         }
@@ -47,9 +47,14 @@ namespace MrJack.Client.Wpf.Moqs
             ConfigureMoq();
         }
 
-        public void TurnCard(int x, int y, int nbTurn)
+        public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void MoveDetective(int actionIndex, int x, int y, int nbTurn)
+        {
+
         }
 
         #endregion
@@ -75,11 +80,6 @@ namespace MrJack.Client.Wpf.Moqs
             };
 
             GameBoard = new MoqsGameBoard();
-        }
-
-        public void MoveDetective(int x, int y, int nbTurn)
-        {
-
         }
 
         #endregion

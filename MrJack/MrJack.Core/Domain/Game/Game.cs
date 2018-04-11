@@ -56,7 +56,7 @@ namespace MrJack.Core.Domain.Game
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard(Rnd);
-            TurnCard(1, 1, 1);
+            TurnCard(9, 1, 1, 1);
             Turn turn = new Turn();
         }
 
@@ -87,7 +87,7 @@ namespace MrJack.Core.Domain.Game
             //turn.CurrentTurn++;
         }
 
-        public void TurnCard(int x, int y, int nbTurn)
+        public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
             ICard card = GameBoard.Board[x, y];
             for (int i = 0; i < nbTurn; i++)
@@ -110,7 +110,7 @@ namespace MrJack.Core.Domain.Game
         }
 
 
-        public void MoveCard(int x1, int y1, int x2, int y2)
+        public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             foreach (var token in AvailableActions)
             {
@@ -128,12 +128,12 @@ namespace MrJack.Core.Domain.Game
         }
 
 
-        public void Draw()
+        public void Draw(int actionIndex)
         {
 
         }
 
-        public void MoveDetective(int x1, int y1, int nbTurn)
+        public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
         {
             int x = 0;
             int y = 0;
