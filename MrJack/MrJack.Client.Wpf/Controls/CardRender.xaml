@@ -7,6 +7,7 @@
              Margin="5"
              d:DesignHeight="120" d:DesignWidth="120">
     <Grid>
+        <Image Panel.ZIndex="3" Name="Check" Source="/Images/check.png" Stretch="Uniform" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" ></Image>
         <Image Panel.ZIndex="0" Name="ImageCard3" RenderTransformOrigin=".5,.5" Source="/Images/Cards/card_3.png" Stretch="Uniform" Height="120">
             <Image.RenderTransform>
                 <RotateTransform x:Name="rotateTransform" Angle="0"></RotateTransform>

@@ -11,6 +11,6 @@
         Joker,
         Turn, 
         Draw, 
-        Move,
+        Move
     }
 }

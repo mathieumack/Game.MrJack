@@ -11,13 +11,25 @@ namespace MrJack.Client.Wpf.Controls
     /// </summary>
     public partial class CardRender : UserControl
     {
+        public int IndexX { get; set; }
+
+        public int IndexY { get; set; }
+
+        public bool IsSelected { get; set; }
+
+        public ICard Card { get; set; }
+
         public CardRender()
         {
             InitializeComponent();
+
+            Select(false);
         }
 
         public void SetCard(ICard card)
         {
+            this.Card = card;
+
             ImageCard3.Visibility = Visibility.Visible;
             ImageCard4.Visibility = Visibility.Visible;
             Token.Visibility = Visibility.Visible;
@@ -127,6 +139,15 @@ namespace MrJack.Client.Wpf.Controls
         private bool IsCardWith4OpenPoints(ICard card)
         {
             return card.Up && card.Down && card.Left && card.Right;
+        }
+        
+        public void Select(bool selectItem)
+        {
+            IsSelected = selectItem;
+            if (IsSelected)
+                Check.Visibility = Visibility.Visible;
+            else
+                Check.Visibility = Visibility.Collapsed;
         }
     }
 }

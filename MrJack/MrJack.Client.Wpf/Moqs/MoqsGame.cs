@@ -70,7 +70,7 @@ namespace MrJack.Client.Wpf.Moqs
             {
                 new MoqsAction() { ActionType = ActionType.Toby, Selectable = true },
                 new MoqsAction() { ActionType = ActionType.Turn, Selectable = true },
-                new MoqsAction() { ActionType = ActionType.Joker, Selectable = false },
+                new MoqsAction() { ActionType = ActionType.Joker, Selectable = true },
                 new MoqsAction() { ActionType = ActionType.Sherlock, Selectable = true },
             };
 

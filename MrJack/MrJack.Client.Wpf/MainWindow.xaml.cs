@@ -4,6 +4,7 @@ using MrJack.Client.Wpf.Moqs;
 using MrJack.Core.Domain.Game;
 using MrJack.Core.Interfaces.Game;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -17,6 +18,9 @@ namespace MrJack.Client.Wpf
     {
         IGame currentGame;
         CardRender[,] cards;
+        List<CardRender> SelectedCard = new List<CardRender>();
+        IAction currentSelectedAction;
+        PlayerType WhoAmI { get; set; }
 
         public MainWindow()
         {
@@ -70,7 +74,8 @@ namespace MrJack.Client.Wpf
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
         {
-            currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Easy);
+            WhoAmI = PlayerType.MrJack;
+            currentGame.StartNewGame(WhoAmI, Difficulty.Easy);
             Refresh();
         }
 
@@ -81,6 +86,8 @@ namespace MrJack.Client.Wpf
             if (currentGame == null)
                 return;
 
+            moveSelectionPanel.Visibility = Visibility.Collapsed;
+
             // Start to refresh available actions :
             for (int i = 0; i < 4; i++)
             {
@@ -89,6 +96,7 @@ namespace MrJack.Client.Wpf
                 var image = GetAvailableActionImage(i+1);
 
                 button.IsEnabled = action.Selectable;
+                image.Source = new BitmapImage(new Uri("/Images/Actions/" + action.ActionType.ToString() + ".png", UriKind.Relative));
             }
 
             // Killer image type:
@@ -183,5 +191,136 @@ namespace MrJack.Client.Wpf
         }
 
         #endregion
+
+        #region Cards selection
+
+        private void Card_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var cardRender = sender as CardRender;
+            if (CanSelectCard(cardRender))
+            {
+                if(currentSelectedAction.ActionType == ActionType.Turn) // 1 item selectable :
+                {
+                    if (SelectedCard.Count == 1)
+                        SelectedCard[0].Select(false);
+                    SelectedCard.Clear();
+
+                    cardRender.Select(!cardRender.IsSelected);
+
+                    if (cardRender.IsSelected)
+                        SelectedCard.Add(cardRender);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Define if we can select the card
+        /// </summary>
+        /// <param name="cardRender"></param>
+        /// <returns></returns>
+        private bool CanSelectCard(CardRender cardRender)
+        {
+            if (currentSelectedAction == null)
+                return false;
+            
+            switch (currentSelectedAction.ActionType)
+            {
+                case ActionType.Joker:
+                    return cardRender.Card.CardType == CardType.Jeton && cardRender.Card.Detective != Detectives.None;
+                case ActionType.Turn:
+                case ActionType.Move:
+                    return cardRender.Card.CardType == CardType.Card;
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region Available actions click
+
+        private void AvailableAction1Btn_Click(object sender, RoutedEventArgs e)
+        {
+            currentSelectedAction = null;
+            if (currentGame.AvailableActions[0].Selectable)
+            {
+                currentSelectedAction = currentGame.AvailableActions[0];
+            }
+            ManageSelectedAction();
+        }
+
+        private void AvailableAction2Btn_Click(object sender, RoutedEventArgs e)
+        {
+            currentSelectedAction = null;
+            if (currentGame.AvailableActions[1].Selectable)
+            {
+                currentSelectedAction = currentGame.AvailableActions[1];
+            }
+            ManageSelectedAction();
+        }
+
+        private void AvailableAction3Btn_Click(object sender, RoutedEventArgs e)
+        {
+            currentSelectedAction = null;
+            if (currentGame.AvailableActions[2].Selectable)
+            {
+                currentSelectedAction = currentGame.AvailableActions[2];
+            }
+            ManageSelectedAction();
+        }
+
+        private void AvailableAction4Btn_Click(object sender, RoutedEventArgs e)
+        {
+            currentSelectedAction = null;
+            if (currentGame.AvailableActions[3].Selectable)
+            {
+                currentSelectedAction = currentGame.AvailableActions[3];
+            }
+            ManageSelectedAction();
+        }
+
+        private void ManageSelectedAction()
+        {
+            if (currentSelectedAction != null)
+            {
+                moveSelectionPanel.Visibility = Visibility.Collapsed;
+                selectJokerActionPanel.Visibility = Visibility.Collapsed;
+                changeCardsActionPanel.Visibility = Visibility.Collapsed;
+
+                switch (currentSelectedAction.ActionType)
+                {
+                    case ActionType.Draw:
+                        currentGame.Draw();
+                        Refresh();
+                        break;
+                    case ActionType.Toby:
+                    case ActionType.Watson:
+                    case ActionType.Sherlock:
+                    case ActionType.Turn:
+                        moveSelectionPanel.Visibility = Visibility.Visible;
+                        // Now we need to wait the user to select the number of moves
+                        break;
+                    case ActionType.Joker:
+                        if(WhoAmI == PlayerType.Sherlock) // Detective
+                            moveSelectionPanel.Visibility = Visibility.Visible;
+                        else // Killer
+                            selectJokerActionPanel.Visibility = Visibility.Visible;
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
+        private void changeCard_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCard.Count == 2)
+            {
+                currentGame.MoveCard(SelectedCard[0].IndexX, SelectedCard[0].IndexY, SelectedCard[1].IndexX, SelectedCard[1].IndexY);
+                Refresh();
+            }
+            else
+                customMessage.Text = "Veuillez sélectionner 2 cartes.";
+        }
     }
 }
