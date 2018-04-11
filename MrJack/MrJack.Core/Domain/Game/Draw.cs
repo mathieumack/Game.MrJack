@@ -15,6 +15,7 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public Draw()
         {
+            Cartes = new List<Killers>();
             Cartes.Add(Killers.William_Gull);
             Cartes.Add(Killers.John_Smith);
             Cartes.Add(Killers.Jeremy_Bert);
