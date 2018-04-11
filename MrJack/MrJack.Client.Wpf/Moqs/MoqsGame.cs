@@ -77,6 +77,11 @@ namespace MrJack.Client.Wpf.Moqs
             GameBoard = new MoqsGameBoard();
         }
 
+        public void MoveDetective(int x, int y, int nbTurn)
+        {
+
+        }
+
         #endregion
     }
 }

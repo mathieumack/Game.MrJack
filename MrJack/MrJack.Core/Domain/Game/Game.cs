@@ -121,6 +121,11 @@ namespace MrJack.Core.Domain.Game
         {
 
         }
+
+        public void MoveDetective(int x, int y, int nbTurn)
+        {
+
+        }
     }
 
     /*

@@ -71,6 +71,14 @@ namespace MrJack.Core.Interfaces.Game
         void TurnCard(int x, int y, int nbTurn);
 
         /// <summary>
+        /// Action called when we move a detective
+        /// </summary>
+        /// <param name="x">Column</param>
+        /// <param name="y">Line</param>
+        /// <param name="nbTurn"></param>
+        void MoveDetective(int x, int y, int nbTurn);
+
+        /// <summary>
         /// Move 2 cards
         /// </summary>
         /// <param name="x1"></param>

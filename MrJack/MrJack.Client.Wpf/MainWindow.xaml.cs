@@ -104,6 +104,10 @@ namespace MrJack.Client.Wpf
             if (currentGame == null)
                 return;
 
+            foreach (var card in SelectedCard)
+                card.Select(false);
+            SelectedCard.Clear();
+
             moveSelectionPanel.Visibility = Visibility.Collapsed;
             selectJokerActionPanel.Visibility = Visibility.Collapsed;
             changeCardsActionPanel.Visibility = Visibility.Collapsed;
@@ -361,14 +365,28 @@ namespace MrJack.Client.Wpf
                 customMessage.Text = "Veuillez sélectionner 2 cartes.";
         }
 
+        private CardRender FindDetective(Detectives dectective)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for(int j = 0; j < 5; j++)
+                {
+                    if (currentGame.GameBoard.Board[i, j].Detective == dectective)
+                        return cards[i, j];
+                }
+            }
+            return null;
+        }
+
         private void ValidateNbTurns_Click(object sender, RoutedEventArgs e)
         {
+            int nbturns = 0;
+            CardRender card = null;
             switch(currentSelectedAction.ActionType)
             {
                 case ActionType.Turn:
                     if (SelectedCard.Count == 1)
                     {
-                        int nbturns = 0;
                         if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                         {
                             currentGame.TurnCard(SelectedCard[0].IndexX, SelectedCard[0].IndexY, int.Parse(nbMovesForselectedItems.Text));
@@ -379,14 +397,41 @@ namespace MrJack.Client.Wpf
                     }
                     break;
                 case ActionType.Toby:
-                case ActionType.Sherlock:
-                case ActionType.Watson:
-                    if (SelectedCard.Count == 1)
+                    card = FindDetective(Detectives.Toby);
+                    if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                     {
-
+                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        Refresh();
                     }
+                    else
+                        customMessage.Text = "Nombre de tours invalide";
+                    break;
+                case ActionType.Sherlock:
+                    card = FindDetective(Detectives.Sherlock);
+                    if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
+                    {
+                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        Refresh();
+                    }
+                    else
+                        customMessage.Text = "Nombre de tours invalide";
+                    break;
+                case ActionType.Watson:
+                    card = FindDetective(Detectives.Watson);
+                    if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
+                    {
+                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        Refresh();
+                    }
+                    else
+                        customMessage.Text = "Nombre de tours invalide";
                     break;
             }
+        }
+
+        private void DoNothing_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

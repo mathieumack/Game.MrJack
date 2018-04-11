@@ -94,7 +94,7 @@
                 <Button Content="Valider" Margin="5" Name="ValidateNbTurns" Click="ValidateNbTurns_Click"></Button>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="selectJokerActionPanel">
-                <Button Content="Ne rien faire." ></Button>
+                <Button Content="Ne rien faire." Name="DoNothing" Click="DoNothing_Click" ></Button>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="changeCardsActionPanel">
                 <Button Content="Echanger." Name="changeCard" Click="changeCard_Click" ></Button>
