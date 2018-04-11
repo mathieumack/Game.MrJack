@@ -56,7 +56,6 @@ namespace MrJack.Core.Domain.Game
             GameBoard = new GameBoard();
             TurnCard(1, 1, 1);
             Turn turn = new Turn();
-            
         }
 
         /// <summary>
@@ -108,6 +107,7 @@ namespace MrJack.Core.Domain.Game
             card.Left = cardDown;
         }
 
+        
         public void MoveCard(int x1, int y1, int x2, int y2)
         {
             ICard card1 = GameBoard.Board[x1, y1];
@@ -117,9 +117,53 @@ namespace MrJack.Core.Domain.Game
             GameBoard.Board[x2, y2] = card1;
         }
 
+
         public void Draw()
         {
 
+        }
+
+        public void MoveDetective(int x1, int y1, int nbTurn)
+        {
+            if(x1 == 4 && y1 <= 4)
+            {
+                if(x1 == 4 && y1 == 4)
+                {
+                    x1 = 3;
+                    ICard card = GameBoard.Board[x1, y1];
+                }
+                else
+                {
+                    y1 = y1++;
+                    ICard card = GameBoard.Board[x1, y1];
+                }
+            }
+
+            else if(x1 <= 4 && y1 == 4)
+            {
+
+                if (x1 == 0)
+                {
+                    y1 = 3;
+                    ICard card = GameBoard.Board[x1, y1];
+                }
+                else
+                {
+                    x1 = x1--;
+                    ICard card = GameBoard.Board[x1, y1];
+                }
+            }
+
+            else if(x1 == 0 && y1 <= 4)
+            {
+                y1 = y1--;
+                ICard card = GameBoard.Board[x1, y1];
+            }
+            else
+            {
+                x1 = x1++;
+                ICard card = GameBoard.Board[x1, y1];
+            }
         }
     }
 
