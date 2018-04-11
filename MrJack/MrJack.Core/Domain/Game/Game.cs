@@ -22,8 +22,7 @@ namespace MrJack.Core.Domain.Game
         public string LastIAAction { get; set; }
         public bool EndTurnResult { get; set; }
         private Turn turn { get; set; }
-
-
+       
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -34,7 +33,13 @@ namespace MrJack.Core.Domain.Game
             //New player with PlayerType
             Player joueur = new Player(typePlayer);
 
+            TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
+            AvailableActions.Add(tokenAction.Token1);
+            AvailableActions.Add(tokenAction.Token2);
+            AvailableActions.Add(tokenAction.Token3);
+            AvailableActions.Add(tokenAction.Token4);
+
             //New IA with opposite of player and difficulty
             if (joueur.PlayerType == PlayerType.MrJack)
             {
