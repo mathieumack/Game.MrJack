@@ -93,6 +93,7 @@ namespace MrJack.Core.Domain.Game
             for (int i = 0; i < nbTurn; i++)
             {
                 TurnCard(card);
+                AvailableActions[actionIndex].Selectable = false;
             }
         }
 
@@ -112,15 +113,8 @@ namespace MrJack.Core.Domain.Game
 
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
-            foreach (var token in AvailableActions)
-            {
-                if (token.ActionType == ActionType.Move)
-                {
-                    Move(x1, y1, x2, y2);
-                    token.Selectable = false;
-
-                }
-            }
+            Move(x1, y1, x2, y2);
+            AvailableActions[actionIndex].Selectable = false;
         }
 
         private void Move(int x1, int y1, int x2, int y2)
@@ -131,15 +125,11 @@ namespace MrJack.Core.Domain.Game
             GameBoard.Board[x1, y1] = card2;
             GameBoard.Board[x2, y2] = card1;
 
-                    token.Selectable = false;
-                }
-            }
         }
-
 
         public void Draw(int actionIndex)
         {
-
+            //AvailableActions[actionIndex].Selectable = false;
         }
 
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
@@ -169,7 +159,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }
             Move(x1, y1, xFinal, yFinal);
-            AvailableActions[nbAssocie].Selectable = false;
+            AvailableActions[actionIndex].Selectable = false;
         }
     }
 
