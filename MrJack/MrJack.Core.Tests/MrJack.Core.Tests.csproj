@@ -52,7 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test_GameBoard.cs" />
     <Compile Include="Test_TokenAction.cs" />
-    <Compile Include="TokenActionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
