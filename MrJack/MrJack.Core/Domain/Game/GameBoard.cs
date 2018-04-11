@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class GameBoard : IGameBoard
+    public class GameBoard : IGameBoard
     {
         public ICard[,] Board { get; set; }
 
@@ -16,6 +16,7 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public GameBoard()
         {
+            Board = new ICard[5,5];
             Draw listeKillers = new Draw();
             //On remplie la table avec les cartes avec tueurs
             for (int i = 1; i < 3; i++)
@@ -26,6 +27,7 @@ namespace MrJack.Core.Domain.Game
                     Board[i, j] = new Card(killer);
                 }
             }
+
             //On place les detectives
             Board[0, 1] = new Card(Detectives.Sherlock);
             Board[4, 1] = new Card(Detectives.Watson);
