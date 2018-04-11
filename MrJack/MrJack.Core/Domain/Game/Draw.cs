@@ -54,7 +54,6 @@ namespace MrJack.Core.Domain.Game
             if(currentPlayer == PlayerType.MrJack)
             {
                 killersSabliers.TryGetValue(killer, out int sabliers);
-                //Joueur.Sabliers += sabliers;
             }
             Cartes.Remove(killer);
             return killer;

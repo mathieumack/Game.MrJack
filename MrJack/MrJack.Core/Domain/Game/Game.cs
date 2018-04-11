@@ -33,6 +33,8 @@ namespace MrJack.Core.Domain.Game
         {
             //New player with PlayerType
             Joueur = new Player(typePlayer);
+            Draw mainDraw = new Draw();
+            mainDraw.Pioche(Joueur.PlayerType);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -45,6 +47,7 @@ namespace MrJack.Core.Domain.Game
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
                 //Créer une IA de type PlayerType.Sherlock
+
             }
             else
             {
