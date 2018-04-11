@@ -14,11 +14,6 @@ namespace MrJack.Core.Tests
         public void Test_Lancer()
         {
             TokenAction Ta = new TokenAction();
-
-            Assert.IsNull(Ta.Token1);
-            Assert.IsNull(Ta.Token2);
-            Assert.IsNull(Ta.Token3);
-            Assert.IsNull(Ta.Token4);
             
             Ta.Lancer();
             
