@@ -75,26 +75,34 @@ namespace MrJack.Core.Domain.Game
         {
             Detective = detective;
 
-            if (Detective == Detectives.Sherlock)
+            int nb = rnd.Next(1, 5);
+            if (nb == 1)
+            {
+                Up = true;
+                Right = false;
+                Down = false;
+                Left = false;
+            }
+            else if (nb == 2)
             {
                 Up = false;
                 Right = true;
                 Down = false;
                 Left = false;
             }
-            else if (Detective == Detectives.Watson)
+            else if (nb == 3)
+            {
+                Up = false;
+                Right = false;
+                Down = true;
+                Left = false;
+            }
+            else
             {
                 Up = false;
                 Right = false;
                 Down = false;
                 Left = true;
-            }
-            else
-            {
-                Up = true;
-                Right = false;
-                Down = false;
-                Left = false;
             }
         }
 
@@ -115,7 +123,7 @@ namespace MrJack.Core.Domain.Game
         }
 
         /// <summary>
-        /// Rotates the card
+        /// Rotates the street card
         /// </summary>
         /// <param name="nb">How many turns</param>
         /// <exception cref="IndexOutOfRangeException">Please choose between 1 and 3</exception>
