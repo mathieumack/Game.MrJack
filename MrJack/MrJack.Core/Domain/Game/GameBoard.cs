@@ -42,6 +42,8 @@ namespace MrJack.Core.Domain.Game
             Board[0, 1] = new Card(Detectives.Sherlock);
             Board[4, 1] = new Card(Detectives.Watson);
             Board[2, 4] = new Card(Detectives.Toby);
+
+            MoveCard(1, 1, 2, 1);
         }
     }  
 
