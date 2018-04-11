@@ -23,7 +23,7 @@ namespace MrJack.Core.Domain.Game
         public bool EndTurnResult { get; set; }
         private Turn turn { get; set; }
         public Player Joueur { get; set; }
-       
+
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -54,7 +54,7 @@ namespace MrJack.Core.Domain.Game
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard();
-            TurnCard(1, 1, 1);
+            MoveDetective(0, 1, 5);
             Turn turn = new Turn();
         }
 
@@ -87,10 +87,10 @@ namespace MrJack.Core.Domain.Game
 
         public void TurnCard(int x, int y, int nbTurn)
         {
-            ICard card = GameBoard.Board[x, y];            
-            for (int i = 0; i<nbTurn; i++)
+            ICard card = GameBoard.Board[x, y];
+            for (int i = 0; i < nbTurn; i++)
             {
-                TurnCard(card);    
+                TurnCard(card);
             }
         }
 
@@ -100,14 +100,14 @@ namespace MrJack.Core.Domain.Game
             var cardRight = card.Right;
             var cardDown = card.Down;
             var cardLeft = card.Left;
-            
+
             card.Up = cardLeft;
             card.Right = cardUp;
             card.Down = cardRight;
             card.Left = cardDown;
         }
 
-        
+
         public void MoveCard(int x1, int y1, int x2, int y2)
         {
             foreach (var token in AvailableActions)
@@ -122,7 +122,7 @@ namespace MrJack.Core.Domain.Game
 
                     token.Selectable = false;
                 }
-            }  
+            }
         }
 
 
@@ -133,44 +133,30 @@ namespace MrJack.Core.Domain.Game
 
         public void MoveDetective(int x1, int y1, int nbTurn)
         {
-            if(x1 == 4 && y1 <= 4)
+            int x = 0;
+            int y = 0;
+            int xFinal = x1;
+            int yFinal = y1;
+            for (int i = 1; i <= nbTurn; i++)
             {
-                if(x1 == 4 && y1 == 4)
+                if (xFinal > yFinal)
                 {
-                    x1 = 3;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-                else
-                {
-                    y1 = y1++;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-            }
+                    x = xFinal + yFinal < 4 && xFinal + yFinal > 0 ? xFinal + 1 : xFinal;
+                    y = xFinal + yFinal < 8 && xFinal + yFinal > 4 ? yFinal + 1 : yFinal;
 
-            else if(x1 <= 4 && y1 == 4)
-            {
-
-                if (x1 == 0)
-                {
-                    y1 = 3;
-                    ICard card = GameBoard.Board[x1, y1];
+                    xFinal = x + y == 8 ? x - 1 : x;
+                    yFinal = x + y == 4 && x == 4 ? y + 1 : y;
+                    ICard card1 = GameBoard.Board[xFinal, yFinal];
                 }
-                else
+                else if (xFinal < yFinal)
                 {
-                    x1 = x1--;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-            }
+                    x = xFinal + yFinal > 4 && xFinal + yFinal < 8 ? xFinal - 1 : xFinal;
+                    y = xFinal + yFinal > 0 && xFinal + yFinal < 4 ? yFinal - 1 : yFinal;
 
-            else if(x1 == 0 && y1 <= 4)
-            {
-                y1 = y1--;
-                ICard card = GameBoard.Board[x1, y1];
-            }
-            else
-            {
-                x1 = x1++;
-                ICard card = GameBoard.Board[x1, y1];
+                    xFinal = x + y == 0 ? x + 1 : x;
+                    yFinal = x + y == 4 && x == 0 ? y - 1 : y;
+                    ICard card1 = GameBoard.Board[xFinal, yFinal];
+                }
             }
         }
     }
@@ -187,4 +173,3 @@ namespace MrJack.Core.Domain.Game
      * On compte les sabliers du criminel
      */
 }
-
