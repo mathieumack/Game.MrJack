@@ -80,6 +80,15 @@ namespace MrJack.Core.Interfaces.Game
         void MoveCard(int x1, int y1, int x2, int y2);
 
         /// <summary>
+        /// Move a detective
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        void MoveDetective(int x1, int y1, int x2, int y2);
+
+        /// <summary>
         /// Pick a card on the draw
         /// </summary>
         void Draw();
