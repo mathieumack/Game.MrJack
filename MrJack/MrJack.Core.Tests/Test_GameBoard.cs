@@ -32,11 +32,9 @@ namespace MrJack.Core.Tests
         {
             GameBoard Gb = new GameBoard();
 
-            Assert.IsNotNull(Gb.Board[2,2]);
-
-            /*Assert.IsTrue(Gb.Board[0, 1].Detective == Detectives.Sherlock);
+            Assert.IsTrue(Gb.Board[0, 1].Detective == Detectives.Sherlock);
             Assert.IsTrue(Gb.Board[4, 1].Detective == Detectives.Watson);
-            Assert.IsTrue(Gb.Board[2, 4].Detective == Detectives.Toby);*/
+            Assert.IsTrue(Gb.Board[2, 4].Detective == Detectives.Toby);
         }
     }
 }
