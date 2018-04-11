@@ -26,6 +26,7 @@ namespace MrJack.Core.Domain.Game
             Cartes.Add(Killers.Madame);
             Cartes.Add(Killers.John_Pizzer);
 
+            killersSabliers = new Dictionary<Killers, int>();
             killersSabliers.Add(Killers.William_Gull, 1);
             killersSabliers.Add(Killers.John_Smith, 1);
             killersSabliers.Add(Killers.Jeremy_Bert, 1);
