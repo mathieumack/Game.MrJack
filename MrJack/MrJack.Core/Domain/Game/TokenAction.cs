@@ -15,6 +15,14 @@ namespace MrJack.Core.Domain.Game
 
         Random rnd = new Random();
 
+        public TokenAction()
+        {
+            Token1 = new Token(ActionType.Joker);
+            Token2 = new Token(ActionType.Move);
+            Token3 = new Token(ActionType.Draw);
+            Token3 = new Token(ActionType.Toby);
+            Lancer();
+        }
 
         /// <summary>
         /// If pour savoir quel jeton a quelle valeur
