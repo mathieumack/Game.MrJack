@@ -50,6 +50,7 @@ namespace MrJack.Core.Domain.Game
             {
                 //Créer une IA de type PlayerType.MrJack
             }
+            GameBoard = new GameBoard();
             Turn turn = new Turn();
             
         }
@@ -90,6 +91,7 @@ namespace MrJack.Core.Domain.Game
         public void MoveCard(int x1, int y1, int x2, int y2)
         {
             throw new NotImplementedException();
+            
         }
 
         public void Draw()

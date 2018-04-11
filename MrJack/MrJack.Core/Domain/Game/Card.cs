@@ -19,6 +19,8 @@ namespace MrJack.Core.Domain.Game
         public bool Down { get; set; }
         public bool Left { get; set; }
 
+        public ICard Killers => throw new NotImplementedException();
+
         /// <summary>
         /// Card constructor
         /// </summary>
@@ -112,6 +114,7 @@ namespace MrJack.Core.Domain.Game
         public void Return()
         {
             if (Killer == Killers.Joseph_Lane)
+            if (Killer == Domain.Game.Killers.Joseph_Lane)
             {
                 Up = true;
                 Right = true;
@@ -120,6 +123,7 @@ namespace MrJack.Core.Domain.Game
             }
 
             Killer = Killers.None;
+            Killer = Domain.Game.Killers.None;
         }
 
         /// <summary>
