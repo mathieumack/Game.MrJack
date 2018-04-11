@@ -66,13 +66,14 @@ namespace MrJack.Client.Wpf.Controls
                     else
                     {
                         ImageCard4.Visibility = Visibility.Hidden;
-                        // We manage the card turn :
-                        if (!card.Left)
-                            rotateTransform.Angle = 90;
-                        else if (!card.Up)
-                            rotateTransform.Angle = 180;
-                        if (!card.Right)
-                            rotateTransform.Angle = -90;
+                    // We manage the card turn :
+                    if (!card.Left)
+                        rotateTransform.Angle = 90;
+                    else if (!card.Up)
+                        rotateTransform.Angle = 180;
+                    else if (!card.Right)
+                        rotateTransform.Angle = -90;
+                    else rotateTransform.Angle = 0;
                     }
 
                     // We manage the Token image source :

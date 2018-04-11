@@ -13,7 +13,7 @@
                 <RotateTransform x:Name="rotateTransform" Angle="0"></RotateTransform>
             </Image.RenderTransform>
         </Image>
-        <Image Panel.ZIndex="1" Name="ImageCard4" Source="/Images/Cards/card_4.png" Stretch="Uniform" Height="120"></Image>
+        <Image Panel.ZIndex="1" Name="ImageCard4" Source="/Images/Cards/card_3.png" Stretch="Uniform" Height="120"></Image>
         <Border Panel.ZIndex="2" BorderThickness="10" BorderBrush="PaleVioletRed" Name="TokenBorder" CornerRadius="50" Height="63" Width="63">
             <TextBlock Text="  "></TextBlock>
         </Border>
