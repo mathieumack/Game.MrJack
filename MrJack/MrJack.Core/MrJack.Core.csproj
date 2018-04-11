@@ -48,6 +48,7 @@
     <Compile Include="Domain\Game\Difficulty.cs" />
     <Compile Include="Domain\Game\Direction.cs" />
     <Compile Include="Domain\Game\Draw.cs" />
+    <Compile Include="Domain\Game\GameBoard.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
     <Compile Include="Domain\Game\Player.cs" />
     <Compile Include="Domain\Game\Token.cs" />

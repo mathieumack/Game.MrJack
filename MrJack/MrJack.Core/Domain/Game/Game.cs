@@ -50,6 +50,7 @@ namespace MrJack.Core.Domain.Game
             {
                 //Créer une IA de type PlayerType.MrJack
             }
+            GameBoard = new GameBoard();
             Turn turn = new Turn();
             
         }

@@ -19,9 +19,9 @@ namespace MrJack.Core.Domain.Game
             Board = new ICard[5,5];
             Draw listeKillers = new Draw();
             //On remplie la table avec les cartes avec tueurs
-            for (int i = 1; i < 3; i++)
+            for (int i = 1; i <= 3; i++)
             {
-                for (int j = 1; j < 3; j++)
+                for (int j = 1; j <= 3; j++)
                 {
                     Killers killer = listeKillers.Pioche(PlayerType.Sherlock);
                     Board[i, j] = new Card(killer);
