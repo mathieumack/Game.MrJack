@@ -15,10 +15,6 @@ namespace MrJack.Core.Domain.Game
 
         Random rnd = new Random();
 
-        public TokenAction()
-        {
-            Lancer();
-        }
 
         /// <summary>
         /// If pour savoir quel jeton a quelle valeur
