@@ -18,6 +18,16 @@ namespace MrJack.Core.Domain.Game
         {
             Board = new ICard[5,5];
             Draw listeKillers = new Draw();
+
+            //On remple tous le tableau avec des dectivies vide
+            for (int k = 0; k <= 4; k++)
+            {
+                for (int l = 0; l <= 4; l++)
+                {
+                    Board[k, l] = new Card(Detectives.None);
+                }
+            }
+
             //On remplie la table avec les cartes avec tueurs
             for (int i = 1; i <= 3; i++)
             {
