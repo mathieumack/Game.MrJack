@@ -39,29 +39,29 @@ namespace MrJack.Client.Wpf
             // Register CardRender table :
             cards = new CardRender[5, 5];
             cards[0, 0] = Card00; // Line 0
-            cards[0, 1] = Card01;
-            cards[0, 2] = Card02;
-            cards[0, 3] = Card03;
-            cards[0, 4] = Card04;
-            cards[1, 0] = Card10; // Line 1
+            cards[0, 1] = Card10;
+            cards[0, 2] = Card20;
+            cards[0, 3] = Card30;
+            cards[0, 4] = Card40;
+            cards[1, 0] = Card01; // Line 1
             cards[1, 1] = Card11;
-            cards[1, 2] = Card12;
-            cards[1, 3] = Card13;
-            cards[1, 4] = Card14;
-            cards[2, 0] = Card20; // Line 2
-            cards[2, 1] = Card21;
+            cards[1, 2] = Card21;
+            cards[1, 3] = Card31;
+            cards[1, 4] = Card41;
+            cards[2, 0] = Card02; // Line 2
+            cards[2, 1] = Card12;
             cards[2, 2] = Card22;
-            cards[2, 3] = Card23;
-            cards[2, 4] = Card24;
-            cards[3, 0] = Card30; // Line 3
-            cards[3, 1] = Card31;
-            cards[3, 2] = Card32;
+            cards[2, 3] = Card32;
+            cards[2, 4] = Card42;
+            cards[3, 0] = Card03; // Line 3
+            cards[3, 1] = Card13;
+            cards[3, 2] = Card23;
             cards[3, 3] = Card33;
-            cards[3, 4] = Card34;
-            cards[4, 0] = Card40; // Line 4
-            cards[4, 1] = Card41;
-            cards[4, 2] = Card42;
-            cards[4, 3] = Card43;
+            cards[3, 4] = Card43;
+            cards[4, 0] = Card04; // Line 4
+            cards[4, 1] = Card14;
+            cards[4, 2] = Card24;
+            cards[4, 3] = Card34;
             cards[4, 4] = Card44;
         }
 
@@ -328,6 +328,9 @@ namespace MrJack.Client.Wpf
                         currentGame.Draw();
                         Refresh();
                         break;
+                    case ActionType.Move:
+                        changeCardsActionPanel.Visibility = Visibility.Visible;
+                        break;
                     case ActionType.Toby:
                     case ActionType.Watson:
                     case ActionType.Sherlock:
@@ -356,6 +359,34 @@ namespace MrJack.Client.Wpf
             }
             else
                 customMessage.Text = "Veuillez sélectionner 2 cartes.";
+        }
+
+        private void ValidateNbTurns_Click(object sender, RoutedEventArgs e)
+        {
+            switch(currentSelectedAction.ActionType)
+            {
+                case ActionType.Turn:
+                    if (SelectedCard.Count == 1)
+                    {
+                        int nbturns = 0;
+                        if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
+                        {
+                            currentGame.TurnCard(SelectedCard[0].IndexX, SelectedCard[0].IndexY, int.Parse(nbMovesForselectedItems.Text));
+                            Refresh();
+                        }
+                        else
+                            customMessage.Text = "Nombre de tours invalide";
+                    }
+                    break;
+                case ActionType.Toby:
+                case ActionType.Sherlock:
+                case ActionType.Watson:
+                    if (SelectedCard.Count == 1)
+                    {
+
+                    }
+                    break;
+            }
         }
     }
 }

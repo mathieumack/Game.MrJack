@@ -13,7 +13,7 @@ namespace MrJack.Core.Domain.Game
         public CardType CardType { get; set; }
         public Killers Killer { get; set; }
         public Detectives Detective { get; set; }
-        public bool CanBeMoved { get { return CanBeMoved; } set { CanBeMoved = true; } }
+        public bool CanBeMoved { get; set; }
         public bool Up { get; set; }
         public bool Right { get; set; }
         public bool Down { get; set; }

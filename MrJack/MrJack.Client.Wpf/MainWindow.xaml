@@ -89,8 +89,9 @@
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Name="moveSelectionPanel">
                 <TextBlock Text="Sélectionnez votre case" FontSize="20"></TextBlock>
-                <TextBlock Text="Entrez le nombre de mouvements : " FontSize="20"></TextBlock>
-                <TextBox MinWidth="40" Name="nbMovesForselectedItems"></TextBox>
+                <TextBlock Text="Entrez le nombre de mouvements (> droite) : " FontSize="20"></TextBlock>
+                <TextBox MinWidth="40" Name="nbMovesForselectedItems" Margin="5"></TextBox>
+                <Button Content="Valider" Margin="5" Name="ValidateNbTurns" Click="ValidateNbTurns_Click"></Button>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="selectJokerActionPanel">
                 <Button Content="Ne rien faire." ></Button>
