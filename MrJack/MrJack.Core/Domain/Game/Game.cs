@@ -23,7 +23,9 @@ namespace MrJack.Core.Domain.Game
         public bool EndTurnResult { get; set; }
         private Turn turn { get; set; }
         public Player Joueur { get; set; }
-       
+        public Randomizer Rnd { get; set; }
+
+
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -31,10 +33,12 @@ namespace MrJack.Core.Domain.Game
         /// <param name="difficulty"></param>
         public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
         {
+            Rnd = new Randomizer();
+
             //New player with PlayerType
             Joueur = new Player(typePlayer);
             Draw mainDraw = new Draw();
-            mainDraw.Pioche(Joueur.PlayerType);
+            mainDraw.Pioche(Joueur.PlayerType, Rnd);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -47,20 +51,20 @@ namespace MrJack.Core.Domain.Game
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
                 //Créer une IA de type PlayerType.Sherlock
-
+                
             }
             else
             {
                 //Créer une IA de type PlayerType.MrJack
             }
-            GameBoard = new GameBoard();
+            GameBoard = new GameBoard(Rnd);
             TurnCard(1, 1, 1);
             Turn turn = new Turn();
         }
 
         /// <summary>
         /// Middle Game 
-        /// </summary>
+        /// </summary>  
         public void MiddleGame()
         {
             if (turn.IsDetectiveStart())
@@ -133,45 +137,7 @@ namespace MrJack.Core.Domain.Game
 
         public void MoveDetective(int x1, int y1, int nbTurn)
         {
-            if(x1 == 4 && y1 <= 4)
-            {
-                if(x1 == 4 && y1 == 4)
-                {
-                    x1 = 3;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-                else
-                {
-                    y1 = y1++;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-            }
-
-            else if(x1 <= 4 && y1 == 4)
-            {
-
-                if (x1 == 0)
-                {
-                    y1 = 3;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-                else
-                {
-                    x1 = x1--;
-                    ICard card = GameBoard.Board[x1, y1];
-                }
-            }
-
-            else if(x1 == 0 && y1 <= 4)
-            {
-                y1 = y1--;
-                ICard card = GameBoard.Board[x1, y1];
-            }
-            else
-            {
-                x1 = x1++;
-                ICard card = GameBoard.Board[x1, y1];
-            }
+            
         }
     }
 
@@ -187,4 +153,3 @@ namespace MrJack.Core.Domain.Game
      * On compte les sabliers du criminel
      */
 }
-

@@ -9,17 +9,16 @@ namespace MrJack.Core.Domain.Game
 {
     public class GameBoard : IGameBoard
     {
-        public Randomizer Rnd { get; set; }
         public ICard[,] Board { get; set; }
 
         /// <summary>
         /// Creates the board game
         /// </summary>
-        public GameBoard()
+        public GameBoard(Randomizer Rnd)
         {
             Board = new ICard[5,5];
             Draw listeKillers = new Draw();
-            Rnd = new Randomizer();
+           
 
             //On remple tous le tableau avec des dectivies vide
             for (int k = 0; k <= 4; k++)
