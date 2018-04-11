@@ -49,14 +49,13 @@ namespace MrJack.Core.Domain.Game
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
                 //Créer une IA de type PlayerType.Sherlock
-                
+
             }
             else
             {
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard(Rnd);
-            TurnCard(1, 1, 1);
             Turn turn = new Turn();
         }
 
@@ -116,24 +115,28 @@ namespace MrJack.Core.Domain.Game
             {
                 if (token.ActionType == ActionType.Move)
                 {
-                    ICard card1 = GameBoard.Board[x1, y1];
-                    ICard card2 = GameBoard.Board[x2, y2];
-
-                    GameBoard.Board[x1, y1] = card2;
-                    GameBoard.Board[x2, y2] = card1;
-
+                    Move(x1, y1, x2, y2);
                     token.Selectable = false;
+
                 }
             }
         }
 
+        private void Move(int x1, int y1, int x2, int y2)
+        {
+            ICard card1 = GameBoard.Board[x1, y1];
+            ICard card2 = GameBoard.Board[x2, y2];
 
+            GameBoard.Board[x1, y1] = card2;
+            GameBoard.Board[x2, y2] = card1;
+
+        }
         public void Draw()
         {
 
         }
 
-        public void MoveDetective(int x1, int y1, int nbTurn)
+        public void MoveDetective(int x1, int y1, int nbTurn, int nbAssocie)
         {
             int x = 0;
             int y = 0;
@@ -148,7 +151,6 @@ namespace MrJack.Core.Domain.Game
 
                     xFinal = x + y == 8 ? x - 1 : x;
                     yFinal = x + y == 4 && x == 4 ? y + 1 : y;
-                    ICard card1 = GameBoard.Board[xFinal, yFinal];
                 }
                 else if (xFinal < yFinal)
                 {
@@ -157,9 +159,11 @@ namespace MrJack.Core.Domain.Game
 
                     xFinal = x + y == 0 ? x + 1 : x;
                     yFinal = x + y == 4 && x == 0 ? y - 1 : y;
-                    ICard card1 = GameBoard.Board[xFinal, yFinal];
+
                 }
             }
+            Move(x1, y1, xFinal, yFinal);
+            AvailableActions[nbAssocie].Selectable = false;
         }
     }
 
