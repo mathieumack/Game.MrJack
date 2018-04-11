@@ -5,12 +5,13 @@
     /// </summary>
     public enum ActionType
     {
-        Sherlock,
-        Watson,
-        Toby,
         Joker,
-        Turn, 
-        Draw, 
-        Move
-    }
+        Move,
+        Draw,
+        Toby,
+        Turn,
+        Sherlock,
+        Watson
+
+    }   
 }

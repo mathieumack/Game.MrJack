@@ -1,9 +1,8 @@
-﻿namespace MrJack.Core.Domain.Game
+﻿    namespace MrJack.Core.Domain.Game
 {
     public enum Killers
     {
         None,
-        Butcher,
         William_Gull,
         John_Smith,
         Jeremy_Bert,
