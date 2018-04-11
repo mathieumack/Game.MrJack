@@ -10,7 +10,7 @@ namespace MrJack.Core.Tests
     public class Test_GameBoard
     {
         [TestMethod]
-        public void Test_GameBoard_Init()
+        public void Test_GB_Init_nbOfCards()
         {
             GameBoard Gb = new GameBoard();
             int nb = 0;
@@ -19,16 +19,24 @@ namespace MrJack.Core.Tests
             {
                 for (int j = 1; j < 3; j++)
                 {
-                    Assert.IsTrue(Gb.Board[i, j].CardType == CardType.Card);
+                    Assert.IsTrue(Gb.Board[i, j].CardType == CardType.Card,  "Card : " + Gb.Board[i, j]);
                     nb++;
                 }
             }
 
-            Assert.IsTrue(nb == 9);
+            Assert.IsTrue(nb == 9, "nombre of cards : " + nb);
+        }
 
-            Assert.IsTrue(Gb.Board[0, 1].Detective == Detectives.Sherlock);
+        [TestMethod]
+        public void Test_GB_Init_Killers()
+        {
+            GameBoard Gb = new GameBoard();
+
+            Assert.IsNotNull(Gb.Board[2,2]);
+
+            /*Assert.IsTrue(Gb.Board[0, 1].Detective == Detectives.Sherlock);
             Assert.IsTrue(Gb.Board[4, 1].Detective == Detectives.Watson);
-            Assert.IsTrue(Gb.Board[2, 4].Detective == Detectives.Toby);
+            Assert.IsTrue(Gb.Board[2, 4].Detective == Detectives.Toby);*/
         }
     }
 }
