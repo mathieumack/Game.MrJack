@@ -63,7 +63,6 @@ namespace MrJack.Client.Wpf
             cards[4, 2] = Card42;
             cards[4, 3] = Card43;
             cards[4, 4] = Card44;
-            
         }
 
         private void ConfigureNewGame_Click(object sender, RoutedEventArgs e)
@@ -73,8 +72,28 @@ namespace MrJack.Client.Wpf
 
         private void StartNewGame_Click(object sender, RoutedEventArgs e)
         {
-            WhoAmI = PlayerType.MrJack;
-            currentGame.StartNewGame(WhoAmI, Difficulty.Easy);
+            ComboBoxItem selectedItem = comboPlayerType.SelectedItem as ComboBoxItem;
+            switch ((string)selectedItem.Content)
+            {
+                case "Sherlock Holmes":
+                    WhoAmI = PlayerType.Sherlock;
+                    break;
+                case "Mr Jack":
+                    WhoAmI = PlayerType.MrJack;
+                    break;
+            }
+            selectedItem = comboDifficulty.SelectedItem as ComboBoxItem;
+            Difficulty difficulty = Difficulty.Easy;
+            switch ((string)selectedItem.Content)
+            {
+                case "Medium":
+                    difficulty = Difficulty.Medium;
+                    break;
+                case "Difficile":
+                    difficulty = Difficulty.Hard;
+                    break;
+            }
+            currentGame.StartNewGame(WhoAmI, difficulty);
             Refresh();
         }
 
@@ -86,6 +105,8 @@ namespace MrJack.Client.Wpf
                 return;
 
             moveSelectionPanel.Visibility = Visibility.Collapsed;
+            selectJokerActionPanel.Visibility = Visibility.Collapsed;
+            changeCardsActionPanel.Visibility = Visibility.Collapsed;
 
             // Start to refresh available actions :
             for (int i = 0; i < 4; i++)
@@ -209,6 +230,17 @@ namespace MrJack.Client.Wpf
                     if (cardRender.IsSelected)
                         SelectedCard.Add(cardRender);
                 }
+                else if (currentSelectedAction.ActionType == ActionType.Move) // 2 items selectable :
+                {
+                    if (SelectedCard.Count > 1)
+                    {
+                        SelectedCard[0].Select(false);
+                        SelectedCard.RemoveAt(0);
+                    }
+                    cardRender.Select(!cardRender.IsSelected);
+                    if (cardRender.IsSelected)
+                        SelectedCard.Add(cardRender);
+                }
             }
         }
 
@@ -280,6 +312,10 @@ namespace MrJack.Client.Wpf
 
         private void ManageSelectedAction()
         {
+            foreach (var card in SelectedCard)
+                card.Select(false);
+            SelectedCard.Clear();
+
             if (currentSelectedAction != null)
             {
                 moveSelectionPanel.Visibility = Visibility.Collapsed;
