@@ -16,6 +16,7 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public GameBoard()
         {
+            Board = new ICard[5,5];
             Draw listeKillers = new Draw();
             //On remplie la table avec les cartes avec tueurs
             for (int i = 1; i < 3; i++)
