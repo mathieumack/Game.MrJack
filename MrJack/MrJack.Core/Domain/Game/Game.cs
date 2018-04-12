@@ -130,7 +130,8 @@ namespace MrJack.Core.Domain.Game
 
         public void Draw()
         {
-
+            Draw mainDraw = new Draw();
+            mainDraw.Pioche(Joueur.PlayerType, Rnd);
         }
 
         public void MoveDetective(int x1, int y1, int nbTurn)
