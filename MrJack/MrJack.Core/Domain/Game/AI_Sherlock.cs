@@ -12,7 +12,7 @@ namespace MrJack.Core.Domain.Game
         public Detectives Detectives { get; set; }
         public Random Rnd { get; set; }
         public IGame Game { get; set; }
-        public GameBoard GB { get; set; }
+        public IGameBoard GB { get; set; }
 
         public AI_Sherlock_Easy(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
         {
