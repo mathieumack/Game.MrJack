@@ -14,7 +14,8 @@ namespace MrJack.Core.Tests
         [TestMethod]
         public void Test_GB_nbOfCards()
         {
-            GameBoard Gb = new GameBoard();
+            Randomizer rnd = new Randomizer();
+            GameBoard Gb = new GameBoard(rnd);
             int nb = 0;
 
             for (int i = 1; i <= 3; i++)
@@ -32,7 +33,8 @@ namespace MrJack.Core.Tests
         [TestMethod]
         public void Test_GB_Killers()
         {
-            GameBoard Gb = new GameBoard();
+            Randomizer rnd = new Randomizer();
+            GameBoard Gb = new GameBoard(rnd);
             List<Killers> ListKillers = new List<Killers>();
             ListKillers.Add(Killers.William_Gull);
             ListKillers.Add(Killers.John_Smith);
@@ -58,7 +60,8 @@ namespace MrJack.Core.Tests
         [TestMethod]
         public void Test_GB_Detectives()
         {
-            GameBoard Gb = new GameBoard();
+            Randomizer rnd = new Randomizer();
+            GameBoard Gb = new GameBoard(rnd);
 
             Assert.IsTrue(Gb.Board[0, 1].Detective == Detectives.Sherlock);
             Assert.IsTrue(Gb.Board[4, 1].Detective == Detectives.Watson);
