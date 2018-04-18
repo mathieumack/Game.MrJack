@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_MrJack_Easy : Player
+    public class AI_Sherlock_Easy : Player
     {
-        public Killers Killer { get; set; }
+        public Detectives Detectives { get; set; }
         public Random Rnd { get; set; }
         public IGame Game { get; set; }
-        public IGameBoard GB { get; set; }
+        public GameBoard GB { get; set; }
 
-        public AI_MrJack_Easy(Killers killer, Random rnd, IGame game) : base(PlayerType.MrJack)
+        public AI_Sherlock_Easy(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
         {
-            Killer = killer;
+            Detectives = detectives;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
@@ -125,4 +125,3 @@ namespace MrJack.Core.Domain.Game
 
     }
 }
-

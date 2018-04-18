@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Domain\Game\ActionType.cs" />
     <Compile Include="Domain\Game\AI_MrJack.cs" />
+    <Compile Include="Domain\Game\AI_Sherlock.cs" />
     <Compile Include="Domain\Game\Card.cs" />
     <Compile Include="Domain\Game\CardType.cs" />
     <Compile Include="Domain\Game\Game.cs" />
