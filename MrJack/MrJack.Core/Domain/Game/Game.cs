@@ -89,11 +89,10 @@ namespace MrJack.Core.Domain.Game
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
-            ICard card = GameBoard.Board[x, y];
+           ICard card = GameBoard.Board[x, y];
 
            card.Rotate(nbTurn);
            AvailableActions[actionIndex].Selectable = false;
-
         }
              
 
