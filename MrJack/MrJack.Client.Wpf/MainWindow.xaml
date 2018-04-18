@@ -74,45 +74,57 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Name="gameBoard" Grid.Column="1" Margin="5">
             <StackPanel Orientation="Horizontal" Height="Auto" Name="AvailableActions" HorizontalAlignment="Center">
-                <Button Name="AvailableAction1Btn" BorderThickness="0" Background="Transparent">
+                <Button Name="AvailableAction1Btn" BorderThickness="0" Background="Transparent" Click="AvailableAction1Btn_Click">
                     <Image Name="AvailableAction1Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
                 </Button>
-                <Button Name="AvailableAction2Btn" BorderThickness="0" Background="Transparent">
+                <Button Name="AvailableAction2Btn" BorderThickness="0" Background="Transparent" Click="AvailableAction2Btn_Click">
                     <Image Name="AvailableAction2Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
                 </Button>
-                <Button Name="AvailableAction3Btn" BorderThickness="0" Background="Transparent">
+                <Button Name="AvailableAction3Btn" BorderThickness="0" Background="Transparent" Click="AvailableAction3Btn_Click">
                     <Image Name="AvailableAction3Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
                 </Button>
-                <Button Name="AvailableAction4Btn" BorderThickness="0" Background="Transparent">
+                <Button Name="AvailableAction4Btn" BorderThickness="0" Background="Transparent" Click="AvailableAction4Btn_Click">
                     <Image Name="AvailableAction4Img" Source="Images/Actions/all.png" Stretch="Fill" Height="75"></Image>
                 </Button>
             </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Name="moveSelectionPanel">
+                <TextBlock Text="Sélectionnez votre case" FontSize="20"></TextBlock>
+                <TextBlock Text="Entrez le nombre de mouvements (> droite) : " FontSize="20"></TextBlock>
+                <TextBox MinWidth="40" Name="nbMovesForselectedItems" Margin="5"></TextBox>
+                <Button Content="Valider" Margin="5" Name="ValidateNbTurns" Click="ValidateNbTurns_Click"></Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="selectJokerActionPanel">
+                <Button Content="Ne rien faire." Name="DoNothing" Click="DoNothing_Click" ></Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="changeCardsActionPanel">
+                <Button Content="Echanger." Name="changeCard" Click="changeCard_Click" ></Button>
+            </StackPanel>
             <UniformGrid Columns="5" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="10">
-                <Controls1:CardRender x:Name="Card00" />
-                <Controls1:CardRender x:Name="Card01" />
-                <Controls1:CardRender x:Name="Card02" />
-                <Controls1:CardRender x:Name="Card03" />
-                <Controls1:CardRender x:Name="Card04" />
-                <Controls1:CardRender x:Name="Card10" />
-                <Controls1:CardRender x:Name="Card11" />
-                <Controls1:CardRender x:Name="Card12" />
-                <Controls1:CardRender x:Name="Card13" />
-                <Controls1:CardRender x:Name="Card14" />
-                <Controls1:CardRender x:Name="Card20" />
-                <Controls1:CardRender x:Name="Card21" />
-                <Controls1:CardRender x:Name="Card22" />
-                <Controls1:CardRender x:Name="Card23" />
-                <Controls1:CardRender x:Name="Card24" />
-                <Controls1:CardRender x:Name="Card30" />
-                <Controls1:CardRender x:Name="Card31" />
-                <Controls1:CardRender x:Name="Card32" />
-                <Controls1:CardRender x:Name="Card33" />
-                <Controls1:CardRender x:Name="Card34" />
-                <Controls1:CardRender x:Name="Card40" />
-                <Controls1:CardRender x:Name="Card41" />
-                <Controls1:CardRender x:Name="Card42" />
-                <Controls1:CardRender x:Name="Card43" />
-                <Controls1:CardRender x:Name="Card44" />
+                <Controls1:CardRender x:Name="Card00" IndexX="0" IndexY="0" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card01" IndexX="1" IndexY="0" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card02" IndexX="2" IndexY="0" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card03" IndexX="3" IndexY="0" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card04" IndexX="4" IndexY="0" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card10" IndexX="0" IndexY="1" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card11" IndexX="1" IndexY="1" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card12" IndexX="2" IndexY="1" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card13" IndexX="3" IndexY="1" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card14" IndexX="4" IndexY="1" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card20" IndexX="0" IndexY="2" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card21" IndexX="1" IndexY="2" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card22" IndexX="2" IndexY="2" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card23" IndexX="3" IndexY="2" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card24" IndexX="4" IndexY="2" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card30" IndexX="0" IndexY="3" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card31" IndexX="1" IndexY="3" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card32" IndexX="2" IndexY="3" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card33" IndexX="3" IndexY="3" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card34" IndexX="4" IndexY="3" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card40" IndexX="0" IndexY="4" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card41" IndexX="1" IndexY="4" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card42" IndexX="2" IndexY="4" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card43" IndexX="3" IndexY="4" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
+                <Controls1:CardRender x:Name="Card44" IndexX="4" IndexY="4" MouseLeftButtonUp="Card_MouseLeftButtonUp" />
             </UniformGrid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource ResourceKey=AccentColorBrush}">

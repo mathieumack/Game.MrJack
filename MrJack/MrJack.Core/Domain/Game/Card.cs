@@ -9,11 +9,11 @@ namespace MrJack.Core.Domain.Game
 {
     public class Card : ICard
     {
-        Random rnd = new Random();
+        Randomizer rnd { get; set; }
         public CardType CardType { get; set; }
         public Killers Killer { get; set; }
         public Detectives Detective { get; set; }
-        public bool CanBeMoved { get { return CanBeMoved; } set { CanBeMoved = true; } }
+        public bool CanBeMoved { get; set; }
         public bool Up { get; set; }
         public bool Right { get; set; }
         public bool Down { get; set; }
@@ -25,16 +25,17 @@ namespace MrJack.Core.Domain.Game
         /// Card constructor
         /// </summary>
         /// <param name="cardType">The card type</param>
-        private Card(CardType cardType)
+        private Card(CardType cardType, Randomizer rnd)
         {
             CardType = cardType;
+            this.rnd = rnd;
         }
 
         /// <summary>
         /// The street card constructor
         /// </summary>
         /// <param name="killer">The name of the killer</param>
-        public Card(Killers killer) : this(CardType.Card)
+        public Card(Killers killer, Randomizer rnd) : this(CardType.Card, rnd)
         {
             Killer = killer;
 
@@ -73,7 +74,7 @@ namespace MrJack.Core.Domain.Game
         /// The token card constructor
         /// </summary>
         /// <param name="detective">The name of the detective</param>
-        public Card(Detectives detective) : this(CardType.Jeton)
+        public Card(Detectives detective, Randomizer rnd) : this(CardType.Jeton, rnd)
         {
             Detective = detective;
 

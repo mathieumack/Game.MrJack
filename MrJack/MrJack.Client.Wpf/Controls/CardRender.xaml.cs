@@ -11,17 +11,28 @@ namespace MrJack.Client.Wpf.Controls
     /// </summary>
     public partial class CardRender : UserControl
     {
+        public int IndexX { get; set; }
+
+        public int IndexY { get; set; }
+
+        public bool IsSelected { get; set; }
+
+        public ICard Card { get; set; }
+
         public CardRender()
         {
             InitializeComponent();
+
+            Select(false);
         }
 
         public void SetCard(ICard card)
         {
+            this.Card = card;
+
             ImageCard3.Visibility = Visibility.Visible;
             ImageCard4.Visibility = Visibility.Visible;
             Token.Visibility = Visibility.Visible;
-
             if (card.CardType == Core.Domain.Game.CardType.Jeton)
             {
                 ImageCard3.Visibility = Visibility.Hidden;
@@ -60,8 +71,10 @@ namespace MrJack.Client.Wpf.Controls
                         rotateTransform.Angle = 90;
                     else if (!card.Up)
                         rotateTransform.Angle = 180;
-                    if (!card.Right)
+                    else if (!card.Right)
                         rotateTransform.Angle = -90;
+                    else
+                        rotateTransform.Angle = 0;
                 }
 
                 // We manage the Token image source :
@@ -127,6 +140,15 @@ namespace MrJack.Client.Wpf.Controls
         private bool IsCardWith4OpenPoints(ICard card)
         {
             return card.Up && card.Down && card.Left && card.Right;
+        }
+
+        public void Select(bool selectItem)
+        {
+            IsSelected = selectItem;
+            if (IsSelected)
+                Check.Visibility = Visibility.Visible;
+            else
+                Check.Visibility = Visibility.Collapsed;
         }
     }
 }
