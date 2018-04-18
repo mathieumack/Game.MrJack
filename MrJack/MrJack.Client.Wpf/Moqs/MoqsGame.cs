@@ -32,7 +32,7 @@ namespace MrJack.Client.Wpf.Moqs
 
         #region Properties
 
-        public void Draw(int actionIndex)
+        public Killers Draw(int actionIndex)
         {
             throw new System.NotImplementedException();
         }
@@ -82,7 +82,7 @@ namespace MrJack.Client.Wpf.Moqs
             GameBoard = new MoqsGameBoard();
         }
 
-        public void MiddleGame()
+        Killers IGame.Draw(int actionIndex)
         {
             throw new System.NotImplementedException();
         }

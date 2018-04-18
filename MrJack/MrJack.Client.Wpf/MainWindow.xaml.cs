@@ -336,7 +336,43 @@ namespace MrJack.Client.Wpf
                 switch (currentSelectedAction.ActionType)
                 {
                     case ActionType.Draw:
-                        currentGame.Draw(selectedActionIndex);
+                        Killers drawedCard = currentGame.Draw(selectedActionIndex);
+                        switch (drawedCard)
+                        {
+                            case Killers.None:
+                                KillerDrawImage.Visibility = Visibility.Collapsed;
+                                break;
+                            case Killers.Insp_Lestrade:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/insplestrade.png", UriKind.Relative));
+                                break;
+                            case Killers.Jeremy_Bert:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/jeremybert.png", UriKind.Relative));
+                                break;
+                            case Killers.John_Pizzer:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/johnpizer.png", UriKind.Relative));
+                                break;
+                            case Killers.John_Smith:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/johnsmith.png", UriKind.Relative));
+                                break;
+                            case Killers.Joseph_Lane:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/josephlane.png", UriKind.Relative));
+                                break;
+                            case Killers.Madame:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/madame.png", UriKind.Relative));
+                                break;
+                            case Killers.Miss_Stealthy:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/missstealthy.png", UriKind.Relative));
+                                break;
+                            case Killers.Sgt_Goodley:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/sgtgoodley.png", UriKind.Relative));
+                                break;
+                            case Killers.William_Gull:
+                                KillerDrawImage.Source = new BitmapImage(new Uri("/Images/killers/williamgull.png", UriKind.Relative));
+                                break;
+                            // TODO : Add other enumeration cases
+                            default:
+                                break;
+                        }
                         Refresh();
                         break;
                     case ActionType.Move:

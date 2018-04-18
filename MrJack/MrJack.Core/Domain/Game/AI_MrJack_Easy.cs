@@ -27,11 +27,11 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void ChooseAction()
         {
-            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
             {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
-                    if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                    if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
                         Draw(actionIndex);
                     }
@@ -62,8 +62,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }                                            
         }
-
-
+        
         /// <summary>
         /// Moves the Sherlock token
         /// </summary>
@@ -94,12 +93,12 @@ namespace MrJack.Core.Domain.Game
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (GB.Board[i, j].Detective == Detectives.Watson)
+                    if(GB.Board[i, j].Detective == Detectives.Watson)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
                     }
                 }
-            }
+            }    
         }
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace MrJack.Core.Domain.Game
             int y1 = Rnd.Next(1, 4);
             int x2 = Rnd.Next(1, 4);
             int y2 = Rnd.Next(1, 4);
-            Game.MoveCard(actionIndex,x1, y1, x2, y2);
+            Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
         
         /// <summary>
