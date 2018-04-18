@@ -12,11 +12,7 @@ namespace MrJack.Core.Domain.Game
         public Killers Killer { get; set; }
         public Random Rnd { get; set; }
         public IGame Game { get; set; }
-<<<<<<< Updated upstream
         public IGameBoard GB { get; set; }
-=======
-        public GameBoard GB { get; set; }
->>>>>>> Stashed changes
 
         public AI_MrJack_Easy(Killers killer, Random rnd, IGame game) : base(PlayerType.MrJack)
         {
@@ -25,18 +21,17 @@ namespace MrJack.Core.Domain.Game
             Game = game;
             GB = Game.GameBoard;
         }
-<<<<<<< Updated upstream
         
         /// <summary>
         /// Allows Mr Jack to do an action
         /// </summary>
         public void ChooseAction()
         {
-            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
             {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
-                    if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                    if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
                         Draw(actionIndex);
                     }
@@ -47,26 +42,6 @@ namespace MrJack.Core.Domain.Game
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
                     {
                         Move(actionIndex);
-=======
-
-        public void ChooseAction()
-        {
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
-            {
-                if (Game.AvailableActions[actionIndex].Selectable)
-                {
-                    if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
-                    {
-
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
-                    {
-
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
-                    {
-
->>>>>>> Stashed changes
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
                     {
@@ -74,7 +49,6 @@ namespace MrJack.Core.Domain.Game
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
                     {
-<<<<<<< Updated upstream
                         Toby(actionIndex);
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
@@ -88,8 +62,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }                                            
         }
-
-
+        
         /// <summary>
         /// Moves the Sherlock token
         /// </summary>
@@ -114,37 +87,18 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         /// <param name="actionIndex">token number</param>
         public void Watson(int actionIndex)
-=======
-
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
-                    {
-
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
-                    {
-
-                    }
-                }
-
-            }
-        }
-
-        public void Sherlock(int actionIndex)
->>>>>>> Stashed changes
         {
             int nb = Rnd.Next(1, 3);
-            for (int i = 0; i <= 5; i++)
+            for(int i = 0; i <= 5; i++)
             {
-                for (int j = 0; j <= 5; j++)
+                for(int j = 0; j <= 5; j++)
                 {
-<<<<<<< Updated upstream
-                    if (GB.Board[i, j].Detective == Detectives.Watson)
+                    if(GB.Board[i, j].Detective == Detectives.Watson)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
                     }
                 }
-            }
+            }    
         }
 
         /// <summary>
@@ -214,49 +168,12 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         /// <param name="actionIndex">token number</param>
         public void Move(int actionIndex)
-=======
-                    if (GB.Board[i, j].Detective == Detectives.Sherlock)
-                    {
-                        Game.MoveDetective(ActionIndex, i, j, nb);
-                        Game.MoveDetective();
-                    }
-                }
-            }
-
-        }
-
-        public void Watson()
-        {
-            int nb = Rnd.Next(1, 3);
-            Game.Watson(nb);
-        }
-
-        public void Toby()
-        {
-            int nb = Rnd.Next(1, 3);
-            Game.Toby(nb);
-        }
-
-        public void Joker()
-        {
-            int nb = Rnd.Next(0, 2);
-            Game.Joker(nb);
-        }
-
-        public void Draw()
-        {
-            Game.Draw();
-        }
-
-        public void Move()
->>>>>>> Stashed changes
         {
             int x1 = Rnd.Next(1, 4);
             int y1 = Rnd.Next(1, 4);
             int x2 = Rnd.Next(1, 4);
             int y2 = Rnd.Next(1, 4);
-<<<<<<< Updated upstream
-            Game.MoveCard(actionIndex,x1, y1, x2, y2);
+            Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
         
         /// <summary>
@@ -264,21 +181,11 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         /// <param name="actionIndex">token number</param>
         public void Turn(int actionIndex)
-=======
-            Game.MoveCard(x1, y1, x2, y2);
-        }
-
-        public void Turn()
->>>>>>> Stashed changes
         {
             int x = Rnd.Next(1, 4);
             int y = Rnd.Next(1, 4);
             int nb = Rnd.Next(1, 4);
-<<<<<<< Updated upstream
             Game.TurnCard(actionIndex,x, y, nb);
-=======
-            Game.TurnCard(x, y, nb);
->>>>>>> Stashed changes
         }
 
     }

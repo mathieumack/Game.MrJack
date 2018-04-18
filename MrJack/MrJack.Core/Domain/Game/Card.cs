@@ -114,7 +114,6 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void Return()
         {
-            if (Killer == Killers.Joseph_Lane)
             if (Killer == Domain.Game.Killers.Joseph_Lane)
             {
                 Up = true;
@@ -123,7 +122,6 @@ namespace MrJack.Core.Domain.Game
                 Left = true;
             }
 
-            Killer = Killers.None;
             Killer = Domain.Game.Killers.None;
         }
 
