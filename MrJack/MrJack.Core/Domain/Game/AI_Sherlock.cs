@@ -142,7 +142,7 @@ namespace MrJack.Core.Domain.Game
                 joker = Detectives.Toby;
             }
 
-            int nb = Rnd.Next(0, 2);
+            int nb = 1;
             for (int i = 0; i <= 5; i++)
             {
                 for (int j = 0; j <= 5; j++)
