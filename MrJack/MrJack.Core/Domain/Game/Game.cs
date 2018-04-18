@@ -35,6 +35,8 @@ namespace MrJack.Core.Domain.Game
             Rnd = new Randomizer();
             Turn = new Turn();
 
+            GameBoard = new GameBoard(Rnd);
+
             //New player with PlayerType
             Joueur = new Player(typePlayer);
             Draw mainDraw = new Draw();
@@ -56,10 +58,19 @@ namespace MrJack.Core.Domain.Game
             }
             else
             {
-                IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
-                //Créer une IA de type PlayerType.MrJack
+                if(difficulty == Difficulty.Easy)
+                {
+                    IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
+                }
+                else if(difficulty == Difficulty.Medium)
+                {
+                    //Créer une IA de type PlayerType.MrJack et Moyenne
+                }
+                else
+                {
+                    //Créer une IA de type PlayerType.MrJack et Difficile
+                }
             }
-            GameBoard = new GameBoard(Rnd);
             MiddleGame();
         }
 
@@ -68,17 +79,29 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            Turn.CurrentPlayer = Turn.Whosplaying();
-            
-            Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer);
-            Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
-           
-            if(IA.PlayerType == Turn.CurrentPlayer)
+            if(Turn.actions != 4)
             {
-                Console.WriteLine("L'IA joue");
+                Turn.CurrentPlayer = Turn.Whosplaying();
+
+                Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
+                Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
+
+                if (IA.PlayerType == Turn.CurrentPlayer)
+                {
+                    Console.WriteLine("L'IA joue");
+                    Turn.actions++;
+                    IA.ChooseAction();
+                }
+                else
+                {
+                    Turn.actions++;
+                }
             }
-            Turn.actions++;
-         }
+            else
+            {
+                Turn.CurrentTurn++;
+            }    
+        }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
