@@ -20,6 +20,17 @@ namespace MrJack.Core.Domain.Game
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
+
+            orderedActions = new List<ActionType>()
+            {
+                ActionType.Draw,
+                ActionType.Joker,
+                ActionType.Move,
+                ActionType.Turn,
+                ActionType.Sherlock,
+                ActionType.Toby,
+                ActionType.Watson
+            };
         }
 
         /// <summary>
