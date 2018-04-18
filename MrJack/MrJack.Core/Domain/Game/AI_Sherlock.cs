@@ -21,16 +21,6 @@ namespace MrJack.Core.Domain.Game
             Game = game;
             GB = Game.GameBoard;
 
-            orderedActions = new List<ActionType>()
-            {
-                ActionType.Draw,
-                ActionType.Joker,
-                ActionType.Move,
-                ActionType.Turn,
-                ActionType.Sherlock,
-                ActionType.Toby,
-                ActionType.Watson
-            };
         }
 
         /// <summary>
@@ -208,12 +198,25 @@ namespace MrJack.Core.Domain.Game
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
+        private List<ActionType> orderedActions;
+
         public AI_Detectives_Medium(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
         {
             detectives = Detectives;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
+
+            orderedActions = new List<ActionType>()
+            {
+                ActionType.Draw,
+                ActionType.Joker,
+                ActionType.Move,
+                ActionType.Turn,
+                ActionType.Sherlock,
+                ActionType.Toby,
+                ActionType.Watson
+            };
         }
 
         /// <summary>
