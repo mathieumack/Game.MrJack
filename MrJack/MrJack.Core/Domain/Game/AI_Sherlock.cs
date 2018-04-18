@@ -75,8 +75,8 @@ namespace MrJack.Core.Domain.Game
                 {
                     if (GB.Board[i, j].Detective == Detectives.Sherlock)
                     {
-                        Game.MoveDetective(i, j, nb,);
-                        Game.MoveDetective()
+                        Game.MoveDetective(i, j, nb);
+                        Game.MoveDetective();
                     }
                 }
             }
