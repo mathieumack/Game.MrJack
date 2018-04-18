@@ -24,6 +24,7 @@ namespace MrJack.Core.Domain.Game
         public Turn Turn { get; set; }
         public Player Joueur { get; set; }
         public Randomizer Rnd { get; set; }
+        public AI_MrJack_Easy IA { get; set; }
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -49,11 +50,13 @@ namespace MrJack.Core.Domain.Game
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
+                
                 //Créer une IA de type PlayerType.Sherlock
 
             }
             else
             {
+                IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard(Rnd);
@@ -65,31 +68,17 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if (Turn.IsDetectiveStart())
-            {
-                Turn.CurrentPlayer = PlayerType.Sherlock;
-            }
-            else
-            {
-                Turn.CurrentPlayer = PlayerType.MrJack;
-            }
+            Turn.CurrentPlayer = Turn.Whosplaying();
+            
+            Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer);
+            Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
            
-             Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer);
-             Console.WriteLine($"Nb de jetons à prendre: {Turn.NbJetonAPiocher()}");
-
-             Turn.actions++;
-             Turn.ChangeCurrentPlayer();
-            if(Joueur.PlayerType == Turn.CurrentPlayer)
+            if(IA.PlayerType == Turn.CurrentPlayer)
             {
-
+                Console.WriteLine("L'IA joue");
             }
-            else if(IA.PlayerType == Turn.CurrentPlayer)
-            {
-
-            }
-
-            Turn.CurrentTurn++;
-        }
+            Turn.actions++;
+         }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {

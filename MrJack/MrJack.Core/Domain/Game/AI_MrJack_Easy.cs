@@ -10,11 +10,11 @@ namespace MrJack.Core.Domain.Game
     public class AI_MrJack_Easy : Player
     {
         public Killers Killer { get; set; }
-        public Random Rnd { get; set; }
+        public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        public AI_MrJack_Easy(Killers killer, Random rnd, IGame game) : base(PlayerType.MrJack)
+        public AI_MrJack_Easy(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
         {
             Killer = killer;
             Rnd = rnd;
