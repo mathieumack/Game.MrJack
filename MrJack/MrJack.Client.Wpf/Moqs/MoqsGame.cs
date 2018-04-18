@@ -82,6 +82,11 @@ namespace MrJack.Client.Wpf.Moqs
             GameBoard = new MoqsGameBoard();
         }
 
+        Killers IGame.Draw(int actionIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
     }
 }
