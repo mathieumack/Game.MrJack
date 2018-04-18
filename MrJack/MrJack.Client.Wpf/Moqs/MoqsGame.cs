@@ -32,7 +32,7 @@ namespace MrJack.Client.Wpf.Moqs
 
         #region Properties
 
-        public void Draw(int actionIndex)
+        public Killers Draw(int actionIndex)
         {
             throw new System.NotImplementedException();
         }
