@@ -106,14 +106,10 @@ namespace MrJack.Core.Domain.Game
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
             ICard card = GameBoard.Board[x, y];
-            for (int i = 0; i < nbTurn; i++)
-            {
-                TurnCard(card);
+            card.Rotate(nbTurn);
                 AvailableActions[actionIndex].Selectable = false;
-            }
-            this.MiddleGame();
-        }
 
+            this.MiddleGame();
         }
              
 
@@ -158,6 +154,7 @@ namespace MrJack.Core.Domain.Game
                 drawKiller.killersSabliers.TryGetValue(drawkiller, out int sabliers);
                 KillerPoints += sabliers;
             }
+            MiddleGame();
             return drawkiller;
         }
 
