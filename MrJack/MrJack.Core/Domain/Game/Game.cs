@@ -97,7 +97,6 @@ namespace MrJack.Core.Domain.Game
         }
              
 
-
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
@@ -118,8 +117,27 @@ namespace MrJack.Core.Domain.Game
         {
             AvailableActions[actionIndex].Selectable = false;
             Draw draw = new Draw();
-            Killers killer = draw.Pioche(Joueur.PlayerType, Rnd);
-            return killer;
+            Killers drawkiller = draw.Pioche(Joueur.PlayerType, Rnd);
+            if(Joueur.PlayerType == PlayerType.Sherlock)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    for (int j = 1; j <= 3; j++)
+                    {
+                        if (GameBoard.Board[i, j].Killer == drawkiller)
+                        {
+                            GameBoard.Board[i, j].Return();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Draw drawKiller = new Draw();
+                drawKiller.killersSabliers.TryGetValue(drawkiller, out int sabliers);
+                KillerPoints += sabliers;
+            }
+            return drawkiller;
         }
 
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)

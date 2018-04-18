@@ -18,7 +18,6 @@ namespace MrJack.Core.Domain.Game
         public bool Right { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
-
         public ICard Killers => throw new NotImplementedException();
 
         /// <summary>
