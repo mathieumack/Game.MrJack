@@ -20,6 +20,8 @@ namespace MrJack.Client.Wpf
         CardRender[,] cards;
         List<CardRender> SelectedCard = new List<CardRender>();
         IAction currentSelectedAction;
+        int selectedActionIndex = -1;
+
         PlayerType WhoAmI { get; set; }
 
         public MainWindow()
@@ -279,6 +281,7 @@ namespace MrJack.Client.Wpf
             currentSelectedAction = null;
             if (currentGame.AvailableActions[0].Selectable)
             {
+                selectedActionIndex = 0;
                 currentSelectedAction = currentGame.AvailableActions[0];
             }
             ManageSelectedAction();
@@ -289,6 +292,7 @@ namespace MrJack.Client.Wpf
             currentSelectedAction = null;
             if (currentGame.AvailableActions[1].Selectable)
             {
+                selectedActionIndex = 1;
                 currentSelectedAction = currentGame.AvailableActions[1];
             }
             ManageSelectedAction();
@@ -299,6 +303,7 @@ namespace MrJack.Client.Wpf
             currentSelectedAction = null;
             if (currentGame.AvailableActions[2].Selectable)
             {
+                selectedActionIndex = 2;
                 currentSelectedAction = currentGame.AvailableActions[2];
             }
             ManageSelectedAction();
@@ -309,6 +314,7 @@ namespace MrJack.Client.Wpf
             currentSelectedAction = null;
             if (currentGame.AvailableActions[3].Selectable)
             {
+                selectedActionIndex = 3;
                 currentSelectedAction = currentGame.AvailableActions[3];
             }
             ManageSelectedAction();
@@ -329,7 +335,7 @@ namespace MrJack.Client.Wpf
                 switch (currentSelectedAction.ActionType)
                 {
                     case ActionType.Draw:
-                        currentGame.Draw();
+                        currentGame.Draw(selectedActionIndex);
                         Refresh();
                         break;
                     case ActionType.Move:
@@ -358,7 +364,7 @@ namespace MrJack.Client.Wpf
         {
             if (SelectedCard.Count == 2)
             {
-                currentGame.MoveCard(SelectedCard[0].IndexX, SelectedCard[0].IndexY, SelectedCard[1].IndexX, SelectedCard[1].IndexY);
+                currentGame.MoveCard(selectedActionIndex, SelectedCard[0].IndexX, SelectedCard[0].IndexY, SelectedCard[1].IndexX, SelectedCard[1].IndexY);
                 Refresh();
             }
             else
@@ -389,7 +395,7 @@ namespace MrJack.Client.Wpf
                     {
                         if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                         {
-                            currentGame.TurnCard(SelectedCard[0].IndexX, SelectedCard[0].IndexY, int.Parse(nbMovesForselectedItems.Text));
+                            currentGame.TurnCard(selectedActionIndex, SelectedCard[0].IndexX, SelectedCard[0].IndexY, int.Parse(nbMovesForselectedItems.Text));
                             Refresh();
                         }
                         else
@@ -400,7 +406,7 @@ namespace MrJack.Client.Wpf
                     card = FindDetective(Detectives.Toby);
                     if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                     {
-                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        currentGame.MoveDetective(selectedActionIndex, card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
                         Refresh();
                     }
                     else
@@ -410,7 +416,7 @@ namespace MrJack.Client.Wpf
                     card = FindDetective(Detectives.Sherlock);
                     if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                     {
-                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        currentGame.MoveDetective(selectedActionIndex, card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
                         Refresh();
                     }
                     else
@@ -420,7 +426,7 @@ namespace MrJack.Client.Wpf
                     card = FindDetective(Detectives.Watson);
                     if (int.TryParse(nbMovesForselectedItems.Text, out nbturns))
                     {
-                        currentGame.MoveDetective(card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
+                        currentGame.MoveDetective(selectedActionIndex, card.IndexX, card.IndexY, int.Parse(nbMovesForselectedItems.Text));
                         Refresh();
                     }
                     else
