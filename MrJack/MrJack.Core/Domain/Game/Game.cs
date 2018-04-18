@@ -127,10 +127,12 @@ namespace MrJack.Core.Domain.Game
 
         }
 
-        public void Draw(int actionIndex)
+        public Killers Draw(int actionIndex)
         {
-            Draw mainDraw = new Draw();
-            mainDraw.Pioche(Joueur.PlayerType, Rnd);
+            AvailableActions[actionIndex].Selectable = false;
+            Draw draw = new Draw();
+            Killers killer = draw.Pioche(Joueur.PlayerType, Rnd);
+            return killer;
         }
 
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
