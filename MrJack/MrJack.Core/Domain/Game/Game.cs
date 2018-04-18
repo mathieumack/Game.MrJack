@@ -86,7 +86,7 @@ namespace MrJack.Core.Domain.Game
                 Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
                 Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
 
-                if (IA.PlayerType == Turn.CurrentPlayer)
+                if (Joueur.PlayerType != Turn.CurrentPlayer)
                 {
                     Console.WriteLine("L'IA joue");
                     Turn.actions++;
