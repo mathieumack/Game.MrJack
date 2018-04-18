@@ -94,6 +94,6 @@ namespace MrJack.Core.Interfaces.Game
         /// Pick a card on the draw
         /// </summary>
         /// <param name="actionIndex"></param>
-        void Draw(int actionIndex);
+        Killers Draw(int actionIndex);
     }
 }
