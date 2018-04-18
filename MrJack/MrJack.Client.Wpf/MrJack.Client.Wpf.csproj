@@ -128,12 +128,12 @@
     <Resource Include="Images\mrjackpocket.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Actions\all.png" />
-    <Resource Include="Images\Actions\draw.png" />
-    <Resource Include="Images\Actions\move.png" />
-    <Resource Include="Images\Actions\sherlock.png" />
-    <Resource Include="Images\Actions\turn.png" />
-    <Resource Include="Images\Actions\watson.png" />
+    <Resource Include="Images\Actions\Joker.png" />
+    <Resource Include="Images\Actions\Draw.png" />
+    <Resource Include="Images\Actions\Move.png" />
+    <Resource Include="Images\Actions\Sherlock.png" />
+    <Resource Include="Images\Actions\Turn.png" />
+    <Resource Include="Images\Actions\Watson.png" />
     <Resource Include="Images\Cards\card_3.png" />
     <Resource Include="Images\Cards\card_4.png" />
     <Resource Include="Images\Detectives\sherlock.png" />
@@ -171,6 +171,12 @@
     <Resource Include="Images\killers\token_johnsmith.png" />
     <Resource Include="Images\killers\token_sgtgoodley.png" />
     <Resource Include="Images\killers\token_williamgull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Actions\Toby.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
