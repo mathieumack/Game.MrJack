@@ -24,9 +24,40 @@ namespace MrJack.Core.Domain.Game
           
         public void ChooseAction()
         {
-            int nbAction = Game.AvailableActions.Count;
-            int nb = Rnd.Next(0,nbAction);
-            if (nb == 0)
+            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            {
+                if (Game.AvailableActions[actionIndex].Selectable)
+                {
+                    if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                    {
+
+                    } else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
+                    {
+
+                    }
+                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
+                    {
+
+                    }
+                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
+                    {
+                        Sherlock(actionIndex);
+                    }
+                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
+                    {
+
+                    }
+                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
+                    {
+
+                    }
+                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
+                    {
+
+                    }
+                }
+
+            }
 
                                 
                                 
@@ -34,7 +65,7 @@ namespace MrJack.Core.Domain.Game
 
 
         
-        public void Sherlock()
+        public void Sherlock(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
             for(int i = 0; i <= 5; i++)
@@ -44,6 +75,7 @@ namespace MrJack.Core.Domain.Game
                     if(GB.Board[i,j].Detective == Detectives.Sherlock)
                     {
                         Game.MoveDetective(i,j,nb,);
+                        Game.MoveDetective()
                     }
                 }
             }
