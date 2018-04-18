@@ -65,23 +65,35 @@ namespace MrJack.Core.Interfaces.Game
         /// <summary>
         /// Action called when we turn a card
         /// </summary>
+        /// <param name="actionIndex"></param>
         /// <param name="x">Column</param>
         /// <param name="y">Line</param>
         /// <param name="nbTurn"></param>
-        void TurnCard(int x, int y, int nbTurn);
+        void TurnCard(int actionIndex, int x, int y, int nbTurn);
+
+        /// <summary>
+        /// Action called when we move a detective
+        /// </summary>
+        /// <param name="actionIndex"></param>
+        /// <param name="x">Column</param>
+        /// <param name="y">Line</param>
+        /// <param name="nbTurn"></param>
+        void MoveDetective(int actionIndex, int x, int y, int nbTurn);
 
         /// <summary>
         /// Move 2 cards
         /// </summary>
+        /// <param name="actionIndex"></param>
         /// <param name="x1"></param>
         /// <param name="y1"></param>
         /// <param name="x2"></param>
         /// <param name="y2"></param>
-        void MoveCard(int x1, int y1, int x2, int y2);
+        void MoveCard(int actionIndex, int x1, int y1, int x2, int y2);
 
         /// <summary>
         /// Pick a card on the draw
         /// </summary>
-        void Draw();
+        /// <param name="actionIndex"></param>
+        Killers Draw(int actionIndex);
     }
 }
