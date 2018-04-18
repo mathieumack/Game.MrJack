@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Turn
+    public class Turn
     {
         public int CurrentTurn { get; set; } //Num du tour
         public int actions; //Numéro jeton utilisé
@@ -17,7 +17,7 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public Turn()
         {
-            this.CurrentTurn = 1;
+            this.CurrentTurn = 0;
             this.actions = 1;
         }
 
