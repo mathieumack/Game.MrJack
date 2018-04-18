@@ -27,11 +27,11 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void ChooseAction()
         {
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
             {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
-                    if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                    if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
                         Draw(actionIndex);
                     }
@@ -62,7 +62,8 @@ namespace MrJack.Core.Domain.Game
                 }
             }                                            
         }
-        
+
+
         /// <summary>
         /// Moves the Sherlock token
         /// </summary>
@@ -70,9 +71,9 @@ namespace MrJack.Core.Domain.Game
         public void Sherlock(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for(int i = 0; i <= 5; i++)
+            for(int i = 0; i < 5; i++)
             {
-                for(int j = 0; j <= 5; j++)
+                for(int j = 0; j < 5; j++)
                 {
                     if(GB.Board[i,j].Detective == Detectives.Sherlock)
                     {
@@ -89,16 +90,16 @@ namespace MrJack.Core.Domain.Game
         public void Watson(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for(int i = 0; i <= 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for(int j = 0; j <= 5; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    if(GB.Board[i, j].Detective == Detectives.Watson)
+                    if (GB.Board[i, j].Detective == Detectives.Watson)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
                     }
                 }
-            }    
+            }
         }
 
         /// <summary>
@@ -108,9 +109,9 @@ namespace MrJack.Core.Domain.Game
         public void Toby(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int j = 0; j <= 5; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     if (GB.Board[i, j].Detective == Detectives.Toby)
                     {
@@ -142,9 +143,9 @@ namespace MrJack.Core.Domain.Game
             }
 
             int nb = Rnd.Next(0, 2);
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int j = 0; j <= 5; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     if (GB.Board[i, j].Detective == joker)
                     {
@@ -173,7 +174,7 @@ namespace MrJack.Core.Domain.Game
             int y1 = Rnd.Next(1, 4);
             int x2 = Rnd.Next(1, 4);
             int y2 = Rnd.Next(1, 4);
-            Game.MoveCard(actionIndex, x1, y1, x2, y2);
+            Game.MoveCard(actionIndex,x1, y1, x2, y2);
         }
         
         /// <summary>
