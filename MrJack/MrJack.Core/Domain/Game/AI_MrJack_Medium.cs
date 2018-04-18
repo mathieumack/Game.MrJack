@@ -29,6 +29,16 @@ namespace MrJack.Core.Domain.Game
         {
             for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
             {
+                if(Game.AvailableActions[actionIndex].Selectable && Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                {
+                    Draw(actionIndex);
+                }
+            }
+
+
+
+            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
                     if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
