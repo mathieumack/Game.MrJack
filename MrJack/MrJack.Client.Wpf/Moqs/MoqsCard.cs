@@ -13,5 +13,21 @@ namespace MrJack.Client.Wpf.Moqs
         public bool Down { get; set; }
         public bool Left { get; set; }
         public bool Right { get; set; }
+        public ICard Killers => throw new System.NotImplementedException();
+
+        public void Rotate(int nb)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool View(Direction direction)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        void ICard.Return()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
