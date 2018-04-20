@@ -131,6 +131,8 @@ namespace MrJack.Core.Domain.Game
 
             if (nb > 1)
                 Rotate(nb - 1);
+
+            CanBeMoved = false;
         }
 
         /// <summary>
