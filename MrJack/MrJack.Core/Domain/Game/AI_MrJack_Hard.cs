@@ -86,9 +86,9 @@ namespace MrJack.Core.Domain.Game
         /// Moves the Sherlock token
         /// </summary>
         /// <param name="actionIndex">token number</param>
-        public void Sherlock(int actionIndex)
+        /// <param name="nb">number of moves (1-2)</param>
+        public void Sherlock(int actionIndex, int nb)
         {
-            int nb = Rnd.Next(1, 3);
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -105,9 +105,9 @@ namespace MrJack.Core.Domain.Game
         /// Moves the Watson token
         /// </summary>
         /// <param name="actionIndex">token number</param>
-        public void Watson(int actionIndex)
+        /// <param name="nb">number of moves (1-2)</param>
+        public void Watson(int actionIndex, int nb)
         {
-            int nb = Rnd.Next(1, 3);
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -123,10 +123,10 @@ namespace MrJack.Core.Domain.Game
         /// <summary>
         /// Moves the Toby token
         /// </summary>
-        /// <param name="actionIndex">token number</param>
-        public void Toby(int actionIndex)
+        /// <param name="actionIndex">token number</param>   
+        /// <param name="nb">number of moves (1-2)</param>
+        public void Toby(int actionIndex, int nb)
         {
-            int nb = Rnd.Next(1, 3);
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -143,24 +143,10 @@ namespace MrJack.Core.Domain.Game
         /// Moves the any token
         /// </summary>
         /// <param name="actionIndex">token number</param>
-        public void Joker(int actionIndex)
-        {
-            Detectives joker;
-            int nbjeton = Rnd.Next(1, 3);
-            if (nbjeton == 1)
-            {
-                joker = Detectives.Sherlock;
-            }
-            else if (nbjeton == 2)
-            {
-                joker = Detectives.Watson;
-            }
-            else
-            {
-                joker = Detectives.Toby;
-            }
-
-            int nb = Rnd.Next(0, 2);
+        /// <param name="joker">the detective to move</param>
+        /// <param name="nb">number of moves (0-1)</param>
+        public void Joker(int actionIndex, Detectives joker, int nb)
+        {            
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
