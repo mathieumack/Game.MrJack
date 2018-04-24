@@ -211,6 +211,138 @@ namespace MrJack.Core.Domain.Game
             Game.TurnCard(actionIndex, x, y, nb);
         }
 
+        public List<Killers> CheckView()
+        {
+            List<Killers> visible = new List<Killers>();
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if(GB.Board[i,j].CardType == CardType.Jeton)
+                    {
+                        if (GB.Board[i, j].View(Direction.Down))
+                        {
+                            for(int k = 1; k < 4; k++)
+                            {
+                                if (GB.Board[i, k].View(Direction.Up)
+                                    && GB.Board[i,k].Killer != Killers.None)
+                                {
+                                    visible.Add(GB.Board[i, k].Killer);
+                                    if (!GB.Board[i, k].View(Direction.Down))
+                                    {
+                                        k = 4;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 4;
+                                }                                
+                            }                          
+                        }
+                        else if (GB.Board[i, j].View(Direction.Left))
+                        {
+                            for (int k = 3; k > 0; k--)
+                            {
+                                if (GB.Board[k, j].View(Direction.Right)
+                                    && GB.Board[k, j].Killer != Killers.None)
+                                {
+                                    visible.Add(GB.Board[k, j].Killer);
+                                    if (!GB.Board[k, j].View(Direction.Left))
+                                    {
+                                        k = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 0;
+                                }
+                            }
+                        }
+                        else if (GB.Board[i, j].View(Direction.Right))
+                        {
+                            for (int k = 1; k < 4; k++)
+                            {
+                                if (GB.Board[k, j].View(Direction.Left)
+                                    && GB.Board[k, j].Killer != Killers.None)
+                                {
+                                    visible.Add(GB.Board[k, j].Killer);
+                                    if (!GB.Board[k, j].View(Direction.Right))
+                                    {
+                                        k = 4;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 4;
+                                }
+                            }
+                        }
+                        else if (GB.Board[i, j].View(Direction.Up))
+                        {
+                            for (int k = 3; k > 0; k--)
+                            {
+                                if (GB.Board[i, k].View(Direction.Down)
+                                    && GB.Board[i, k].Killer != Killers.None)
+                                {
+                                    visible.Add(GB.Board[i, k].Killer);
+                                    if (!GB.Board[i, k].View(Direction.Up))
+                                    {
+                                        k = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return visible;
+        }
+
+        public int KillerCount()
+        {
+            int nb = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (GB.Board[i, j].CardType == CardType.Card &&
+                        GB.Board[i, j].Killer != Killers.None)
+                    {
+                        nb++;
+                    }
+                }
+            }
+            return nb;
+        }
+
+
+        public void Choose()
+        {            
+            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            {
+                if (Game.AvailableActions[actionIndex].Selectable)
+                {
+                    List<Killers> visible = CheckView();
+                    int nbKillers = KillerCount();
+                    if (nbKillers / 2 == visible.Count)
+                    {
+                        if (Game.KillerPoints > 4 || nbKillers > 5)
+                        {
+                            Draw(actionIndex);
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                
+            }
+        }
     }
 
 }
