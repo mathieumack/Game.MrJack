@@ -11,9 +11,8 @@ namespace MrJack.Core.Domain.Game
         public int nbSablier { get; set; }
         public PlayerType PlayerType { get; set; }
 
-        public Player(PlayerType playerType) {
+        public Player() {
             nbSablier = 0;
-            PlayerType = playerType;
         }
     }
 }

@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class AI_MrJack_Medium : Player, IIA
+    public class AI_MrJack_Medium : Player, IIA
     {
-        public Killers Killer { get; set; }
         public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        private List<ActionType> orderedActions;
+        protected List<ActionType> orderedActions;
 
-        public AI_MrJack_Medium(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
+        public AI_MrJack_Medium(Randomizer rnd, IGame game) 
+            : base()
         {
-            Killer = killer;
+            PlayerType = PlayerType.MrJack;
+
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
