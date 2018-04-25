@@ -7,29 +7,45 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_Sherlock : Player
+    public class AI_Detectives_Medium : Player
     {
         public Detectives Detectives { get; set; }
-        public Randomizer Rnd { get; set; }
+        public Random Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        public AI_Sherlock(Detectives detectives, Randomizer rnd, IGame game) : base(PlayerType.Sherlock)
+        private List<ActionType> orderedActions;
+
+        public AI_Detectives_Medium(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
         {
-            Detectives = detectives;
+            detectives = Detectives;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
+
+            orderedActions = new List<ActionType>()
+            {
+                ActionType.Draw,
+                ActionType.Joker,
+                ActionType.Move,
+                ActionType.Turn,
+                ActionType.Sherlock,
+                ActionType.Toby,
+                ActionType.Watson
+            };
         }
 
         /// <summary>
         /// Allows Mr Jack to do an action
         /// </summary>
-        public void ChooseAction()
+        public void ChooseActionSherlock()
         {
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            bool notFound = true;
+            for (int j = 0; j < orderedActions.Count && notFound; j++)
             {
-                if (Game.AvailableActions[actionIndex].Selectable)
+                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound; actionIndex++)
+                {
+                    if (Game.AvailableActions[actionIndex].Selectable)
                 {
                     if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
@@ -62,6 +78,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }
         }
+
 
         /// <summary>
         /// Moves the Sherlock token
@@ -127,37 +144,31 @@ namespace MrJack.Core.Domain.Game
         public void Joker(int actionIndex)
         {
             Detectives joker;
-            bool moved = false;
-            do
+            int nbjeton = Rnd.Next(1, 3);
+            if (nbjeton == 1)
             {
-                int nbjeton = Rnd.Next(1, 3);
-                if (nbjeton == 1)
-                {
-                    joker = Detectives.Sherlock;
-                }
-                else if (nbjeton == 2)
-                {
-                    joker = Detectives.Watson;
-                }
-                else
-                {
-                    joker = Detectives.Toby;
-                }
+                joker = Detectives.Sherlock;
+            }
+            else if (nbjeton == 2)
+            {
+                joker = Detectives.Watson;
+            }
+            else
+            {
+                joker = Detectives.Toby;
+            }
 
-                int nb = Rnd.Next(0, 2);
-                for (int i = 0; i < 5; i++)
+            int nb = 1;
+            for (int i = 0; i <= 5; i++)
+            {
+                for (int j = 0; j <= 5; j++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    if (GB.Board[i, j].Detective == joker)
                     {
-                        if (GB.Board[i, j].Detective == joker && GB.Board[i, j].CanBeMoved)
-                        {
-                            Game.MoveDetective(actionIndex, i, j, nb);
-                            moved = true;
-                        }
+                        Game.MoveDetective(actionIndex, i, j, nb);
                     }
                 }
             }
-            while (!moved);
         }
 
         /// <summary>
@@ -175,22 +186,10 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Move(int actionIndex)
         {
-            int x1;
-            int y1;
-            do
-            {
-                x1 = Rnd.Next(1, 4);
-                y1 = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x1, y1].CanBeMoved);
-            int x2;
-            int y2;
-            do
-            {
-                x2 = Rnd.Next(1, 4);
-                y2 = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x2, y2].CanBeMoved);
+            int x1 = Rnd.Next(1, 4);
+            int y1 = Rnd.Next(1, 4);
+            int x2 = Rnd.Next(1, 4);
+            int y2 = Rnd.Next(1, 4);
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
 
@@ -200,18 +199,11 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Turn(int actionIndex)
         {
-            int x;
-            int y;
-            do
-            {
-                x = Rnd.Next(1, 4);
-                y = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x, y].CanBeMoved);
+            int x = Rnd.Next(1, 4);
+            int y = Rnd.Next(1, 4);
             int nb = Rnd.Next(1, 4);
             Game.TurnCard(actionIndex, x, y, nb);
         }
 
     }
 }
-
