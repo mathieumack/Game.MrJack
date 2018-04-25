@@ -72,11 +72,11 @@ namespace MrJack.Core.Domain.Game
             {
                 if(difficulty == Difficulty.Easy)
                 {
-                    IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Easy(Rnd, this);
                 }
                 else if(difficulty == Difficulty.Medium)
                 {
-                    IA = new AI_MrJack_Medium(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Medium(Rnd, this);
                 }
                 else
                 {
