@@ -91,7 +91,8 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if(Turn.actions == 3)
+            // fin de tour.
+            if (Turn.actions == 3)
             {
                 EndOfTurn();
             }
@@ -111,8 +112,8 @@ namespace MrJack.Core.Domain.Game
                     IA.ChooseAction();
                 }
             }
-           
         }
+
         public void EndOfTurn()
         {
             Turn.CurrentTurn++;
