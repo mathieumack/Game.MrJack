@@ -78,13 +78,15 @@ namespace MrJack.Core.Domain.Game
         public void Sherlock(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for(int i = 0; i < 5; i++)
+            bool finded = false;
+            for(int i = 0; i < 5 && !finded; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for(int j = 0; j < 5 && !finded; j++)
                 {
                     if(GB.Board[i,j].Detective == Detectives.Sherlock)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
+                        finded = true;
                     }
                 }
             }           
@@ -97,13 +99,15 @@ namespace MrJack.Core.Domain.Game
         public void Watson(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for (int i = 0; i < 5; i++)
+            bool finded = false;
+            for (int i = 0; i < 5 && !finded; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 5 && !finded; j++)
                 {
                     if (GB.Board[i, j].Detective == Detectives.Watson)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
+                        finded = true;
                     }
                 }
             }
@@ -116,13 +120,15 @@ namespace MrJack.Core.Domain.Game
         public void Toby(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for (int i = 0; i < 5; i++)
+            bool finded = false;
+            for (int i = 0; i < 5 && !finded; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 5 && !finded; j++)
                 {
                     if (GB.Board[i, j].Detective == Detectives.Toby)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
+                        finded = true;
                     }
                 }
             }
@@ -150,13 +156,15 @@ namespace MrJack.Core.Domain.Game
             }
 
             int nb = Rnd.Next(0, 2);
-            for (int i = 0; i < 5; i++)
+            bool finded = false;
+            for (int i = 0; i < 5 && !finded; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 5 && !finded; j++)
                 {
                     if (GB.Board[i, j].Detective == joker)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
+                        finded = true;
                     }
                 }
             }
