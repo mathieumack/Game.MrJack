@@ -18,6 +18,7 @@ namespace MrJack.Client.Wpf.Moqs
         public string LastIAAction { get; set; }
         public bool EndTurnResult { get; set; }
         public Killers Killer { get; set; }
+        public Draw MainDraw { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         #endregion
 
@@ -83,6 +84,11 @@ namespace MrJack.Client.Wpf.Moqs
         }
 
         Killers IGame.Draw(int actionIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MiddleGame()
         {
             throw new System.NotImplementedException();
         }
