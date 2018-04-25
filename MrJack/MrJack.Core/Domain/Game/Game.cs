@@ -39,7 +39,7 @@ namespace MrJack.Core.Domain.Game
             GameBoard = new GameBoard(Rnd);
 
             //New player with PlayerType
-            Joueur = new Player(typePlayer);
+            Joueur = new Player();
             MainDraw = new Draw();
             MainDraw.Pioche(Joueur.PlayerType, Rnd);
 
@@ -53,30 +53,30 @@ namespace MrJack.Core.Domain.Game
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
-                
+
                 //Créer une IA de type PlayerType.Sherlock
-                if(difficulty == Difficulty.Easy)
+                if (difficulty == Difficulty.Easy)
                 {
-                    //New IA Sherlock Easy
+                    IA = new AI_Sherlock(Rnd, this);
                 }
                 else if (difficulty == Difficulty.Medium)
                 {
-                    //New IA Sherlock Medium
+                    IA = new AI_Sherlock_Medium(Rnd, this);
                 }
                 else
                 {
-                    //New IA Sherlock Hard
+                    //Créer une IA de type PlayerType.MrJack et Difficile
                 }
             }
             else
             {
                 if(difficulty == Difficulty.Easy)
                 {
-                    IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Easy(Rnd, this);
                 }
                 else if(difficulty == Difficulty.Medium)
                 {
-                    IA = new AI_MrJack_Medium(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Medium(Rnd, this);
                 }
                 else
                 {

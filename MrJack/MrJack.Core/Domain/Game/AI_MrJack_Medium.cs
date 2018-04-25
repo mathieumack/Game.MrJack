@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class AI_MrJack_Medium : Player, IIA
+    public class AI_MrJack_Medium : Player, IIA
     {
-        public Killers Killer { get; set; }
         public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        private List<ActionType> orderedActions;
+        protected List<ActionType> orderedActions;
 
-        public AI_MrJack_Medium(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
+        public AI_MrJack_Medium(Randomizer rnd, IGame game) 
+            : base()
         {
-            Killer = killer;
+            PlayerType = PlayerType.MrJack;
+
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
@@ -146,31 +147,37 @@ namespace MrJack.Core.Domain.Game
         public void Joker(int actionIndex)
         {
             Detectives joker;
-            int nbjeton = Rnd.Next(1, 3);
-            if (nbjeton == 1)
+            bool moved = false;
+            do
             {
-                joker = Detectives.Sherlock;
-            }
-            else if (nbjeton == 2)
-            {
-                joker = Detectives.Watson;
-            }
-            else
-            {
-                joker = Detectives.Toby;
-            }
-
-            int nb = Rnd.Next(0, 2);
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
+                int nbjeton = Rnd.Next(1, 3);
+                if (nbjeton == 1)
                 {
-                    if (GB.Board[i, j].Detective == joker)
+                    joker = Detectives.Sherlock;
+                }
+                else if (nbjeton == 2)
+                {
+                    joker = Detectives.Watson;
+                }
+                else
+                {
+                    joker = Detectives.Toby;
+                }
+
+                int nb = Rnd.Next(0, 2);
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 5; j++)
                     {
-                        Game.MoveDetective(actionIndex, i, j, nb);
+                        if (GB.Board[i, j].Detective == joker && GB.Board[i, j].CanBeMoved)
+                        {
+                            Game.MoveDetective(actionIndex, i, j, nb);
+                            moved = true;
+                        }
                     }
                 }
             }
+            while (!moved);
         }
 
         /// <summary>
