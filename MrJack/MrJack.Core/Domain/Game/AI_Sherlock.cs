@@ -9,14 +9,14 @@ namespace MrJack.Core.Domain.Game
 {
     public class AI_Sherlock : Player
     {
-        public Killers Killer { get; set; }
+        public Detectives Detectives { get; set; }
         public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        public AI_Sherlock(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.Sherlock)
+        public AI_Sherlock(Detectives detectives, Randomizer rnd, IGame game) : base(PlayerType.Sherlock)
         {
-            Killer = killer;
+            Detectives = detectives;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
