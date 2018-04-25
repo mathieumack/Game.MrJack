@@ -22,8 +22,6 @@ namespace MrJack.Core.Domain.Game
                 ActionType.Turn,
                 ActionType.Move,
                 ActionType.Draw,
-                
-                
             };
         }
     }
