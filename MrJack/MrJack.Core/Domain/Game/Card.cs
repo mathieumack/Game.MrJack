@@ -9,30 +9,33 @@ namespace MrJack.Core.Domain.Game
 {
     public class Card : ICard
     {
-        Random rnd = new Random();
+        Randomizer rnd { get; set; }
         public CardType CardType { get; set; }
         public Killers Killer { get; set; }
         public Detectives Detective { get; set; }
-        public bool CanBeMoved { get { return CanBeMoved; } set { CanBeMoved = true; } }
+        public bool CanBeMoved { get; set; }
         public bool Up { get; set; }
         public bool Right { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
 
+        public ICard Killers => throw new NotImplementedException();
+
         /// <summary>
         /// Card constructor
         /// </summary>
         /// <param name="cardType">The card type</param>
-        private Card(CardType cardType)
+        private Card(CardType cardType, Randomizer rnd)
         {
             CardType = cardType;
+            this.rnd = rnd;
         }
 
         /// <summary>
         /// The street card constructor
         /// </summary>
         /// <param name="killer">The name of the killer</param>
-        public Card(Killers killer) : this(CardType.Card)
+        public Card(Killers killer, Randomizer rnd) : this(CardType.Card, rnd)
         {
             Killer = killer;
 
@@ -71,7 +74,7 @@ namespace MrJack.Core.Domain.Game
         /// The token card constructor
         /// </summary>
         /// <param name="detective">The name of the detective</param>
-        public Card(Detectives detective) : this(CardType.Jeton)
+        public Card(Detectives detective, Randomizer rnd) : this(CardType.Jeton, rnd)
         {
             Detective = detective;
 
@@ -111,7 +114,7 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void Return()
         {
-            if (Killer == Killers.Joseph_Lane)
+            if (Killer == Domain.Game.Killers.Joseph_Lane)
             {
                 Up = true;
                 Right = true;
@@ -119,7 +122,7 @@ namespace MrJack.Core.Domain.Game
                 Left = true;
             }
 
-            Killer = Killers.None;
+            Killer = Domain.Game.Killers.None;
         }
 
         /// <summary>

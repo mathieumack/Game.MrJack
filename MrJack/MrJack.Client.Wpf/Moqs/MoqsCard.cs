@@ -13,5 +13,7 @@ namespace MrJack.Client.Wpf.Moqs
         public bool Down { get; set; }
         public bool Left { get; set; }
         public bool Right { get; set; }
+
+        public ICard Killers => throw new System.NotImplementedException();
     }
 }

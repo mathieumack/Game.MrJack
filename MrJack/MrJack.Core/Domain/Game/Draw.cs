@@ -45,16 +45,14 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         /// <param name="currentPlayer">Le joueur en cours</param>
         /// <returns>le tueur sur la carte</returns>
-        public Killers Pioche(PlayerType currentPlayer)
+        public Killers Pioche(PlayerType currentPlayer, Randomizer rnd)
         {
-            Random rnd = new Random();
             int nb = rnd.Next(0, CardsLeft);
             CardsLeft--;
             Killers killer = Cartes[nb];
             if(currentPlayer == PlayerType.MrJack)
             {
                 killersSabliers.TryGetValue(killer, out int sabliers);
-                //Joueur.Sabliers += sabliers;
             }
             Cartes.Remove(killer);
             return killer;

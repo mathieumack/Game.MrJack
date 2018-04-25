@@ -32,12 +32,12 @@ namespace MrJack.Client.Wpf.Moqs
 
         #region Properties
 
-        public void Draw()
+        public Killers Draw(int actionIndex)
         {
             throw new System.NotImplementedException();
         }
 
-        public void MoveCard(int x1, int y1, int x2, int y2)
+        public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             throw new System.NotImplementedException();
         }
@@ -47,9 +47,14 @@ namespace MrJack.Client.Wpf.Moqs
             ConfigureMoq();
         }
 
-        public void TurnCard(int x, int y, int nbTurn)
+        public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void MoveDetective(int actionIndex, int x, int y, int nbTurn)
+        {
+
         }
 
         #endregion
@@ -70,11 +75,21 @@ namespace MrJack.Client.Wpf.Moqs
             {
                 new MoqsAction() { ActionType = ActionType.Toby, Selectable = true },
                 new MoqsAction() { ActionType = ActionType.Turn, Selectable = true },
-                new MoqsAction() { ActionType = ActionType.Joker, Selectable = false },
+                new MoqsAction() { ActionType = ActionType.Joker, Selectable = true },
                 new MoqsAction() { ActionType = ActionType.Sherlock, Selectable = true },
             };
 
             GameBoard = new MoqsGameBoard();
+        }
+
+        Killers IGame.Draw(int actionIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void MiddleGame()
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
