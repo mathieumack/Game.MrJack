@@ -214,6 +214,7 @@ namespace MrJack.Core.Domain.Game
 
                     xFinal = x + y == 8 ? x - 1 : x;
                     yFinal = x + y == 4 && x == 4 ? y + 1 : y;
+                    
                 }
                 else if (xFinal < yFinal)
                 {
