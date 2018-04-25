@@ -96,6 +96,7 @@ namespace MrJack.Client.Wpf
                     break;
             }
             currentGame.StartNewGame(WhoAmI, difficulty);
+            
             Refresh();
         }
 

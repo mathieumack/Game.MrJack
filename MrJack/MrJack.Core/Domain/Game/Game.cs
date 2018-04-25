@@ -21,9 +21,10 @@ namespace MrJack.Core.Domain.Game
         public List<Killers> UserDraw { get; set; }
         public string LastIAAction { get; set; }
         public bool EndTurnResult { get; set; }
-        private Turn turn { get; set; }
+        public Turn Turn { get; set; }
         public Player Joueur { get; set; }
         public Randomizer Rnd { get; set; }
+        public IIA IA { get; set; }
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -32,6 +33,9 @@ namespace MrJack.Core.Domain.Game
         public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
         {
             Rnd = new Randomizer();
+            Turn = new Turn();
+
+            GameBoard = new GameBoard(Rnd);
 
             //New player with PlayerType
             Joueur = new Player(typePlayer);
@@ -48,16 +52,26 @@ namespace MrJack.Core.Domain.Game
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
+                
                 //Créer une IA de type PlayerType.Sherlock
 
             }
             else
             {
-                //Créer une IA de type PlayerType.MrJack
+                if(difficulty == Difficulty.Easy)
+                {
+                    IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
+                }
+                else if(difficulty == Difficulty.Medium)
+                {
+                    IA = new AI_MrJack_Medium(Killers.Insp_Lestrade, Rnd, this);
+                }
+                else
+                {
+                    //Créer une IA de type PlayerType.MrJack et Difficile
+                }
             }
-            GameBoard = new GameBoard(Rnd);
-            TurnCard(0, 1, 1, 1);
-            Turn turn = new Turn();
+            MiddleGame();
         }
 
         /// <summary>
@@ -65,43 +79,44 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if (turn.IsDetectiveStart())
+            if(Turn.actions != 4)
             {
-                turn.CurrentPlayer = PlayerType.Sherlock;
+                Turn.CurrentPlayer = Turn.Whosplaying();
+
+                Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
+                Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
+
+                if (Joueur.PlayerType != Turn.CurrentPlayer)
+                {
+                    Console.WriteLine("L'IA joue");
+                    Turn.actions++;
+                    IA.ChooseAction();
+                }
+                else
+                {
+                    Turn.actions++;
+                }
             }
             else
             {
-                turn.CurrentPlayer = PlayerType.MrJack;
-            }
-
-            do
-            {
-                Console.WriteLine("C'est au tour de " + turn.CurrentPlayer);
-                Console.WriteLine($"Nb de jetons à prendre: {turn.NbJetonAPiocher()}");
-
-                turn.actions++;
-                turn.ChangeCurrentPlayer();
-            } while (turn.actions <= 3);
-
-
-            //turn.CurrentTurn++;
+                Turn.CurrentTurn++;
+            }    
         }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
-            ICard card = GameBoard.Board[x, y];
+           ICard card = GameBoard.Board[x, y];
 
            card.Rotate(nbTurn);
            AvailableActions[actionIndex].Selectable = false;
-
         }
              
-
 
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
             AvailableActions[actionIndex].Selectable = false;
+            this.MiddleGame();
         }
 
         private void Move(int x1, int y1, int x2, int y2)
@@ -118,8 +133,27 @@ namespace MrJack.Core.Domain.Game
         {
             AvailableActions[actionIndex].Selectable = false;
             Draw draw = new Draw();
-            Killers killer = draw.Pioche(Joueur.PlayerType, Rnd);
-            return killer;
+            Killers drawkiller = draw.Pioche(Joueur.PlayerType, Rnd);
+            if(Joueur.PlayerType == PlayerType.Sherlock)
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    for (int j = 1; j <= 3; j++)
+                    {
+                        if (GameBoard.Board[i, j].Killer == drawkiller)
+                        {
+                            GameBoard.Board[i, j].Return();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Draw drawKiller = new Draw();
+                drawKiller.killersSabliers.TryGetValue(drawkiller, out int sabliers);
+                KillerPoints += sabliers;
+            }
+            return drawkiller;
         }
 
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
@@ -150,6 +184,7 @@ namespace MrJack.Core.Domain.Game
             }
             Move(x1, y1, xFinal, yFinal);
             AvailableActions[actionIndex].Selectable = false;
+            this.MiddleGame();
         }
     }
 
