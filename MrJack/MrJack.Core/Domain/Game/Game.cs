@@ -91,7 +91,11 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if (Turn.actions != 4)
+            if(Turn.actions == 3)
+            {
+                EndOfTurn();
+            }
+            else
             {
                 Turn.actions++;
 
@@ -107,16 +111,25 @@ namespace MrJack.Core.Domain.Game
                     IA.ChooseAction();
                 }
             }
-            // fin de tour.
-            if (Turn.actions == 4)
-            {
-                Turn.CurrentTurn++;
-                Turn.actions = -1;
+           
+        }
+        public void EndOfTurn()
+        {
+            Turn.CurrentTurn++;
+            Turn.actions = -1;
 
-                List<Killers> visible = CheckView();
-                foreach(Killers killerVisible in visible)
+            List<Killers> visible = CheckView();
+            foreach (Killers killerVisible in visible)
+            {
+                for(int i = 0; i < 5; i++)
                 {
-                    MainDraw.Cartes.Remove(killerVisible);
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if(GameBoard.Board[i,j].Killer == killerVisible)
+                        {
+                            GameBoard.Board[i, j].Return();
+                        }
+                    }
                 }
             }
         }
@@ -213,7 +226,7 @@ namespace MrJack.Core.Domain.Game
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (GameBoard.Board[i, j].CardType == CardType.Jeton)
+                    if (GameBoard.Board[i, j].Detective != Detectives.None)
                     {
                         if (GameBoard.Board[i, j].View(Direction.Down))
                         {
