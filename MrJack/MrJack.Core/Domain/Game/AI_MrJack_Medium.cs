@@ -7,62 +7,81 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_MrJack_Easy : Player, IIA
+    class AI_MrJack_Medium : Player, IIA
     {
         public Killers Killer { get; set; }
         public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        public AI_MrJack_Easy(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
+        private List<ActionType> orderedActions;
+
+        public AI_MrJack_Medium(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
         {
             Killer = killer;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
+
+            orderedActions = new List<ActionType>()
+            {
+                ActionType.Draw,
+                ActionType.Joker,
+                ActionType.Move,
+                ActionType.Turn,
+                ActionType.Sherlock,
+                ActionType.Toby,                
+                ActionType.Watson
+            };
         }
-        
+
         /// <summary>
         /// Allows Mr Jack to do an action
         /// </summary>
         public void ChooseAction()
         {
-            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            bool notFound = true;
+            for (int j = 0; j < orderedActions.Count && notFound; j++)
             {
-                if (Game.AvailableActions[actionIndex].Selectable)
+                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound; actionIndex++)
                 {
-                    if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                    if (Game.AvailableActions[actionIndex].Selectable && 
+                        Game.AvailableActions[actionIndex].ActionType == orderedActions[j])
                     {
-                        Draw(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
-                    {
-                        Joker(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
-                    {
-                        Move(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
-                    {
-                        Sherlock(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
-                    {
-                        Toby(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
-                    {
-                        Turn(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
-                    {
-                        Watson(actionIndex);
+                        notFound = true;
+                        if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+                        {
+                            Draw(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
+                        {
+                            Joker(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
+                        {
+                            Move(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
+                        {
+                            Sherlock(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
+                        {
+                            Toby(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
+                        {
+                            Turn(actionIndex);
+                        }
+                        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
+                        {
+                            Watson(actionIndex);
+                        }
                     }
                 }
-            }                                            
+            }
         }
-        
+
         /// <summary>
         /// Moves the Sherlock token
         /// </summary>
@@ -70,16 +89,16 @@ namespace MrJack.Core.Domain.Game
         public void Sherlock(int actionIndex)
         {
             int nb = Rnd.Next(1, 3);
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    if(GB.Board[i,j].Detective == Detectives.Sherlock)
+                    if (GB.Board[i, j].Detective == Detectives.Sherlock)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
                     }
                 }
-            }           
+            }
         }
 
         /// <summary>
@@ -119,7 +138,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }
         }
-        
+
         /// <summary>
         /// Moves the any token
         /// </summary>
@@ -128,7 +147,7 @@ namespace MrJack.Core.Domain.Game
         {
             Detectives joker;
             int nbjeton = Rnd.Next(1, 3);
-            if(nbjeton == 1)
+            if (nbjeton == 1)
             {
                 joker = Detectives.Sherlock;
             }
@@ -162,7 +181,7 @@ namespace MrJack.Core.Domain.Game
         {
             Game.Draw(actionIndex);
         }
-        
+
         /// <summary>
         /// Moves the position of two cards
         /// </summary>
@@ -187,7 +206,7 @@ namespace MrJack.Core.Domain.Game
             while (GB.Board[x2, y2].CanBeMoved);
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
-        
+
         /// <summary>
         /// Turns the position of a card
         /// </summary>
@@ -203,8 +222,9 @@ namespace MrJack.Core.Domain.Game
             }
             while (GB.Board[x, y].CanBeMoved);
             int nb = Rnd.Next(1, 4);
-            Game.TurnCard(actionIndex,x, y, nb);
+            Game.TurnCard(actionIndex, x, y, nb);
         }
 
     }
+
 }

@@ -24,7 +24,7 @@ namespace MrJack.Core.Domain.Game
         public Turn Turn { get; set; }
         public Player Joueur { get; set; }
         public Randomizer Rnd { get; set; }
-        public AI_MrJack_Easy IA { get; set; }
+        public IIA IA { get; set; }
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -64,7 +64,7 @@ namespace MrJack.Core.Domain.Game
                 }
                 else if(difficulty == Difficulty.Medium)
                 {
-                    //Créer une IA de type PlayerType.MrJack et Moyenne
+                    IA = new AI_MrJack_Medium(Killers.Insp_Lestrade, Rnd, this);
                 }
                 else
                 {
@@ -102,11 +102,10 @@ namespace MrJack.Core.Domain.Game
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
         {
-            ICard card = GameBoard.Board[x, y];
-            card.Rotate(nbTurn);
-                AvailableActions[actionIndex].Selectable = false;
+           ICard card = GameBoard.Board[x, y];
 
-            this.MiddleGame();
+           card.Rotate(nbTurn);
+           AvailableActions[actionIndex].Selectable = false;
         }
              
 
