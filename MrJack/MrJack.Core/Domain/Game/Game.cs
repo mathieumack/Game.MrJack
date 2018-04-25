@@ -79,8 +79,10 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if(Turn.actions != 4)
+            if (Turn.actions != 4)
             {
+                Turn.actions++;
+
                 Turn.CurrentPlayer = Turn.Whosplaying();
 
                 Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
@@ -89,18 +91,13 @@ namespace MrJack.Core.Domain.Game
                 if (Joueur.PlayerType != Turn.CurrentPlayer)
                 {
                     Console.WriteLine("L'IA joue");
-                    Turn.actions++;
                     IA.ChooseAction();
-                }
-                else
-                {
-                    Turn.actions++;
                 }
             }
             else
             {
                 Turn.CurrentTurn++;
-            }    
+            }   
         }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
@@ -132,7 +129,6 @@ namespace MrJack.Core.Domain.Game
 
         public Killers Draw(int actionIndex)
         {
-            AvailableActions[actionIndex].Selectable = false;
             Draw draw = new Draw();
             Killers drawkiller = draw.Pioche(Joueur.PlayerType, Rnd);
             if(Joueur.PlayerType == PlayerType.Sherlock)
@@ -154,6 +150,7 @@ namespace MrJack.Core.Domain.Game
                 drawKiller.killersSabliers.TryGetValue(drawkiller, out int sabliers);
                 KillerPoints += sabliers;
             }
+            AvailableActions[actionIndex].Selectable = false;
             MiddleGame();
             return drawkiller;
         }

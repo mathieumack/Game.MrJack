@@ -27,37 +27,52 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void ChooseAction()
         {
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            bool finded = false;
+            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && !finded; actionIndex++)
             {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
                     if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
+                        Console.WriteLine("L'IA Draw");
                         Draw(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
                     {
+                        Console.WriteLine("L'IA Joker");
                         Joker(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
                     {
+                        Console.WriteLine("L'IA Move");
                         Move(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
                     {
+                        Console.WriteLine("L'IA Move Sherlock");
                         Sherlock(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
                     {
+                        Console.WriteLine("L'IA Move Toby");
                         Toby(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
                     {
+                        Console.WriteLine("L'IA Turn Card");
                         Turn(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
                     {
+                        Console.WriteLine("L'IA Move Watson");
                         Watson(actionIndex);
+                        finded = true;
                     }
                 }
             }                                            
