@@ -53,19 +53,19 @@ namespace MrJack.Core.Domain.Game
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
-                
+
                 //Créer une IA de type PlayerType.Sherlock
-                if(difficulty == Difficulty.Easy)
+                if (difficulty == Difficulty.Easy)
                 {
                     IA = new AI_Sherlock(Rnd, this);
                 }
                 else if (difficulty == Difficulty.Medium)
                 {
-                    IA = new AI_Sherlock(Rnd, this);
+                    IA = new AI_Sherlock_Medium(Rnd, this);
                 }
                 else
                 {
-                    //New IA Sherlock Hard
+                    //Créer une IA de type PlayerType.MrJack et Difficile
                 }
             }
             else
