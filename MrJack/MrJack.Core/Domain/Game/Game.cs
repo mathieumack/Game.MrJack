@@ -106,8 +106,9 @@ namespace MrJack.Core.Domain.Game
 
            card.Rotate(nbTurn);
            AvailableActions[actionIndex].Selectable = false;
+           this.MiddleGame();
         }
-             
+
 
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
@@ -123,7 +124,6 @@ namespace MrJack.Core.Domain.Game
 
             GameBoard.Board[x1, y1] = card2;
             GameBoard.Board[x2, y2] = card1;
-
         }
 
         public Killers Draw(int actionIndex)

@@ -27,37 +27,45 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void ChooseAction()
         {
-            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            bool finded = false;
+            for(int actionIndex = 0; actionIndex < Game.AvailableActions.Count && !finded; actionIndex++)
             {
                 if (Game.AvailableActions[actionIndex].Selectable)
                 {
                     if(Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                     {
                         Draw(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
                     {
                         Joker(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
                     {
                         Move(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
                     {
                         Sherlock(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
                     {
                         Toby(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
                     {
                         Turn(actionIndex);
+                        finded = true;
                     }
                     else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
                     {
                         Watson(actionIndex);
+                        finded = true;
                     }
                 }
             }                                            
