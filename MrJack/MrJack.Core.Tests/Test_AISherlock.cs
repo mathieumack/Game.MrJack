@@ -188,8 +188,10 @@ namespace MrJack.Core.Tests
             int y1 = Rnd.Next(1, 4);
             int x2 = Rnd.Next(1, 4);
             int y2 = Rnd.Next(1, 4);
+            //verifier que x1 a bien pris la valeur de x2 apres le Game.MoveCard, meme chose pour y1 et y2
+            
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
-            Assert.IsTrue();
+            
         }
         public void TestTurn(int actionIndex)
         {
