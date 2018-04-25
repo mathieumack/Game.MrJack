@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_Detectives_Easy : Player
+    public class AI_Sherlock : Player
     {
         public Detectives Detectives { get; set; }
-        public Random Rnd { get; set; }
+        public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }  
 
-        public AI_Detectives_Easy(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
+        public AI_Sherlock(Detectives detectives, Randomizer rnd, IGame game) : base(PlayerType.Sherlock)
         {
-            detectives = Detectives;
+            Detectives = detectives;
             Rnd = rnd;
             Game = game;
             GB = Game.GameBoard;
@@ -62,7 +62,6 @@ namespace MrJack.Core.Domain.Game
                 }
             }
         }
-
 
         /// <summary>
         /// Moves the Sherlock token
@@ -170,10 +169,22 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Move(int actionIndex)
         {
-            int x1 = Rnd.Next(1, 4);
-            int y1 = Rnd.Next(1, 4);
-            int x2 = Rnd.Next(1, 4);
-            int y2 = Rnd.Next(1, 4);
+            int x1;
+            int y1;
+            do
+            {
+                x1 = Rnd.Next(1, 4);
+                y1 = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x1, y1].CanBeMoved);
+            int x2;
+            int y2;
+            do
+            {
+                x2 = Rnd.Next(1, 4);
+                y2 = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x2, y2].CanBeMoved);
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
 
@@ -183,8 +194,14 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Turn(int actionIndex)
         {
-            int x = Rnd.Next(1, 4);
-            int y = Rnd.Next(1, 4);
+            int x;
+            int y;
+            do
+            {
+                x = Rnd.Next(1, 4);
+                y = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x, y].CanBeMoved);
             int nb = Rnd.Next(1, 4);
             Game.TurnCard(actionIndex, x, y, nb);
         }

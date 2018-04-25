@@ -53,6 +53,7 @@
     <Compile Include="Domain\Game\GameBoard.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
     <Compile Include="Domain\Game\Player.cs" />
+    <Compile Include="Domain\Game\Randomizer.cs" />
     <Compile Include="Domain\Game\Token.cs" />
     <Compile Include="Domain\Game\TokenAction.cs" />
     <Compile Include="Domain\Game\Turn.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Interfaces\Game\IGameBoard.cs" />
     <Compile Include="Domain\Game\PlayerType.cs" />
     <Compile Include="Interfaces\Game\IGame.cs" />
+    <Compile Include="Interfaces\Game\IIA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
