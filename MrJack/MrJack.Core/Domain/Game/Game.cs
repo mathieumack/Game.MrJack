@@ -39,7 +39,7 @@ namespace MrJack.Core.Domain.Game
             GameBoard = new GameBoard(Rnd);
 
             //New player with PlayerType
-            Joueur = new Player(typePlayer);
+            Joueur = new Player();
             MainDraw = new Draw();
             MainDraw.Pioche(Joueur.PlayerType, Rnd);
 
