@@ -45,6 +45,8 @@ namespace MrJack.Core.Interfaces.Game
         /// </summary>
         List<Killers> UserDraw { get; set; }
 
+        Draw MainDraw { get; set; }
+
         /// <summary>
         /// Lest IA action message
         /// </summary>
@@ -54,6 +56,7 @@ namespace MrJack.Core.Interfaces.Game
         /// True if the killer is visible
         /// </summary>
         bool EndTurnResult { get; set; }
+        
 
         /// <summary>
         /// Start a new game
