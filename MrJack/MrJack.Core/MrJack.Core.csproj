@@ -53,6 +53,7 @@
     <Compile Include="Domain\Game\GameBoard.cs" />
     <Compile Include="Domain\Game\Killers.cs" />
     <Compile Include="Domain\Game\Player.cs" />
+    <Compile Include="Domain\Game\Randomizer.cs" />
     <Compile Include="Domain\Game\Token.cs" />
     <Compile Include="Domain\Game\TokenAction.cs" />
     <Compile Include="Domain\Game\Turn.cs" />
