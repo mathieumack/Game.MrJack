@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\Game\IGameBoard.cs" />
     <Compile Include="Domain\Game\PlayerType.cs" />
     <Compile Include="Interfaces\Game\IGame.cs" />
+    <Compile Include="Interfaces\Game\IIA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
