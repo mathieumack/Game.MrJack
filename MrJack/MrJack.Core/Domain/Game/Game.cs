@@ -192,9 +192,10 @@ namespace MrJack.Core.Domain.Game
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
         {
             Tuple<int, int> calculate = Calculate(x1, y1, nbTurn);
-           
+
             Move(x1, y1, calculate.Item1, calculate.Item2);
             AvailableActions[actionIndex].Selectable = false;
+            this.MiddleGame();
         }
 
         public Tuple<int, int> Calculate(int x1, int y1, int nbTurn)
@@ -224,9 +225,7 @@ namespace MrJack.Core.Domain.Game
 
                 }
             }
-            Move(x1, y1, xFinal, yFinal);
-            AvailableActions[actionIndex].Selectable = false;
-            this.MiddleGame();
+            return new Tuple<int, int>(xFinal, yFinal); 
         }
 
         public List<Killers> CheckView()
