@@ -15,13 +15,15 @@ namespace MrJack.Core.Domain.Game
 
             orderedActions = new List<ActionType>()
             {
-                ActionType.Draw,
+                ActionType.Sherlock,
+                ActionType.Watson,
+                ActionType.Toby,
                 ActionType.Joker,
                 ActionType.Move,
                 ActionType.Turn,
-                ActionType.Sherlock,
-                ActionType.Toby,
-                ActionType.Watson
+                ActionType.Draw,
+                
+                
             };
         }
     }
