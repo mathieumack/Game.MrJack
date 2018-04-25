@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_Sherlock : Player
+    public class AI_Sherlock : Player, IIA
     {
         public Detectives Detectives { get; set; }
         public Randomizer Rnd { get; set; }

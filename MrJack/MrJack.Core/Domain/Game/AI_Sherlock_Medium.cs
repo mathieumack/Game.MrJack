@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    public class AI_Detectives_Medium : Player
+    public class AI_Detectives_Medium : Player, IIA
     {
         public Detectives Detectives { get; set; }
-        public Random Rnd { get; set; }
+        public Randomizer Rnd { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
         private List<ActionType> orderedActions;
 
-        public AI_Detectives_Medium(Detectives detectives, Random rnd, IGame game) : base(PlayerType.Sherlock)
+        public AI_Detectives_Medium(Detectives detectives, Randomizer rnd, IGame game) : base(PlayerType.Sherlock)
         {
             detectives = Detectives;
             Rnd = rnd;
