@@ -19,8 +19,8 @@ namespace MrJack.Core.Domain.Game
                 ActionType.Watson,
                 ActionType.Toby,
                 ActionType.Joker,
-                ActionType.Move,
                 ActionType.Turn,
+                ActionType.Move,
                 ActionType.Draw,
                 
                 
