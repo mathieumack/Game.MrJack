@@ -56,7 +56,6 @@ namespace MrJack.Core.Domain.Game
                 //Créer une IA de type PlayerType.MrJack
             }
             GameBoard = new GameBoard(Rnd);
-            TurnCard(0, 1, 1, 1);
             Turn turn = new Turn();
         }
 
@@ -141,10 +140,19 @@ namespace MrJack.Core.Domain.Game
 
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
         {
+            Tuple<int, int> calculate = Calculate(x1, y1, nbTurn);
+           
+            Move(x1, y1, calculate.Item1, calculate.Item2);
+            AvailableActions[actionIndex].Selectable = false;
+        }
+
+        public Tuple<int, int> Calculate(int x1, int y1, int nbTurn)
+        {
             int x = 0;
             int y = 0;
             int xFinal = x1;
             int yFinal = y1;
+
             for (int i = 1; i <= nbTurn; i++)
             {
                 if (xFinal > yFinal)
@@ -165,8 +173,7 @@ namespace MrJack.Core.Domain.Game
 
                 }
             }
-            Move(x1, y1, xFinal, yFinal);
-            AvailableActions[actionIndex].Selectable = false;
+            return new Tuple<int, int>(xFinal, yFinal);
         }
     }
 

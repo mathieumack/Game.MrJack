@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Draw
+    public class Draw
     {
         public List<Killers> Cartes { get; set; }
         public Dictionary<Killers, int> killersSabliers { get; set; }
