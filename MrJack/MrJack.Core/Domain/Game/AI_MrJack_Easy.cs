@@ -128,31 +128,37 @@ namespace MrJack.Core.Domain.Game
         public void Joker(int actionIndex)
         {
             Detectives joker;
-            int nbjeton = Rnd.Next(1, 3);
-            if(nbjeton == 1)
+            bool moved = false;
+            do
             {
-                joker = Detectives.Sherlock;
-            }
-            else if (nbjeton == 2)
-            {
-                joker = Detectives.Watson;
-            }
-            else
-            {
-                joker = Detectives.Toby;
-            }
-
-            int nb = Rnd.Next(0, 2);
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
+                int nbjeton = Rnd.Next(1, 3);
+                if (nbjeton == 1)
                 {
-                    if (GB.Board[i, j].Detective == joker)
+                    joker = Detectives.Sherlock;
+                }
+                else if (nbjeton == 2)
+                {
+                    joker = Detectives.Watson;
+                }
+                else
+                {
+                    joker = Detectives.Toby;
+                }
+                
+                int nb = Rnd.Next(0, 2);
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 5; j++)
                     {
-                        Game.MoveDetective(actionIndex, i, j, nb);
+                        if (GB.Board[i, j].Detective == joker && GB.Board[i,j].CanBeMoved)
+                        {
+                            Game.MoveDetective(actionIndex, i, j, nb);
+                            moved = true;
+                        }
                     }
                 }
             }
+            while (!moved);
         }
 
         /// <summary>
@@ -170,11 +176,23 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Move(int actionIndex)
         {
-            int x1 = Rnd.Next(1, 4);
-            int y1 = Rnd.Next(1, 4);
-            int x2 = Rnd.Next(1, 4);
-            int y2 = Rnd.Next(1, 4);
-            Game.MoveCard(actionIndex,x1, y1, x2, y2);
+            int x1;
+            int y1;
+            do
+            {
+                x1 = Rnd.Next(1, 4);
+                y1 = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x1, y1].CanBeMoved);
+            int x2;
+            int y2;
+            do
+            {
+                x2 = Rnd.Next(1, 4);
+                y2 = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x2, y2].CanBeMoved);
+            Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
         
         /// <summary>
@@ -183,8 +201,14 @@ namespace MrJack.Core.Domain.Game
         /// <param name="actionIndex">token number</param>
         public void Turn(int actionIndex)
         {
-            int x = Rnd.Next(1, 4);
-            int y = Rnd.Next(1, 4);
+            int x;
+            int y;
+            do
+            {
+                x = Rnd.Next(1, 4);
+                y = Rnd.Next(1, 4);
+            }
+            while (GB.Board[x, y].CanBeMoved);
             int nb = Rnd.Next(1, 4);
             Game.TurnCard(actionIndex,x, y, nb);
         }
