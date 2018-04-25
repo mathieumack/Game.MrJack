@@ -332,7 +332,10 @@ namespace MrJack.Core.Domain.Game
                     {
                         if (Game.KillerPoints > 4 || nbKillers > 5)
                         {
-                            Draw(actionIndex);
+                            if(Game.AvailableActions[actionIndex].Selectable)
+                            {
+                                Draw(actionIndex);
+                            }                                
                         }
                     }
                     else
