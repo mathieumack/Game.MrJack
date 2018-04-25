@@ -75,34 +75,26 @@ namespace MrJack.Core.Domain.Game
         {
             Detective = detective;
 
-            int nb = rnd.Next(1, 5);
-            if (nb == 1)
-            {
-                Up = true;
-                Right = false;
-                Down = false;
-                Left = false;
-            }
-            else if (nb == 2)
+            if (Detective == Detectives.Sherlock)
             {
                 Up = false;
                 Right = true;
                 Down = false;
                 Left = false;
             }
-            else if (nb == 3)
-            {
-                Up = false;
-                Right = false;
-                Down = true;
-                Left = false;
-            }
-            else
+            else if (Detective == Detectives.Watson)
             {
                 Up = false;
                 Right = false;
                 Down = false;
                 Left = true;
+            }
+            else
+            {
+                Up = true;
+                Right = false;
+                Down = false;
+                Left = false;
             }
         }
 
