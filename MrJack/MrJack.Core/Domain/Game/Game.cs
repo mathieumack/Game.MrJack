@@ -197,6 +197,7 @@ namespace MrJack.Core.Domain.Game
             int y = 0;
             int xFinal = x1;
             int yFinal = y1;
+            bool rotate = false;
             for (int i = 1; i <= nbTurn; i++)
             {
                 if (xFinal > yFinal)
@@ -204,20 +205,48 @@ namespace MrJack.Core.Domain.Game
                     x = xFinal + yFinal < 4 && xFinal + yFinal > 0 ? xFinal + 1 : xFinal;
                     y = xFinal + yFinal < 8 && xFinal + yFinal > 4 ? yFinal + 1 : yFinal;
 
-                    xFinal = x + y == 8 ? x - 1 : x;
-                    yFinal = x + y == 4 && x == 4 ? y + 1 : y;
+                    if (x + y == 8)
+                    {
+                        xFinal = x - 1;
+                        rotate = true;
+                    }
+                    else
+                        xFinal = x;
+
+                    if (x + y == 4)
+                    {
+                        yFinal = y + 1;
+                        rotate = true;
+                    }
+                    else
+                        yFinal = y;
                 }
                 else if (xFinal < yFinal)
                 {
                     x = xFinal + yFinal > 4 && xFinal + yFinal < 8 ? xFinal - 1 : xFinal;
                     y = xFinal + yFinal > 0 && xFinal + yFinal < 4 ? yFinal - 1 : yFinal;
 
-                    xFinal = x + y == 0 ? x + 1 : x;
-                    yFinal = x + y == 4 && x == 0 ? y - 1 : y;
+                    if (x + y == 0)
+                    {
+                        xFinal = x + 1;
+                        rotate = true;
+                    }
+                    else
+                        xFinal = x;
+
+                    if(x + y == 4)
+                    {
+                        yFinal = y - 1;
+                        rotate = true;
+                    }
+                    else
+                        yFinal = y;
 
                 }
             }
             Move(x1, y1, xFinal, yFinal);
+            if (rotate)
+                GameBoard.Board[xFinal, yFinal].Rotate(1);
             GameBoard.Board[xFinal, yFinal].CanBeMoved = false;            
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
