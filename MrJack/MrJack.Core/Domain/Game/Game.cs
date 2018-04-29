@@ -41,7 +41,7 @@ namespace MrJack.Core.Domain.Game
             //New player with PlayerType
             Joueur = new Player();
             MainDraw = new Draw();
-            MainDraw.Pioche(Joueur.PlayerType, Rnd);
+            MainDraw.Pioche(Rnd);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -166,7 +166,7 @@ namespace MrJack.Core.Domain.Game
         public Killers Draw(int actionIndex)
         {
             Draw draw = new Draw();
-            Killers drawkiller = draw.Pioche(Joueur.PlayerType, Rnd);
+            Killers drawkiller = draw.Pioche(Rnd);
             if(Joueur.PlayerType == PlayerType.Sherlock)
             {
                 for (int i = 1; i <= 3; i++)
