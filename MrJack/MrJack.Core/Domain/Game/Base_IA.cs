@@ -13,7 +13,7 @@ namespace MrJack.Core.Domain.Game
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
 
-        public Base_IA(Randomizer rnd, IGame game) : base(PlayerType.MrJack)
+        public Base_IA(Randomizer rnd, IGame game, PlayerType playerType) : base(playerType)
         {
             Rnd = rnd;
             Game = game;
