@@ -11,7 +11,7 @@ namespace MrJack.Core.Domain.Game
     {       
         private List<ActionType> orderedActions;
 
-        public AI_MrJack_Medium(Randomizer rnd, IGame game) : base(rnd, game)
+        public AI_MrJack_Medium(Randomizer rnd, IGame game, PlayerType playerType) : base(rnd, game, playerType)
         {            
             orderedActions = new List<ActionType>()
             {
