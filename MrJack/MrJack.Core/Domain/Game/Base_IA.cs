@@ -93,7 +93,7 @@ namespace MrJack.Core.Domain.Game
             bool moved = false;
             do
             {
-                int nbjeton = Rnd.Next(1, 3);
+                int nbjeton = Rnd.Next(1, 4);
                 if (nbjeton == 1)
                 {
                     joker = Detectives.Sherlock;
@@ -145,7 +145,7 @@ namespace MrJack.Core.Domain.Game
                 x1 = Rnd.Next(1, 4);
                 y1 = Rnd.Next(1, 4);
             }
-            while (GB.Board[x1, y1].CanBeMoved);
+            while (!GB.Board[x1, y1].CanBeMoved);
             int x2;
             int y2;
             do
@@ -153,7 +153,7 @@ namespace MrJack.Core.Domain.Game
                 x2 = Rnd.Next(1, 4);
                 y2 = Rnd.Next(1, 4);
             }
-            while (GB.Board[x2, y2].CanBeMoved);
+            while (!GB.Board[x2, y2].CanBeMoved);
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
 
@@ -170,7 +170,7 @@ namespace MrJack.Core.Domain.Game
                 x = Rnd.Next(1, 4);
                 y = Rnd.Next(1, 4);
             }
-            while (GB.Board[x, y].CanBeMoved);
+            while (!GB.Board[x, y].CanBeMoved);
             int nb = Rnd.Next(1, 4);
             Game.TurnCard(actionIndex, x, y, nb);
         }

@@ -28,6 +28,7 @@ namespace MrJack.Core.Domain.Game
         {
             CardType = cardType;
             this.Rnd = rnd;
+            CanBeMoved = true;
         }
 
         /// <summary>
