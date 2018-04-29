@@ -148,6 +148,8 @@ namespace MrJack.Core.Domain.Game
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
+            GameBoard.Board[x1, y1].CanBeMoved = false;
+            GameBoard.Board[x2, y2].CanBeMoved = false;
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
         }
@@ -158,7 +160,7 @@ namespace MrJack.Core.Domain.Game
             ICard card2 = GameBoard.Board[x2, y2];
 
             GameBoard.Board[x1, y1] = card2;
-            GameBoard.Board[x2, y2] = card1;
+            GameBoard.Board[x2, y2] = card1;            
         }
 
         public Killers Draw(int actionIndex)
@@ -216,6 +218,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }
             Move(x1, y1, xFinal, yFinal);
+            GameBoard.Board[xFinal, yFinal].CanBeMoved = false;            
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
         }
@@ -233,8 +236,7 @@ namespace MrJack.Core.Domain.Game
                         {
                             for (int k = 1; k < 4; k++)
                             {
-                                if (GameBoard.Board[i, k].View(Direction.Up)
-                                    && GameBoard.Board[i, k].Killer != Killers.None)
+                                if (GameBoard.Board[i, k].View(Direction.Up))
                                 {
                                     visible.Add(GameBoard.Board[i, k].Killer);
                                     if (!GameBoard.Board[i, k].View(Direction.Down))
@@ -252,8 +254,7 @@ namespace MrJack.Core.Domain.Game
                         {
                             for (int k = 3; k > 0; k--)
                             {
-                                if (GameBoard.Board[k, j].View(Direction.Right)
-                                    && GameBoard.Board[k, j].Killer != Killers.None)
+                                if (GameBoard.Board[k, j].View(Direction.Right))
                                 {
                                     visible.Add(GameBoard.Board[k, j].Killer);
                                     if (!GameBoard.Board[k, j].View(Direction.Left))
@@ -271,8 +272,7 @@ namespace MrJack.Core.Domain.Game
                         {
                             for (int k = 1; k < 4; k++)
                             {
-                                if (GameBoard.Board[k, j].View(Direction.Left)
-                                    && GameBoard.Board[k, j].Killer != Killers.None)
+                                if (GameBoard.Board[k, j].View(Direction.Left))
                                 {
                                     visible.Add(GameBoard.Board[k, j].Killer);
                                     if (!GameBoard.Board[k, j].View(Direction.Right))
@@ -290,8 +290,7 @@ namespace MrJack.Core.Domain.Game
                         {
                             for (int k = 3; k > 0; k--)
                             {
-                                if (GameBoard.Board[i, k].View(Direction.Down)
-                                    && GameBoard.Board[i, k].Killer != Killers.None)
+                                if (GameBoard.Board[i, k].View(Direction.Down))
                                 {
                                     visible.Add(GameBoard.Board[i, k].Killer);
                                     if (!GameBoard.Board[i, k].View(Direction.Up))
@@ -308,6 +307,9 @@ namespace MrJack.Core.Domain.Game
                     }
                 }
             }
+
+            visible.RemoveAll(Killers => Killers == Killers.None);
+
             return visible;
         }
     }
