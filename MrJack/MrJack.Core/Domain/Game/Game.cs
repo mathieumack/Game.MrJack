@@ -43,6 +43,8 @@ namespace MrJack.Core.Domain.Game
             Joueur = new Player(typePlayer);
             MainDraw = new Draw();
             Killer = MainDraw.Pioche(Rnd);
+            KillerPoints = 0;
+            DetectivePoints = 0;
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -135,6 +137,7 @@ namespace MrJack.Core.Domain.Game
                         }
                     }
                 }
+                DetectivePoints++;
             }
             else
             {
@@ -151,6 +154,7 @@ namespace MrJack.Core.Domain.Game
                         }
                     }
                 }
+                KillerPoints++;
             }
         }
 
