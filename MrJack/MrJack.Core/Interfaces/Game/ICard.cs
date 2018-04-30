@@ -19,5 +19,9 @@ namespace MrJack.Core.Interfaces.Game
         bool Left { get; set; }
         
         bool Right { get; set; }
+
+        void Return();
+        void Rotate(int nb);
+        bool View(Direction direction);
     }
 }

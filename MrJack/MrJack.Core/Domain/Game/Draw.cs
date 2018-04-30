@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Draw
+    public class Draw
     {
         public List<Killers> Cartes { get; set; }
         public Dictionary<Killers, int> killersSabliers { get; set; }
@@ -43,17 +43,12 @@ namespace MrJack.Core.Domain.Game
         /// <summary>
         /// Permet de piocher un carte (et ajouter des sabliers si MrJack)
         /// </summary>
-        /// <param name="currentPlayer">Le joueur en cours</param>
         /// <returns>le tueur sur la carte</returns>
-        public Killers Pioche(PlayerType currentPlayer, Randomizer rnd)
+        public Killers Pioche(Randomizer rnd)
         {
             int nb = rnd.Next(0, CardsLeft);
             CardsLeft--;
             Killers killer = Cartes[nb];
-            if(currentPlayer == PlayerType.MrJack)
-            {
-                killersSabliers.TryGetValue(killer, out int sabliers);
-            }
             Cartes.Remove(killer);
             return killer;
         }

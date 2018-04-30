@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Game\ActionType.cs" />
+    <Compile Include="Domain\Game\AI_Sherlock.cs" />
+    <Compile Include="Domain\Game\AI_Sherlock_Medium.cs" />
+    <Compile Include="Domain\Game\AI_MrJack_Easy.cs" />
+    <Compile Include="Domain\Game\AI_MrJack_Medium.cs" />
+    <Compile Include="Domain\Game\Base_IA.cs" />
     <Compile Include="Domain\Game\Card.cs" />
     <Compile Include="Domain\Game\CardType.cs" />
     <Compile Include="Domain\Game\Game.cs" />
@@ -60,6 +65,7 @@
     <Compile Include="Interfaces\Game\IGameBoard.cs" />
     <Compile Include="Domain\Game\PlayerType.cs" />
     <Compile Include="Interfaces\Game\IGame.cs" />
+    <Compile Include="Interfaces\Game\IIA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

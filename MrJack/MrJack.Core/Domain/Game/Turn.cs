@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class Turn
+    public class Turn
     {
         public int CurrentTurn { get; set; } //Num du tour
         public int actions; //Numéro jeton utilisé
@@ -17,15 +17,15 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public Turn()
         {
-            this.CurrentTurn = 1;
-            this.actions = 1;
+            this.CurrentTurn = 0;
+            this.actions = -1;
         }
 
         /// <summary>
         /// On détermine si le tour est pair ou impair
         /// </summary>
         /// <returns></returns>
-        public bool IsDetectiveStart()
+        public bool IsTurnPair()
         {
             if (CurrentTurn % 2 == 0)
                 return true;
@@ -37,16 +37,45 @@ namespace MrJack.Core.Domain.Game
         /// Détermine le nb de jetons à piocher
         /// </summary>
         /// <returns></returns>
-        public int NbJetonAPiocher()
+        public int NbJetonSelectionnable()
         {
-            if (actions == 1)
-                return 1;
+            if (actions == 0)
+                return 4;
+            else if (actions == 1)
+                return 3;
             else if (actions == 2)
                 return 2;
             else if (actions == 3)
                 return 1;
             else
                 return 0;
+        }
+
+        public PlayerType Whosplaying()
+        {
+            if(IsTurnPair())
+            {
+                if(actions == 0 || actions == 3)
+                {
+                    return PlayerType.Sherlock;
+                }
+                else
+                {
+                    return PlayerType.MrJack;
+                }
+            }
+            else
+            {
+                if (actions == 0 || actions == 3)
+                {
+                    return PlayerType.MrJack;
+                }
+                else
+                {
+                    return PlayerType.Sherlock;
+                }
+            }
+            
         }
 
         /// <summary>

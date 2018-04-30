@@ -13,7 +13,7 @@ namespace MrJack.Core.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            
+                
         }
     }
 }

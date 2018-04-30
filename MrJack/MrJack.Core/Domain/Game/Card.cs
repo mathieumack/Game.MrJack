@@ -9,7 +9,7 @@ namespace MrJack.Core.Domain.Game
 {
     public class Card : ICard
     {
-        Randomizer rnd { get; set; }
+        Randomizer Rnd { get; set; }
         public CardType CardType { get; set; }
         public Killers Killer { get; set; }
         public Detectives Detective { get; set; }
@@ -18,7 +18,6 @@ namespace MrJack.Core.Domain.Game
         public bool Right { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
-
         public ICard Killers => throw new NotImplementedException();
 
         /// <summary>
@@ -28,7 +27,8 @@ namespace MrJack.Core.Domain.Game
         private Card(CardType cardType, Randomizer rnd)
         {
             CardType = cardType;
-            this.rnd = rnd;
+            this.Rnd = rnd;
+            CanBeMoved = true;
         }
 
         /// <summary>
@@ -78,34 +78,26 @@ namespace MrJack.Core.Domain.Game
         {
             Detective = detective;
 
-            int nb = rnd.Next(1, 5);
-            if (nb == 1)
-            {
-                Up = true;
-                Right = false;
-                Down = false;
-                Left = false;
-            }
-            else if (nb == 2)
+            if (Detective == Detectives.Sherlock)
             {
                 Up = false;
                 Right = true;
                 Down = false;
                 Left = false;
             }
-            else if (nb == 3)
-            {
-                Up = false;
-                Right = false;
-                Down = true;
-                Left = false;
-            }
-            else
+            else if (Detective == Detectives.Watson)
             {
                 Up = false;
                 Right = false;
                 Down = false;
                 Left = true;
+            }
+            else
+            {
+                Up = true;
+                Right = false;
+                Down = false;
+                Left = false;
             }
         }
 
@@ -114,7 +106,6 @@ namespace MrJack.Core.Domain.Game
         /// </summary>
         public void Return()
         {
-            if (Killer == Killers.Joseph_Lane)
             if (Killer == Domain.Game.Killers.Joseph_Lane)
             {
                 Up = true;
@@ -123,7 +114,6 @@ namespace MrJack.Core.Domain.Game
                 Left = true;
             }
 
-            Killer = Killers.None;
             Killer = Domain.Game.Killers.None;
         }
 
@@ -144,6 +134,8 @@ namespace MrJack.Core.Domain.Game
 
             if (nb > 1)
                 Rotate(nb - 1);
+
+            CanBeMoved = false;
         }
 
         /// <summary>
