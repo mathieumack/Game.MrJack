@@ -7,43 +7,29 @@ using System.Threading.Tasks;
 
 namespace MrJack.Core.Domain.Game
 {
-    class AI_MrJack_Hard : Player, IIA
+    class AI_MrJack_Hard : Base_IA
     {
         public Killers Killer { get; set; }
-        public Randomizer Rnd { get; set; }
-        public IGame Game { get; set; }
-        public IGameBoard GB { get; set; }
-
+       
         private List<ActionType> orderedActions;
 
-        public AI_MrJack_Hard(Killers killer, Randomizer rnd, IGame game) : base(PlayerType.MrJack)
+        public AI_MrJack_Hard(Killers killer, Randomizer rnd, IGame game, PlayerType playerType) : base(rnd, game, playerType)
         {
             Killer = killer;
-            Rnd = rnd;
-            Game = game;
-            GB = Game.GameBoard;
 
-            orderedActions = new List<ActionType>()
-            {
-                ActionType.Draw,
-                ActionType.Joker,
-                ActionType.Move,
-                ActionType.Turn,
-                ActionType.Sherlock,
-                ActionType.Toby,
-                ActionType.Watson
-            };
+            orderedActions = OrderActions();
         }
 
         /// <summary>
         /// Allows Mr Jack to do an action
         /// </summary>
-        public void ChooseAction()
+        public override void ChooseAction()
         {
             bool notFound = true;
+            bool finded = false;
             for (int j = 0; j < orderedActions.Count && notFound; j++)
             {
-                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound; actionIndex++)
+                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound && !finded; actionIndex++)
                 {
                     if (Game.AvailableActions[actionIndex].Selectable &&
                         Game.AvailableActions[actionIndex].ActionType == orderedActions[j])
@@ -52,30 +38,37 @@ namespace MrJack.Core.Domain.Game
                         if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                         {
                             Draw(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
                         {
                             Joker(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
                         {
                             Move(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
                         {
                             Sherlock(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
                         {
                             Toby(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
                         {
                             Turn(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
                         {
                             Watson(actionIndex);
+                            finded = true;
                         }
                     }
                 }
@@ -158,38 +151,13 @@ namespace MrJack.Core.Domain.Game
                 }
             }
         }
-
-        /// <summary>
-        /// Draws a card
-        /// </summary>
-        /// <param name="actionIndex">token number</param>
-        public void Draw(int actionIndex)
-        {
-            Game.Draw(actionIndex);
-        }
-
+                
         /// <summary>
         /// Moves the position of two cards
         /// </summary>
         /// <param name="actionIndex">token number</param>
-        public void Move(int actionIndex)
-        {
-            int x1;
-            int y1;
-            do
-            {
-                x1 = Rnd.Next(1, 4);
-                y1 = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x1, y1].CanBeMoved);
-            int x2;
-            int y2;
-            do
-            {
-                x2 = Rnd.Next(1, 4);
-                y2 = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x2, y2].CanBeMoved);
+        public void Move(int actionIndex, int x1, int y1, int x2, int y2)
+        {           
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
         }
 
@@ -197,110 +165,10 @@ namespace MrJack.Core.Domain.Game
         /// Turns the position of a card
         /// </summary>
         /// <param name="actionIndex">token number</param>
-        public void Turn(int actionIndex)
+        public void Turn(int actionIndex, int x, int y, int nb)
         {
-            int x;
-            int y;
-            do
-            {
-                x = Rnd.Next(1, 4);
-                y = Rnd.Next(1, 4);
-            }
-            while (GB.Board[x, y].CanBeMoved);
-            int nb = Rnd.Next(1, 4);
             Game.TurnCard(actionIndex, x, y, nb);
-        }
-
-        public List<Killers> CheckView()
-        {
-            List<Killers> visible = new List<Killers>();
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if(GB.Board[i,j].CardType == CardType.Jeton)
-                    {
-                        if (GB.Board[i, j].View(Direction.Down))
-                        {
-                            for(int k = 1; k < 4; k++)
-                            {
-                                if (GB.Board[i, k].View(Direction.Up)
-                                    && GB.Board[i,k].Killer != Killers.None)
-                                {
-                                    visible.Add(GB.Board[i, k].Killer);
-                                    if (!GB.Board[i, k].View(Direction.Down))
-                                    {
-                                        k = 4;
-                                    }
-                                }
-                                else
-                                {
-                                    k = 4;
-                                }                                
-                            }                          
-                        }
-                        else if (GB.Board[i, j].View(Direction.Left))
-                        {
-                            for (int k = 3; k > 0; k--)
-                            {
-                                if (GB.Board[k, j].View(Direction.Right)
-                                    && GB.Board[k, j].Killer != Killers.None)
-                                {
-                                    visible.Add(GB.Board[k, j].Killer);
-                                    if (!GB.Board[k, j].View(Direction.Left))
-                                    {
-                                        k = 0;
-                                    }
-                                }
-                                else
-                                {
-                                    k = 0;
-                                }
-                            }
-                        }
-                        else if (GB.Board[i, j].View(Direction.Right))
-                        {
-                            for (int k = 1; k < 4; k++)
-                            {
-                                if (GB.Board[k, j].View(Direction.Left)
-                                    && GB.Board[k, j].Killer != Killers.None)
-                                {
-                                    visible.Add(GB.Board[k, j].Killer);
-                                    if (!GB.Board[k, j].View(Direction.Right))
-                                    {
-                                        k = 4;
-                                    }
-                                }
-                                else
-                                {
-                                    k = 4;
-                                }
-                            }
-                        }
-                        else if (GB.Board[i, j].View(Direction.Up))
-                        {
-                            for (int k = 3; k > 0; k--)
-                            {
-                                if (GB.Board[i, k].View(Direction.Down)
-                                    && GB.Board[i, k].Killer != Killers.None)
-                                {
-                                    visible.Add(GB.Board[i, k].Killer);
-                                    if (!GB.Board[i, k].View(Direction.Up))
-                                    {
-                                        k = 0;
-                                    }
-                                }
-                                else
-                                {
-                                    k = 0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return visible;
-        }
+        }                
 
         public int KillerCount()
         {
@@ -318,34 +186,36 @@ namespace MrJack.Core.Domain.Game
             }
             return nb;
         }
-
-
-        public void Choose()
-        {            
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+        
+        public List<ActionType> OrderActions()
+        {
+            List<ActionType> listAction = new List<ActionType>();
+          
+            List<Killers> visible = Game.CheckView();
+            int nbKillers = KillerCount();
+            if (nbKillers / 2 == visible.Count)
             {
-                if (Game.AvailableActions[actionIndex].Selectable)
+                if (Game.KillerPoints > 4 || nbKillers > 5)
                 {
-                    List<Killers> visible = CheckView();
-                    int nbKillers = KillerCount();
-                    if (nbKillers / 2 == visible.Count)
-                    {
-                        if (Game.KillerPoints > 4 || nbKillers > 5)
-                        {
-                            if(Game.AvailableActions[actionIndex].Selectable)
-                            {
-                                Draw(actionIndex);
-                            }                                
-                        }
-                    }
-                    else
-                    {
-
-                    }
+                        listAction.Add(ActionType.Draw);                          
                 }
-                
             }
+            else
+            {
+
+            }
+            return listAction;
         }
     }
 
 }
+
+/**
+ *   ActionType.Draw,
+ *   ActionType.Joker,
+ *   ActionType.Move,
+ *   ActionType.Turn,
+ *   ActionType.Sherlock,
+ *   ActionType.Toby,                
+ *   ActionType.Watso
+ */

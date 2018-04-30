@@ -99,5 +99,10 @@ namespace MrJack.Core.Interfaces.Game
         /// <param name="actionIndex"></param>
         Killers Draw(int actionIndex);
         void MiddleGame();
+        /// <summary>
+        /// The list of killers visible by the dectives
+        /// </summary>
+        /// <returns></returns>
+        List<Killers> CheckView();
     }
 }

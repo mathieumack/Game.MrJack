@@ -81,7 +81,7 @@ namespace MrJack.Core.Domain.Game
                 }
                 else
                 {
-                    //Créer une IA de type PlayerType.MrJack et Difficile
+                    IA = new AI_MrJack_Hard(Killer, Rnd, this, PlayerType.MrJack);
                 }
             }
             MiddleGame();

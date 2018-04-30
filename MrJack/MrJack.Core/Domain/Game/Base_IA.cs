@@ -90,37 +90,32 @@ namespace MrJack.Core.Domain.Game
         public virtual void Joker(int actionIndex)
         {
             Detectives joker;
-            bool moved = false;
-            do
+            int nbjeton = Rnd.Next(1, 4);
+            if (nbjeton == 1)
             {
-                int nbjeton = Rnd.Next(1, 4);
-                if (nbjeton == 1)
-                {
-                    joker = Detectives.Sherlock;
-                }
-                else if (nbjeton == 2)
-                {
-                    joker = Detectives.Watson;
-                }
-                else
-                {
-                    joker = Detectives.Toby;
-                }
+                joker = Detectives.Sherlock;
+            }
+            else if (nbjeton == 2)
+            {
+                joker = Detectives.Watson;
+            }
+            else
+            {
+                joker = Detectives.Toby;
+            }
 
-                int nb = Rnd.Next(0, 2);
-                for (int i = 0; i < 5; i++)
+            int nb = Rnd.Next(0, 2);
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    if (GB.Board[i, j].Detective == joker && GB.Board[i, j].CanBeMoved)
                     {
-                        if (GB.Board[i, j].Detective == joker && GB.Board[i, j].CanBeMoved)
-                        {
-                            Game.MoveDetective(actionIndex, i, j, nb);
-                            moved = true;
-                        }
+                        Game.MoveDetective(actionIndex, i, j, nb);
+                        moved = true;
                     }
                 }
             }
-            while (!moved);
         }
 
         /// <summary>

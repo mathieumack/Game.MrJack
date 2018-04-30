@@ -93,6 +93,11 @@ namespace MrJack.Client.Wpf.Moqs
             throw new System.NotImplementedException();
         }
 
+        public List<Killers> CheckView()
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
     }
 }
