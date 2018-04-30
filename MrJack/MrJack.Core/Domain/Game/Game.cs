@@ -26,6 +26,7 @@ namespace MrJack.Core.Domain.Game
         public Randomizer Rnd { get; set; }
         public IIA IA { get; set; }
         public Draw MainDraw { get; set; }
+
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -41,7 +42,7 @@ namespace MrJack.Core.Domain.Game
             //New player with PlayerType
             Joueur = new Player(typePlayer);
             MainDraw = new Draw();
-            MainDraw.Pioche(Rnd);
+            Killer = MainDraw.Pioche(Rnd);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -120,15 +121,33 @@ namespace MrJack.Core.Domain.Game
             Turn.actions = -1;
 
             List<Killers> visible = CheckView();
-            foreach (Killers killerVisible in visible)
+
+            //Vérifie si le tuer est visible
+            if(visible.Any(e => e == Killer))
             {
-                for(int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        if(GameBoard.Board[i,j].Killer == killerVisible)
+                        if (!visible.Any(e => e == GameBoard.Board[i, j].Killer))
                         {
                             GameBoard.Board[i, j].Return();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Killers killerVisible in visible)
+                {
+                    for(int i = 0; i < 5; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            if(GameBoard.Board[i,j].Killer == killerVisible)
+                            {
+                                GameBoard.Board[i, j].Return();
+                            }
                         }
                     }
                 }
