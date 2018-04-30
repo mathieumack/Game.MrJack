@@ -18,7 +18,7 @@ namespace MrJack.Core.Domain.Game
         public Turn()
         {
             this.CurrentTurn = 0;
-            this.actions = 0;
+            this.actions = -1;
         }
 
         /// <summary>

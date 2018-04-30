@@ -25,6 +25,8 @@ namespace MrJack.Core.Domain.Game
         public Player Joueur { get; set; }
         public Randomizer Rnd { get; set; }
         public IIA IA { get; set; }
+        public Draw MainDraw { get; set; }
+
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -39,8 +41,8 @@ namespace MrJack.Core.Domain.Game
 
             //New player with PlayerType
             Joueur = new Player(typePlayer);
-            Draw mainDraw = new Draw();
-            mainDraw.Pioche(Joueur.PlayerType, Rnd);
+            MainDraw = new Draw();
+            Killer = MainDraw.Pioche(Rnd);
 
             TokenAction tokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
@@ -52,19 +54,30 @@ namespace MrJack.Core.Domain.Game
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
             {
-                
-                //Créer une IA de type PlayerType.Sherlock
 
+                //Créer une IA de type PlayerType.Sherlock
+                if (difficulty == Difficulty.Easy)
+                {
+                    IA = new AI_Sherlock(Rnd, this);
+                }
+                else if (difficulty == Difficulty.Medium)
+                {
+                    IA = new AI_Sherlock_Medium(Rnd, this);
+                }
+                else
+                {
+                    //Créer une IA de type PlayerType.MrJack et Difficile
+                }
             }
             else
             {
                 if(difficulty == Difficulty.Easy)
                 {
-                    IA = new AI_MrJack_Easy(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Easy(Rnd, this, PlayerType.MrJack);
                 }
                 else if(difficulty == Difficulty.Medium)
                 {
-                    IA = new AI_MrJack_Medium(Killers.Insp_Lestrade, Rnd, this);
+                    IA = new AI_MrJack_Medium(Rnd, this, PlayerType.MrJack);
                 }
                 else
                 {
@@ -79,28 +92,66 @@ namespace MrJack.Core.Domain.Game
         /// </summary>  
         public void MiddleGame()
         {
-            if(Turn.actions != 4)
+            // fin de tour.
+            if (Turn.actions == 3)
             {
+                EndOfTurn();
+            }
+            else
+            {
+                Turn.actions++;
+
                 Turn.CurrentPlayer = Turn.Whosplaying();
 
                 Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
                 Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
 
+                //Si c'est au tour de l'IA
                 if (Joueur.PlayerType != Turn.CurrentPlayer)
                 {
                     Console.WriteLine("L'IA joue");
-                    Turn.actions++;
                     IA.ChooseAction();
                 }
-                else
+            }
+        }
+
+        public void EndOfTurn()
+        {
+            Turn.CurrentTurn++;
+            Turn.actions = -1;
+
+            List<Killers> visible = CheckView();
+
+            //Vérifie si le tuer est visible
+            if(visible.Any(e => e == Killer))
+            {
+                for (int i = 0; i < 5; i++)
                 {
-                    Turn.actions++;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (!visible.Any(e => e == GameBoard.Board[i, j].Killer))
+                        {
+                            GameBoard.Board[i, j].Return();
+                        }
+                    }
                 }
             }
             else
             {
-                Turn.CurrentTurn++;
-            }    
+                foreach (Killers killerVisible in visible)
+                {
+                    for(int i = 0; i < 5; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            if(GameBoard.Board[i,j].Killer == killerVisible)
+                            {
+                                GameBoard.Board[i, j].Return();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
@@ -109,12 +160,15 @@ namespace MrJack.Core.Domain.Game
 
            card.Rotate(nbTurn);
            AvailableActions[actionIndex].Selectable = false;
+           this.MiddleGame();
         }
-             
+
 
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
+            GameBoard.Board[x1, y1].CanBeMoved = false;
+            GameBoard.Board[x2, y2].CanBeMoved = false;
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
         }
@@ -125,15 +179,13 @@ namespace MrJack.Core.Domain.Game
             ICard card2 = GameBoard.Board[x2, y2];
 
             GameBoard.Board[x1, y1] = card2;
-            GameBoard.Board[x2, y2] = card1;
-
+            GameBoard.Board[x2, y2] = card1;            
         }
 
         public Killers Draw(int actionIndex)
         {
-            AvailableActions[actionIndex].Selectable = false;
             Draw draw = new Draw();
-            Killers drawkiller = draw.Pioche(Joueur.PlayerType, Rnd);
+            Killers drawkiller = draw.Pioche(Rnd);
             if(Joueur.PlayerType == PlayerType.Sherlock)
             {
                 for (int i = 1; i <= 3; i++)
@@ -153,6 +205,8 @@ namespace MrJack.Core.Domain.Game
                 drawKiller.killersSabliers.TryGetValue(drawkiller, out int sabliers);
                 KillerPoints += sabliers;
             }
+            AvailableActions[actionIndex].Selectable = false;
+            this.MiddleGame();
             return drawkiller;
         }
 
@@ -162,6 +216,7 @@ namespace MrJack.Core.Domain.Game
             int y = 0;
             int xFinal = x1;
             int yFinal = y1;
+            bool rotate = false;
             for (int i = 1; i <= nbTurn; i++)
             {
                 if (xFinal > yFinal)
@@ -169,22 +224,141 @@ namespace MrJack.Core.Domain.Game
                     x = xFinal + yFinal < 4 && xFinal + yFinal > 0 ? xFinal + 1 : xFinal;
                     y = xFinal + yFinal < 8 && xFinal + yFinal > 4 ? yFinal + 1 : yFinal;
 
-                    xFinal = x + y == 8 ? x - 1 : x;
-                    yFinal = x + y == 4 && x == 4 ? y + 1 : y;
+                    if (x + y == 8)
+                    {
+                        xFinal = x - 1;
+                        rotate = true;
+                    }
+                    else
+                        xFinal = x;
+
+                    if (x + y == 4)
+                    {
+                        yFinal = y + 1;
+                        rotate = true;
+                    }
+                    else
+                        yFinal = y;
                 }
                 else if (xFinal < yFinal)
                 {
                     x = xFinal + yFinal > 4 && xFinal + yFinal < 8 ? xFinal - 1 : xFinal;
                     y = xFinal + yFinal > 0 && xFinal + yFinal < 4 ? yFinal - 1 : yFinal;
 
-                    xFinal = x + y == 0 ? x + 1 : x;
-                    yFinal = x + y == 4 && x == 0 ? y - 1 : y;
+                    if (x + y == 0)
+                    {
+                        xFinal = x + 1;
+                        rotate = true;
+                    }
+                    else
+                        xFinal = x;
+
+                    if(x + y == 4)
+                    {
+                        yFinal = y - 1;
+                        rotate = true;
+                    }
+                    else
+                        yFinal = y;
 
                 }
             }
             Move(x1, y1, xFinal, yFinal);
+            if (rotate)
+                GameBoard.Board[xFinal, yFinal].Rotate(1);
+            GameBoard.Board[xFinal, yFinal].CanBeMoved = false;            
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
+        }
+
+        public List<Killers> CheckView()
+        {
+            List<Killers> visible = new List<Killers>();
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (GameBoard.Board[i, j].Detective != Detectives.None)
+                    {
+                        if (GameBoard.Board[i, j].View(Direction.Down))
+                        {
+                            for (int k = 1; k < 4; k++)
+                            {
+                                if (GameBoard.Board[i, k].View(Direction.Up))
+                                {
+                                    visible.Add(GameBoard.Board[i, k].Killer);
+                                    if (!GameBoard.Board[i, k].View(Direction.Down))
+                                    {
+                                        k = 4;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 4;
+                                }
+                            }
+                        }
+                        else if (GameBoard.Board[i, j].View(Direction.Left))
+                        {
+                            for (int k = 3; k > 0; k--)
+                            {
+                                if (GameBoard.Board[k, j].View(Direction.Right))
+                                {
+                                    visible.Add(GameBoard.Board[k, j].Killer);
+                                    if (!GameBoard.Board[k, j].View(Direction.Left))
+                                    {
+                                        k = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 0;
+                                }
+                            }
+                        }
+                        else if (GameBoard.Board[i, j].View(Direction.Right))
+                        {
+                            for (int k = 1; k < 4; k++)
+                            {
+                                if (GameBoard.Board[k, j].View(Direction.Left))
+                                {
+                                    visible.Add(GameBoard.Board[k, j].Killer);
+                                    if (!GameBoard.Board[k, j].View(Direction.Right))
+                                    {
+                                        k = 4;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 4;
+                                }
+                            }
+                        }
+                        else if (GameBoard.Board[i, j].View(Direction.Up))
+                        {
+                            for (int k = 3; k > 0; k--)
+                            {
+                                if (GameBoard.Board[i, k].View(Direction.Down))
+                                {
+                                    visible.Add(GameBoard.Board[i, k].Killer);
+                                    if (!GameBoard.Board[i, k].View(Direction.Up))
+                                    {
+                                        k = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    k = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            visible.RemoveAll(Killers => Killers == Killers.None);
+
+            return visible;
         }
     }
 

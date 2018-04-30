@@ -9,9 +9,9 @@ namespace MrJack.Core.Domain.Game
 {
     public class AI_MrJack_Medium : Base_IA
     {       
-        private List<ActionType> orderedActions;
+        public List<ActionType> orderedActions;
 
-        public AI_MrJack_Medium(Randomizer rnd, IGame game) : base(rnd, game)
+        public AI_MrJack_Medium(Randomizer rnd, IGame game, PlayerType playerType) : base(rnd, game, playerType)
         {            
             orderedActions = new List<ActionType>()
             {
@@ -71,7 +71,7 @@ namespace MrJack.Core.Domain.Game
                 }
             }
         }
-               
+
     }
 
 }

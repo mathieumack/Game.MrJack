@@ -34,7 +34,7 @@ namespace MrJack.Core.Domain.Game
             {
                 for (int j = 1; j <= 3; j++)
                 {
-                    Killers killer = listeKillers.Pioche(PlayerType.Sherlock, Rnd);
+                    Killers killer = listeKillers.Pioche(Rnd);
                     Board[i, j] = new Card(killer, Rnd);
                 }
             }

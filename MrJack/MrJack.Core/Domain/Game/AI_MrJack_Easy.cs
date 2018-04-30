@@ -9,7 +9,7 @@ namespace MrJack.Core.Domain.Game
 {
     public class AI_MrJack_Easy : Base_IA
     {
-        public AI_MrJack_Easy(Randomizer rnd, IGame game) : base(rnd, game)
+        public AI_MrJack_Easy(Randomizer rnd, IGame game, PlayerType playerType) : base(rnd, game, playerType)
         { }
 
         /// <summary>
