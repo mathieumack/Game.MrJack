@@ -112,7 +112,6 @@ namespace MrJack.Core.Domain.Game
                     if (GB.Board[i, j].Detective == joker && GB.Board[i, j].CanBeMoved)
                     {
                         Game.MoveDetective(actionIndex, i, j, nb);
-                        moved = true;
                     }
                 }
             }

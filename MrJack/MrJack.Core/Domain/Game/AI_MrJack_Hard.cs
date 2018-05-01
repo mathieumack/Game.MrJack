@@ -206,8 +206,31 @@ namespace MrJack.Core.Domain.Game
             }
             return listAction;
         }
-    }
 
+        public void ActionChoose()
+        {
+            List<Killers> visible = Game.CheckView();
+            int nbTotal = KillerCount();
+            if(visible.Count > nbTotal)
+            {
+
+            }
+            //Sherlock token stays still
+            if(Game.AvailableActions.Any(e => e.ActionType != ActionType.Sherlock && e.ActionType != ActionType.Joker)){
+
+            }
+            //Watson token stays still
+            else if (Game.AvailableActions.Any(e => e.ActionType != ActionType.Watson && e.ActionType != ActionType.Joker)){
+
+            }
+            //Toby token stays still
+            else if (Game.AvailableActions.Any(e => e.ActionType != ActionType.Toby && e.ActionType != ActionType.Joker)){
+
+            }
+        }
+
+
+    }
 }
 
 /**
