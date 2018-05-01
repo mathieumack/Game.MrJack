@@ -36,6 +36,28 @@ namespace MrJack.Core.Domain.Game
                 {
                     Killers killer = listeKillers.Pioche(Rnd);
                     Board[i, j] = new Card(killer, Rnd);
+                    ///Les detectives ne peuvent voir les cartes devant eux
+                    if (i == 1 && j == 1)
+                    {
+                        Board[i, j].Up = true;
+                        Board[i, j].Right = true;
+                        Board[i, j].Down = true;
+                        Board[i, j].Left = false;
+                    }
+                    else if (i == 3 && j == 1)
+                    {
+                        Board[i, j].Up = true;
+                        Board[i, j].Right = false;
+                        Board[i, j].Down = true;
+                        Board[i, j].Left = true;
+                    }
+                    else if (i == 2 && j == 3)
+                    {
+                        Board[i, j].Up = true;
+                        Board[i, j].Right = true;
+                        Board[i, j].Down = false;
+                        Board[i, j].Left = true;
+                    }
                 }
             }
 
