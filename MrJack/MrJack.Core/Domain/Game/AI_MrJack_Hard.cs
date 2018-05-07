@@ -17,7 +17,16 @@ namespace MrJack.Core.Domain.Game
         {
             Killer = killer;
 
-            orderedActions = OrderActions();
+            orderedActions = new List<ActionType>()
+            {
+                ActionType.Draw,
+                ActionType.Joker,
+                ActionType.Move,
+                ActionType.Turn,
+                ActionType.Sherlock,
+                ActionType.Toby,
+                ActionType.Watson
+            };
         }
 
         /// <summary>
@@ -187,50 +196,7 @@ namespace MrJack.Core.Domain.Game
             return nb;
         }
         
-        public List<ActionType> OrderActions()
-        {
-            List<ActionType> listAction = new List<ActionType>();
-          
-            List<Killers> visible = Game.CheckView();
-            int nbKillers = KillerCount();
-            if (nbKillers / 2 == visible.Count)
-            {
-                if (Game.KillerPoints > 4 || nbKillers > 5)
-                {
-                        listAction.Add(ActionType.Draw);                          
-                }
-            }
-            else
-            {
-
-            }
-            return listAction;
-        }
-
-        public void ActionChoose()
-        {
-            List<Killers> visible = Game.CheckView();
-            int nbTotal = KillerCount();
-            if(visible.Count > nbTotal)
-            {
-
-            }
-            //Sherlock token stays still
-            if(Game.AvailableActions.Any(e => e.ActionType != ActionType.Sherlock && e.ActionType != ActionType.Joker)){
-
-            }
-            //Watson token stays still
-            else if (Game.AvailableActions.Any(e => e.ActionType != ActionType.Watson && e.ActionType != ActionType.Joker)){
-
-            }
-            //Toby token stays still
-            else if (Game.AvailableActions.Any(e => e.ActionType != ActionType.Toby && e.ActionType != ActionType.Joker)){
-
-            }
-        }
-
-
-    }
+       
 }
 
 /**
