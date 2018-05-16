@@ -17,6 +17,7 @@ namespace MrJack.Core.Domain.Game
         public int DetectivePoints { get; set; }
         public IGameBoard GameBoard { get; set; }
         public bool CanDraw { get; set; }
+        public TokenAction TokenAction { get; set; }
         public List<IAction> AvailableActions { get; set; }
         public List<Killers> UserDraw { get; set; }
         public string LastIAAction { get; set; }
@@ -46,12 +47,12 @@ namespace MrJack.Core.Domain.Game
             KillerPoints = 0;
             DetectivePoints = 0;
 
-            TokenAction tokenAction = new TokenAction();
+            TokenAction = new TokenAction();
             AvailableActions = new List<IAction>();
-            AvailableActions.Add(tokenAction.Token1);
-            AvailableActions.Add(tokenAction.Token2);
-            AvailableActions.Add(tokenAction.Token3);
-            AvailableActions.Add(tokenAction.Token4);
+            AvailableActions.Add(TokenAction.Token1);
+            AvailableActions.Add(TokenAction.Token2);
+            AvailableActions.Add(TokenAction.Token3);
+            AvailableActions.Add(TokenAction.Token4);
 
             //New IA with opposite of player and difficulty
             if (Joueur.PlayerType == PlayerType.MrJack)
@@ -119,13 +120,10 @@ namespace MrJack.Core.Domain.Game
 
         public void EndOfTurn()
         {
-            Turn.CurrentTurn++;
-            Turn.actions = -1;
-
             List<Killers> visible = CheckView();
 
             //Vérifie si le tuer est visible
-            if(visible.Any(e => e == Killer))
+            if (visible.Any(e => e == Killer))
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -143,11 +141,11 @@ namespace MrJack.Core.Domain.Game
             {
                 foreach (Killers killerVisible in visible)
                 {
-                    for(int i = 0; i < 5; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         for (int j = 0; j < 5; j++)
                         {
-                            if(GameBoard.Board[i,j].Killer == killerVisible)
+                            if (GameBoard.Board[i, j].Killer == killerVisible)
                             {
                                 GameBoard.Board[i, j].Return();
                             }
@@ -156,6 +154,48 @@ namespace MrJack.Core.Domain.Game
                 }
                 KillerPoints++;
             }
+
+            //Préparation pour le prochain tour
+            Turn.CurrentTurn++;
+            Turn.actions = -1;
+
+            bool pair = Turn.IsTurnPair();
+            if (pair)
+                TokenAction.Lancer();
+            else
+                TokenAction.Tourner();
+            AvailableActions.Clear();
+            AvailableActions.Add(TokenAction.Token1);
+            AvailableActions.Add(TokenAction.Token2);
+            AvailableActions.Add(TokenAction.Token3);
+            AvailableActions.Add(TokenAction.Token4);
+
+            int nbkillers = 0;
+            for (int i = 1; i <= 4; i++)
+            {
+                for (int j = 1; j <= 4; j++)
+                {
+                    GameBoard.Board[i, j].CanBeMoved = true;
+                    if(GameBoard.Board[i,j].Killer != Killers.None)
+                        nbkillers++;
+                }
+            }
+            
+            //Vérifie si c'est la fin de partie
+            if(KillerPoints == 6)
+            {
+                Console.WriteLine("fini");
+            }
+            else if(Turn.CurrentTurn > 8)
+            {
+                Console.WriteLine("fini");
+            }
+            else if(nbkillers == 1)
+            {
+                Console.WriteLine("fini");
+            }
+            else
+                MiddleGame();        
         }
 
         public void TurnCard(int actionIndex, int x, int y, int nbTurn)
@@ -166,8 +206,7 @@ namespace MrJack.Core.Domain.Game
            AvailableActions[actionIndex].Selectable = false;
            this.MiddleGame();
         }
-
-
+        
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
@@ -190,7 +229,7 @@ namespace MrJack.Core.Domain.Game
         {
             Draw draw = new Draw();
             Killers drawkiller = draw.Pioche(Rnd);
-            if(Joueur.PlayerType == PlayerType.Sherlock)
+            if(Turn.CurrentPlayer == PlayerType.Sherlock)
             {
                 for (int i = 1; i <= 3; i++)
                 {

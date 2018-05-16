@@ -38,6 +38,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token1 = new Token(ActionType.Turn);
             }
+            Token1.Selectable = true;
             int nb2 = rnd.Next(1, 3);
             if (nb2 == 1)
             {
@@ -47,6 +48,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token2 = new Token(ActionType.Turn);
             }
+            Token2.Selectable = true;
             int nb3 = rnd.Next(1, 3);
             if (nb3 == 1)
             {
@@ -56,6 +58,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token3 = new Token(ActionType.Sherlock);
             }
+            Token3.Selectable = true;
             int nb4 = rnd.Next(1, 3);
             if (nb4 == 1)
             {
@@ -65,6 +68,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token4 = new Token(ActionType.Watson);
             }
+            Token4.Selectable = true;
         }
         /// <summary>
         /// if pour savoir quelles actions exécuter
@@ -79,7 +83,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token1.ActionType = ActionType.Joker;
             }
-
+            Token1.Selectable = true;
             if (Token2.ActionType == ActionType.Move)
             {
                 Token2.ActionType = ActionType.Turn;
@@ -88,7 +92,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token2.ActionType = ActionType.Move;
             }
-
+            Token2.Selectable = true;
             if (Token3.ActionType == ActionType.Draw)
             {
                 Token3.ActionType = ActionType.Sherlock;
@@ -97,7 +101,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token3.ActionType = ActionType.Draw;
             }
-
+            Token3.Selectable = true;
             if (Token4.ActionType == ActionType.Toby)
             {
                 Token4.ActionType = ActionType.Watson;
@@ -106,6 +110,7 @@ namespace MrJack.Core.Domain.Game
             {
                 Token4.ActionType = ActionType.Toby;
             }
+            Token4.Selectable = true;
         }
     }
 }
