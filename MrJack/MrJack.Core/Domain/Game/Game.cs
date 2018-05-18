@@ -28,6 +28,8 @@ namespace MrJack.Core.Domain.Game
         public IIA IA { get; set; }
         public Draw MainDraw { get; set; }
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Initialise variable when we create a game.
         /// </summary>
@@ -106,13 +108,13 @@ namespace MrJack.Core.Domain.Game
 
                 Turn.CurrentPlayer = Turn.Whosplaying();
 
-                Console.WriteLine("C'est au tour de " + Turn.CurrentPlayer.ToString());
-                Console.WriteLine($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
+                log.Info("C'est au tour de " + Turn.CurrentPlayer.ToString());
+                log.Info($"Nb de jetons sélectionnable: {Turn.NbJetonSelectionnable()}");
 
                 //Si c'est au tour de l'IA
                 if (Joueur.PlayerType != Turn.CurrentPlayer)
                 {
-                    Console.WriteLine("L'IA joue");
+                    log.Info("L'IA joue");
                     IA.ChooseAction();
                 }
             }
@@ -184,15 +186,15 @@ namespace MrJack.Core.Domain.Game
             //Vérifie si c'est la fin de partie
             if(KillerPoints == 6)
             {
-                Console.WriteLine("fini");
+               log.Info("MrJack gagne");
             }
             else if(Turn.CurrentTurn > 8)
             {
-                Console.WriteLine("fini");
+                log.Info("MrJack gagne");
             }
             else if(nbkillers == 1)
             {
-                Console.WriteLine("fini");
+                log.Info("Sherlock gagne");
             }
             else
                 MiddleGame();        
