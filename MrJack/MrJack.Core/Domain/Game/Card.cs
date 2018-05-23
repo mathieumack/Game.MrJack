@@ -18,7 +18,6 @@ namespace MrJack.Core.Domain.Game
         public bool Right { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
-        public ICard Killers => throw new NotImplementedException();
 
         /// <summary>
         /// Card constructor
@@ -121,11 +120,8 @@ namespace MrJack.Core.Domain.Game
         /// Rotates the street card
         /// </summary>
         /// <param name="nb">How many turns</param>
-        /// <exception cref="IndexOutOfRangeException">Please choose between 1 and 3</exception>
         public void Rotate(int nb)
-        {
-            if ((nb < 0) || (nb > 4))
-                throw new IndexOutOfRangeException("Please choose between 1 and 3");
+        {            
             bool temp = Up;
             Up = Left;
             Left = Down;
