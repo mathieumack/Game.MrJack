@@ -93,6 +93,7 @@ namespace MrJack.Core.Tests
                         MrJack.Core.Domain.Game.Detectives testMD2 = GB.Board[i, j].Detective;
                         Assert.IsTrue(testMD1 != testMD2);
                         
+                        
 
                     }
                 }
@@ -188,9 +189,13 @@ namespace MrJack.Core.Tests
             int y1 = Rnd.Next(1, 4);
             int x2 = Rnd.Next(1, 4);
             int y2 = Rnd.Next(1, 4);
-            //verifier que x1 a bien pris la valeur de x2 apres le Game.MoveCard, meme chose pour y1 et y2
-            
+            //verifier que les deux catres ont changé de place
+            int x1Test = x1;
+            int y1Test = y1;
+            int x2Test = x2;
+            int y2Test = y2;
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
+            Assert.IsTrue(GameBoard.Board[x1, y1] != GameBoard.Board[x1Test, y1Test]);
             
         }
         public void TestTurn(int actionIndex)
