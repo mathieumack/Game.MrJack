@@ -31,17 +31,6 @@ namespace MrJack.Core.Tests
         }
 
         [TestMethod]
-        public void TestDraw()
-        {
-            Draw draw = new Draw();
-            Player Joueur;
-            Randomizer Rnd;
-            GameBoard gameBoard;
-
-
-        }
-
-        [TestMethod]
         public void TestTurnCard()
         {
             int x = 1;
@@ -71,7 +60,25 @@ namespace MrJack.Core.Tests
         }
 
         [TestMethod]
-        public void TestMoveDetective()
+        public void TestMoveDetective_Watson()
+        {
+            Game game = new Game();
+            PlayerType playerType = new PlayerType();
+            playerType = PlayerType.Sherlock;
+            Difficulty difficulty = new Difficulty();
+            difficulty = Difficulty.Easy;
+            game.StartNewGame(playerType, difficulty);
+
+            int x1 = 4;
+            int y1 = 1;
+            int nbTurn = 1;
+            Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.Watson);
+            game.MoveDetective(0, x1, y1, nbTurn);
+            Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.None);     
+        }
+
+        [TestMethod]
+        public void TestMoveDetective_Sherlock()
         {
             Game game = new Game();
             PlayerType playerType = new PlayerType();
@@ -86,31 +93,42 @@ namespace MrJack.Core.Tests
             Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.Sherlock);
             game.MoveDetective(0, x1, y1, nbTurn);
             Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.None);
-
-          //  Tuple<int, int> coord = game.Calculate(x1, y1, nbTurn);
-            //int x1Final = coord.Item1;
-            //int y1Final = coord.Item2;
-            //Assert.IsTrue(x1Final == 1 && y1Final == 0);
-            //Assert.IsTrue(game.GameBoard.Board[x1Final, y1Final].Detective == Detectives.Sherlock);           
         }
+
         [TestMethod]
-        public void test_Player()
+        public void Test_Player()
         {
             Player player = new Player(PlayerType.MrJack);
             Assert.AreEqual(player.nbSablier, 0);
         }
 
         [TestMethod]
-        public void Test_StartNewGame()
+        public void Test_StartNewGame_MrJack_Medium()
         {
             Game currentGame = new Game();
             currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Medium);
 
             Assert.IsTrue(currentGame.IA is AI_Sherlock_Medium);
-            
-            currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Hard);
-
-
         }
+
+        [TestMethod]
+        public void Test_StartNewGame_Sherlock_Facile()
+        {
+            Game currentGame = new Game();
+            currentGame.StartNewGame(PlayerType.Sherlock, Difficulty.Easy);
+
+            Assert.IsTrue(currentGame.IA is AI_MrJack_Easy);
+        }
+
+        [TestMethod]
+        public void Test_Draw()
+        {
+            Game game = new Game();
+            game.StartNewGame(PlayerType.Sherlock, Difficulty.Easy);
+            Killers k = game.Draw(1);
+
+            Assert.IsTrue(k != Killers.None);
+        }
+
     }
 }
