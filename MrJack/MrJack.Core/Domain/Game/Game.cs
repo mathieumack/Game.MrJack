@@ -290,22 +290,6 @@ namespace MrJack.Core.Domain.Game
         /// <param name="nbTurn">Nombre de cases de déplacement</param>
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
         {
-            Tuple<int, int> calculate = Calculate(x1, y1, nbTurn);
-
-            Move(x1, y1, calculate.Item1, calculate.Item2);
-            AvailableActions[actionIndex].Selectable = false;
-            this.MiddleGame();
-        }
-
-        /// <summary>
-        /// Calculate permet de déterminer en quelles coordonnées le détective devra se placer
-        /// </summary>
-        /// <param name="x1">Coordonnée x de la carte à déplacer</param>
-        /// <param name="y1">Coordonnée y de la carte à déplacer</param>
-        /// <param name="nbTurn">Nombre de cases de déplacements</param>
-        /// <returns></returns>
-        public Tuple<int, int> Calculate(int x1, int y1, int nbTurn)
-        {
             int x = 0;
             int y = 0;
             int xFinal = x1;
@@ -347,7 +331,7 @@ namespace MrJack.Core.Domain.Game
                     else
                         xFinal = x;
 
-                    if(x + y == 4)
+                    if (x + y == 4)
                     {
                         yFinal = y - 1;
                         rotate = true;
@@ -360,7 +344,7 @@ namespace MrJack.Core.Domain.Game
             Move(x1, y1, xFinal, yFinal);
             if (rotate)
                 GameBoard.Board[xFinal, yFinal].Rotate(1);
-            GameBoard.Board[xFinal, yFinal].CanBeMoved = false;            
+            GameBoard.Board[xFinal, yFinal].CanBeMoved = false;
             AvailableActions[actionIndex].Selectable = false;
             this.MiddleGame();
         }

@@ -208,40 +208,40 @@ namespace MrJack.Core.Tests
             //
             // TODO: ajoutez ici la logique du test
             //
-            for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
-            {
-                if (Game.AvailableActions[actionIndex].Selectable)
-                {
-                    if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
-                    {
-                        Draw(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
-                    {
-                        Joker(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
-                    {
-                        Move(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
-                    {
-                        Sherlock(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
-                    {
-                        Toby(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
-                    {
-                        Turn(actionIndex);
-                    }
-                    else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
-                    {
-                        Watson(actionIndex);
-                    }
-                }
-            }
+            //for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count; actionIndex++)
+            //{
+            //    if (Game.AvailableActions[actionIndex].Selectable)
+            //    {
+            //        if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
+            //        {
+            //            Draw(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
+            //        {
+            //            Joker(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
+            //        {
+            //            Move(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
+            //        {
+            //            Sherlock(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
+            //        {
+            //            Toby(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
+            //        {
+            //            Turn(actionIndex);
+            //        }
+            //        else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
+            //        {
+            //            Watson(actionIndex);
+            //        }
+            //    }
+            //}
         }
     }
 }
