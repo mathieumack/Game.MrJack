@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestAI_Sherlock_Medium.cs" />
     <Compile Include="Test_GameBoard.cs" />
     <Compile Include="Test_Token.cs" />
     <Compile Include="Test_TokenAction.cs" />
