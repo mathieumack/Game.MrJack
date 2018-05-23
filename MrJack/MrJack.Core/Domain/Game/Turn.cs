@@ -57,9 +57,9 @@ namespace MrJack.Core.Domain.Game
         /// <returns>Retourne le joueur qui doit jouer</returns>
         public PlayerType Whosplaying()
         {
-            if(IsTurnPair())
+            if (IsTurnPair())
             {
-                if(actions == 0 || actions == 3)
+                if (actions == 0 || actions == 3)
                 {
                     return PlayerType.Sherlock;
                 }
@@ -79,16 +79,6 @@ namespace MrJack.Core.Domain.Game
                     return PlayerType.Sherlock;
                 }
             }
-            
         }
-      
-        /// <summary>
-        /// Fin du tour
-        /// </summary>
-        public void End()
-        {
-
-        }
-     
     }
 }
