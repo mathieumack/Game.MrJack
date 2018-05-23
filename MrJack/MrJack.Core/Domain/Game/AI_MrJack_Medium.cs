@@ -11,7 +11,7 @@ namespace MrJack.Core.Domain.Game
     {       
         private List<ActionType> orderedActions;
 
-        public AI_MrJack_Medium(Randomizer rnd, IGame game) : base(rnd, game)
+        public AI_MrJack_Medium(Randomizer rnd, IGame game, PlayerType playerType) : base(rnd, game, playerType)
         {            
             orderedActions = new List<ActionType>()
             {
@@ -31,47 +31,55 @@ namespace MrJack.Core.Domain.Game
         public override void ChooseAction()
         {
             bool notFound = true;
+            bool finded = false;
             for (int j = 0; j < orderedActions.Count && notFound; j++)
             {
-                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound; actionIndex++)
+                for (int actionIndex = 0; actionIndex < Game.AvailableActions.Count && notFound && !finded; actionIndex++)
                 {
-                    if (Game.AvailableActions[actionIndex].Selectable && 
+                    if (Game.AvailableActions[actionIndex].Selectable &&
                         Game.AvailableActions[actionIndex].ActionType == orderedActions[j])
                     {
                         notFound = true;
                         if (Game.AvailableActions[actionIndex].ActionType == ActionType.Draw)
                         {
                             Draw(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Joker)
                         {
                             Joker(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Move)
                         {
                             Move(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Sherlock)
                         {
                             Sherlock(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Toby)
                         {
                             Toby(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Turn)
                         {
                             Turn(actionIndex);
+                            finded = true;
                         }
                         else if (Game.AvailableActions[actionIndex].ActionType == ActionType.Watson)
                         {
                             Watson(actionIndex);
+                            finded = true;
                         }
                     }
                 }
             }
         }
-               
+
     }
 
 }
