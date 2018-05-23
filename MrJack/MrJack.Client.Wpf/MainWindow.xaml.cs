@@ -95,6 +95,7 @@ namespace MrJack.Client.Wpf
                     difficulty = Difficulty.Hard;
                     break;
             }
+            borderWhoAmI.Visibility = WhoAmI == PlayerType.MrJack ? Visibility.Visible : Visibility.Collapsed;
             currentGame.StartNewGame(WhoAmI, difficulty);
             
             Refresh();
