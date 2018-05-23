@@ -115,16 +115,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MrJack.Core\MrJack.Core.csproj">
-      <Project>{b3a46451-4e25-4ee4-9d94-c6a5fd248249}</Project>
-      <Name>MrJack.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MrJack.Services\MrJack.Services.csproj">
-      <Project>{8ed3fadc-1273-4bb8-a7ec-c7322e35580d}</Project>
-      <Name>MrJack.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\mrjackpocket.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +167,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Actions\Toby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MrJack.Core\MrJack.Core.csproj">
+      <Project>{b3a46451-4e25-4ee4-9d94-c6a5fd248249}</Project>
+      <Name>MrJack.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrJack.Services\MrJack.Services.csproj">
+      <Project>{8ed3fadc-1273-4bb8-a7ec-c7322e35580d}</Project>
+      <Name>MrJack.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
