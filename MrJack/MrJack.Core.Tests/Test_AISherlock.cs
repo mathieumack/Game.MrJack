@@ -103,6 +103,7 @@ namespace MrJack.Core.Tests
                 }
             }
         }
+        [TestMethod]
         public void TestWatson(int actionIndex)
         {
             //TODO: tester la fonction
@@ -125,6 +126,7 @@ namespace MrJack.Core.Tests
                 }
             }
         }
+        [TestMethod]
         public void TestToby(int actionIndex)
         {
             //TODO: Test fonction
@@ -147,7 +149,7 @@ namespace MrJack.Core.Tests
                 }
             }
         }
-
+        [TestMethod]
         public void TestJoker(int actionIndex)
         {
             //TODO: Test fonction
@@ -187,6 +189,7 @@ namespace MrJack.Core.Tests
                 }
             }
         }
+        [TestMethod]
         public void TestMove(int actionIndex)
         {
             int x1 = Rnd.Next(1, 4);
@@ -198,6 +201,7 @@ namespace MrJack.Core.Tests
             Game.MoveCard(actionIndex, x1, y1, x2, y2);
             
         }
+        [TestMethod]
         public void TestTurn(int actionIndex)
         {
             int x = Rnd.Next(1, 4);

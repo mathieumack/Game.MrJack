@@ -57,6 +57,13 @@ namespace MrJack.Core.Tests
             turn.actions = 3;
             Assert.IsTrue(turn.Whosplaying() == PlayerType.Sherlock);
 
+            turn.actions = 1;
+            Assert.IsTrue(turn.Whosplaying() == PlayerType.MrJack);
+            turn.actions = 2;
+            Assert.IsTrue(turn.Whosplaying() == PlayerType.MrJack);
+            turn.actions = 4;
+            Assert.IsTrue(turn.Whosplaying() == PlayerType.MrJack);
+
             turn.CurrentTurn = 1;
             turn.actions = 0;
             Assert.IsTrue(turn.Whosplaying() == PlayerType.MrJack);
