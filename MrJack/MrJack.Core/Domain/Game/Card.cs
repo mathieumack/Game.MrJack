@@ -9,7 +9,7 @@ namespace MrJack.Core.Domain.Game
 {
     public class Card : ICard
     {
-        Randomizer rnd { get; set; }
+        Randomizer Rnd { get; set; }
         public CardType CardType { get; set; }
         public Killers Killer { get; set; }
         public Detectives Detective { get; set; }
@@ -27,7 +27,8 @@ namespace MrJack.Core.Domain.Game
         private Card(CardType cardType, Randomizer rnd)
         {
             CardType = cardType;
-            this.rnd = rnd;
+            this.Rnd = rnd;
+            CanBeMoved = true;
         }
 
         /// <summary>

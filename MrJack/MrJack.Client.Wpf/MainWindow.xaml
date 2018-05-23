@@ -65,7 +65,7 @@
                 </StackPanel>
             </Border>
             <!-- Showed if the user is a Killer type -->
-            <Border CornerRadius="15" Background="#66AAAAAA" Margin="10,0,10,10" BorderThickness="1" BorderBrush="DarkGray">
+            <Border Name="borderWhoAmI" CornerRadius="15" Background="#66AAAAAA" Margin="10,0,10,10" BorderThickness="1" BorderBrush="DarkGray">
                 <StackPanel Margin="10" HorizontalAlignment="Center">
                     <TextBlock Text="Vous êtes: " FontSize="20" Foreground="Black" Margin="10"></TextBlock>
                     <Image Name="KillerUserImage" Source="Images/killers/draw.png" Stretch="Uniform" MaxHeight="150"></Image>
