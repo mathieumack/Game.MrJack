@@ -75,9 +75,9 @@ namespace MrJack.Core.Tests
         {
             Game game = new Game();
             PlayerType playerType = new PlayerType();
-            playerType = PlayerType.Sherlock;
             Difficulty difficulty = new Difficulty();
             difficulty = Difficulty.Easy;
+            playerType = PlayerType.Sherlock;           
             game.StartNewGame(playerType, difficulty);
 
             int x1 = 0;
@@ -86,12 +86,8 @@ namespace MrJack.Core.Tests
             Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.Sherlock);
             game.MoveDetective(0, x1, y1, nbTurn);
             Assert.IsTrue(game.GameBoard.Board[x1, y1].Detective == Detectives.None);
+           
 
-          //  Tuple<int, int> coord = game.Calculate(x1, y1, nbTurn);
-            //int x1Final = coord.Item1;
-            //int y1Final = coord.Item2;
-            //Assert.IsTrue(x1Final == 1 && y1Final == 0);
-            //Assert.IsTrue(game.GameBoard.Board[x1Final, y1Final].Detective == Detectives.Sherlock);           
         }
         [TestMethod]
         public void test_Player()
