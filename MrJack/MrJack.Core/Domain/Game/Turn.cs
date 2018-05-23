@@ -81,22 +81,7 @@ namespace MrJack.Core.Domain.Game
             }
             
         }
-
-        /// <summary>
-        /// On change de joueur pour l'action
-        /// </summary>
-        public void ChangeCurrentPlayer()
-        {
-            if (CurrentPlayer == PlayerType.MrJack)
-            {
-                CurrentPlayer = PlayerType.Sherlock;
-            }
-            else
-            {
-                CurrentPlayer = PlayerType.MrJack;
-            }
-        }
-
+      
         /// <summary>
         /// Fin du tour
         /// </summary>
@@ -104,29 +89,6 @@ namespace MrJack.Core.Domain.Game
         {
 
         }
-
-        /// <summary>
-        /// On effectue les actions en fonction du type de jeton
-        /// </summary>
-       /* public void Action()
-        {
-            foreach(int i in Jetons)
-            {
-                if (i == 1)
-                    ActionJetons.TournerCase();
-                if (i == 2)
-                    ActionJetons.DeplacerCase();
-                if (i == 3)
-                    ActionJetons.Sherlock();
-                if (i == 4)
-                    ActionJetons.Watson();
-                if (i == 5)
-                    ActionJetons.ChienToby();
-                if (i == 6)
-                    ActionJetons.Joker();
-                if (i == 7)
-                    ActionJetons.PiocherCarte();
-            }
-        }*/
+     
     }
 }

@@ -96,5 +96,6 @@ namespace MrJack.Core.Tests
             //Assert.IsTrue(x1Final == 1 && y1Final == 0);
             //Assert.IsTrue(game.GameBoard.Board[x1Final, y1Final].Detective == Detectives.Sherlock);           
         }
+        
     }
 }
