@@ -100,12 +100,12 @@ namespace MrJack.Core.Tests
         public void Test_StartNewGame()
         {
             Game currentGame = new Game();
-            Difficulty difficulty = Difficulty.Medium;
-            currentGame.StartNewGame(PlayerType.Sherlock, difficulty);
+            currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Medium);
 
             Assert.IsTrue(currentGame.IA is AI_Sherlock_Medium);
             
             currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Hard);
+
 
         }
     }

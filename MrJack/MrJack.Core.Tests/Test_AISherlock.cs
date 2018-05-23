@@ -18,6 +18,7 @@ namespace MrJack.Core.Tests
     {
         public Detectives Detectives { get; set; }
         public Random Rnd { get; set; }
+        public Randomizer Rndz { get; set; }
         public IGame Game { get; set; }
         public IGameBoard GB { get; set; }
         //arrange
@@ -75,8 +76,12 @@ namespace MrJack.Core.Tests
 
         [TestMethod]
 
-        public void TestSherlock(int actionIndex)
+        public void TestSherlock()
         {
+            Game game = new Game();
+            game.StartNewGame(PlayerType.MrJack, Difficulty.Easy);
+            GameBoard GB = game.GameBoard as GameBoard;
+            Rnd = new Random();
             int nb = Rnd.Next(1, 3);
             for (int i = 0; i <= 5; i++)
             {
@@ -89,7 +94,7 @@ namespace MrJack.Core.Tests
                         Assert.IsTrue(GB.Board[i, j].Detective == Detectives.Sherlock);
                         //On teste si GB.Board[i,j].Detective a changer apres avoir executer game.moveDetective
                         MrJack.Core.Domain.Game.Detectives testMD1 = GB.Board[i, j].Detective;
-                        Game.MoveDetective(actionIndex, i, j, nb);
+                        Game.MoveDetective(2, i, j, nb);
                         MrJack.Core.Domain.Game.Detectives testMD2 = GB.Board[i, j].Detective;
                         Assert.IsTrue(testMD1 != testMD2);
                         
