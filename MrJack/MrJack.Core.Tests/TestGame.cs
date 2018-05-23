@@ -11,10 +11,7 @@ namespace MrJack.Core.Tests
     [ExcludeFromCodeCoverage]
     public class TestGame
     {
-        public void testGetNbSablier()
-        {
-
-        }
+       
         [TestMethod]
         public void TestMoveCard()
         {
@@ -95,6 +92,25 @@ namespace MrJack.Core.Tests
             //int y1Final = coord.Item2;
             //Assert.IsTrue(x1Final == 1 && y1Final == 0);
             //Assert.IsTrue(game.GameBoard.Board[x1Final, y1Final].Detective == Detectives.Sherlock);           
+        }
+        [TestMethod]
+        public void test_Player()
+        {
+            Player player = new Player(PlayerType.MrJack);
+            Assert.AreEqual(player.nbSablier, 0);
+        }
+
+        [TestMethod]
+        public void Test_StartNewGame()
+        {
+            Game currentGame = new Game();
+            Difficulty difficulty = Difficulty.Medium;
+            currentGame.StartNewGame(PlayerType.Sherlock, difficulty);
+
+            Assert.IsTrue(currentGame.IA is AI_Sherlock_Medium);
+            
+            currentGame.StartNewGame(PlayerType.MrJack, Difficulty.Hard);
+
         }
     }
 }
