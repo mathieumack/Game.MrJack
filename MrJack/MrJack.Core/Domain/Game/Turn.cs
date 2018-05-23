@@ -34,9 +34,9 @@ namespace MrJack.Core.Domain.Game
         }
 
         /// <summary>
-        /// Détermine le nb de jetons à piocher
+        /// Détermine le nombre de jetons à piocher
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Retourne le nombre de jetons utilisables selon l'action</returns>
         public int NbJetonSelectionnable()
         {
             if (actions == 0)
@@ -51,6 +51,10 @@ namespace MrJack.Core.Domain.Game
                 return 0;
         }
 
+        /// <summary>
+        /// Détermine quel joueur doit jouer selon l'action et si on est dans un tour pair ou impair
+        /// </summary>
+        /// <returns>Retourne le joueur qui doit jouer</returns>
         public PlayerType Whosplaying()
         {
             if(IsTurnPair())

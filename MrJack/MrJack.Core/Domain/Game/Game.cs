@@ -29,10 +29,10 @@ namespace MrJack.Core.Domain.Game
         public Draw MainDraw { get; set; }
 
         /// <summary>
-        /// Initialise variable when we create a game.
+        /// Initialise les variables quand on crée une nouvelle partie.
         /// </summary>
-        /// <param name="typePlayer"></param>
-        /// <param name="difficulty"></param>
+        /// <param name="typePlayer">Type de joueur</param>
+        /// <param name="difficulty">Difficulté de la partie</param>
         public void StartNewGame(PlayerType typePlayer, Difficulty difficulty)
         {
             Rnd = new Randomizer();
@@ -91,7 +91,9 @@ namespace MrJack.Core.Domain.Game
         }
 
         /// <summary>
-        /// Middle Game 
+        /// Middle Game permet de déterminer le milieu de la partie soit: 
+        ///     - en ajoutant un tour, en changeant de joueur et en affichant ces informations sur la partie
+        ///     - en terminant le tour si le tour est de 3
         /// </summary>  
         public void MiddleGame()
         {
@@ -118,6 +120,12 @@ namespace MrJack.Core.Domain.Game
             }
         }
 
+        /// <summary>
+        /// Détermine la fin de la partie
+        /// -> On ajoute un tour 
+        /// -> On détermine l'action à -1
+        /// -> On affiche tous les tueurs de la partie 
+        /// </summary>
         public void EndOfTurn()
         {
             List<Killers> visible = CheckView();
@@ -206,7 +214,15 @@ namespace MrJack.Core.Domain.Game
            AvailableActions[actionIndex].Selectable = false;
            this.MiddleGame();
         }
-        
+
+        /// <summary>
+        /// Permet d'intervertir deux cartes entre-elles en faisant appel à la fonction Move()
+        /// </summary>
+        /// <param name="actionIndex"></param>
+        /// <param name="x1">Coordonnée x de la première carte à bouger</param>
+        /// <param name="y1">Coordonnée y de la première carte à bouger</param>
+        /// <param name="x2">Coordonnée x de la deuxième carte à bouger</param>
+        /// <param name="y2">Coordonnée y de la deuxième carte à bouger</param>
         public void MoveCard(int actionIndex, int x1, int y1, int x2, int y2)
         {
             Move(x1, y1, x2, y2);
@@ -216,6 +232,13 @@ namespace MrJack.Core.Domain.Game
             this.MiddleGame();
         }
 
+        /// <summary>
+        /// Fonction qui bouge deux cartes dans le GameBoard
+        /// </summary>
+        /// <param name="x1">Coordonnée x de la première carte à bouger</param>
+        /// <param name="y1">Coordonnée y de la première carte à bouger</param>
+        /// <param name="x2">Coordonnée x de la deuxième carte à bouger</param>
+        /// <param name="y2">Coordonnée y de la deuxième carte à bouger</param>
         private void Move(int x1, int y1, int x2, int y2)
         {
             ICard card1 = GameBoard.Board[x1, y1];
@@ -225,6 +248,11 @@ namespace MrJack.Core.Domain.Game
             GameBoard.Board[x2, y2] = card1;            
         }
 
+        /// <summary>
+        /// Pioche un joueur dans la liste des killers
+        /// </summary>
+        /// <param name="actionIndex"></param>
+        /// <returns></returns>
         public Killers Draw(int actionIndex)
         {
             Draw draw = new Draw();
@@ -253,6 +281,13 @@ namespace MrJack.Core.Domain.Game
             return drawkiller;
         }
 
+        /// <summary>
+        /// Déplace d'un certains de nombre de cases un détective
+        /// </summary>
+        /// <param name="actionIndex"></param>
+        /// <param name="x1">Coordonnée x de la carte à déplacer</param>
+        /// <param name="y1">Coordonnée y de la carte à déplacer</param>
+        /// <param name="nbTurn">Nombre de cases de déplacement</param>
         public void MoveDetective(int actionIndex, int x1, int y1, int nbTurn)
         {
             Tuple<int, int> calculate = Calculate(x1, y1, nbTurn);
@@ -262,6 +297,13 @@ namespace MrJack.Core.Domain.Game
             this.MiddleGame();
         }
 
+        /// <summary>
+        /// Calculate permet de déterminer en quelles coordonnées le détective devra se placer
+        /// </summary>
+        /// <param name="x1">Coordonnée x de la carte à déplacer</param>
+        /// <param name="y1">Coordonnée y de la carte à déplacer</param>
+        /// <param name="nbTurn">Nombre de cases de déplacements</param>
+        /// <returns></returns>
         public Tuple<int, int> Calculate(int x1, int y1, int nbTurn)
         {
             int x = 0;
